@@ -1,0 +1,51 @@
+generated: '2026-07-19'
+method: searched
+source: https://lkcloud-api.readme.io/docs/authentication-2
+docs: https://lkcloud-api.readme.io/docs/authentication-2
+summary:
+  types: [oauth2]
+  primary: oauth2
+  oauth2_flows: [clientCredentials]
+  token_transport: Authorization Bearer header
+  scopes_supported: false
+  additional_headers:
+  - SiteServiceKey
+authorization_server:
+  issuer: https://auth2.lkidentity.com
+  token_endpoint: https://auth2.lkidentity.com/connect/token
+  authorization_endpoint: https://auth2.lkidentity.com/connect/authorize
+  introspection_endpoint: https://auth2.lkidentity.com/connect/introspect
+  revocation_endpoint: https://auth2.lkidentity.com/connect/revocation
+  openid_configuration: https://auth2.lkidentity.com/.well-known/openid-configuration
+  token_endpoint_auth_methods_supported: [client_secret_basic, client_secret_post]
+  id_token_signing_alg_values_supported: [RS256]
+schemes:
+- name: OAuth2ClientCredentials
+  type: oauth2
+  flow: clientCredentials
+  token_url: https://auth2.lkidentity.com/connect/token
+  grant_type: client_credentials
+  credentials_issued_by: ELLKAY technical project team (client_id + client_secret per organization)
+  token_type: Bearer
+  expires_in_seconds: 7199
+  applies_to: [LKCloud Interop API, LKCloud FHIR R4 API]
+  note: >-
+    OAuth2 scopes are NOT supported; any scope headers sent by a client are ignored.
+    Endpoint authorization is granted per client_id / subscriber_id via ELLKAY-side API permissions.
+- name: SiteServiceKey
+  type: apiKey
+  in: header
+  parameter_name: SiteServiceKey
+  role: routing
+  secret: false
+  note: >-
+    Non-secret routing key issued by ELLKAY that directs the request to the correct
+    connection/data source. Required alongside the OAuth2 Bearer token on Interop and FHIR calls.
+- name: SubscriberKey
+  type: apiKey
+  deprecated: true
+  status: legacy
+  applies_to: [LKCloud Interop API]
+  note: >-
+    Subscriber-key authentication retained for backwards-compatibility only; NOT supported for FHIR.
+    ELLKAY strongly encourages migrating to OAuth2. Slated for eventual discontinuation (no date set).
