@@ -1,0 +1,18 @@
+generated: '2026-07-19'
+method: searched
+source: https://lkcloud-api.readme.io/docs/rate-limits
+model: concurrency
+limits:
+- scope: SiteService Key
+  limit_count: 5
+  window: concurrent
+  description: LKCloud APIs enforce a rate limit of 5 concurrent requests per SiteService Key.
+recommendation: >-
+  Start at a concurrency of 1 per data source and consult your ELLKAY technical contact
+  about increasing concurrency if needed. Build integrations with configurable
+  per-data-source concurrency.
+external_limits:
+  note: >-
+    External/target systems may set their own rate limits; ELLKAY returns the
+    ExternalApiRateLimitReached error code in the response content when they are hit.
+  ref: errors/ellkay-error-codes.yml

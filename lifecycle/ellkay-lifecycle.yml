@@ -1,0 +1,41 @@
+generated: '2026-07-19'
+method: searched
+source: https://lkcloud-api.readme.io/docs/environments
+versioning:
+  scheme: release-numbered
+  current_interop: 6.23.0
+  current_fhir_module: FHIR R4 1.4.0
+  note: The server-side API and the FHIR module are versioned separately.
+  changelog: https://lkcloud-api.readme.io/changelog
+  ref: changelog/ellkay-changelog.yml
+release_process:
+  channel: Staging-first
+  detail: >-
+    New API functionality deploys to the Staging environment with a release announcement
+    (release date/time, release notes, updated docs) sent to all LKCloud API customers
+    before Production release.
+breaking_change_policy:
+  makes_breaking_changes: false
+  statement: ELLKAY does not make breaking changes to the LKCloud APIs.
+  guidance: Customers are advised to run automated tests against Staging to verify version compatibility.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes:
+  - target: Subscriber-key authentication
+    status: deprecated
+    detail: >-
+      Retained for backwards-compatibility (Interop only, never FHIR); eventual discontinuation
+      planned with no date chosen. Customers strongly encouraged to migrate to OAuth2.
+  - target: Legacy Ping / dual-OAuth support (FHIR)
+    status: removed
+    detail: Removed in FHIR R4 1.4.0 (7/1/2025); fully migrated to LKIdentity authentication.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+environments:
+  staging: https://services.lkstaging.com
+  production: https://services.lkcloud.com
+  fhir_staging: https://fhir.lkstaging.com/R4
+  fhir_production: https://fhir.lkcloud.com/R4

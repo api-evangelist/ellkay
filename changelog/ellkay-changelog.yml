@@ -1,0 +1,47 @@
+generated: '2026-07-19'
+method: searched
+source: https://lkcloud-api.readme.io/changelog
+scheme: release-numbered (MAJOR.MINOR.PATCH), dated release notes
+current_version: 6.23.0
+policy: ELLKAY does not make breaking changes to the LKCloud APIs; new functionality lands in Staging first.
+entries:
+- version: 6.23.0
+  date: '2025-10-28'
+  breaking: false
+  type: [enhancements, bug-fixes]
+  highlights:
+  - Added Coverage Dates (Effective and Expiration Date) to GetPatientSummary.
+  - Added LoincCode to the GetProcedures response.
+  - Added support for search by MRN in Smart Search.
+  - Added Provider Id field to GetEncounterNotes and GetEncounterNoteBody.
+  - Implemented separate ErrorCodes for Expired OAuth Access Token.
+  - Fixed wrong staging URL for OAuth in SendCharge.
+- version: 6.22.0
+  date: '2025-09-30'
+  breaking: false
+  type: [features, enhancements]
+  highlights:
+  - Added a new DateRange object in ScheduleAppointment, EditAppointment, and GetOpenAppointmentSlots.
+  - Introduced custom payment types in ApplyPayment; added a master list for payment types.
+  - Added Custom object support across multiple request and response payloads.
+- version: 6.21.0
+  date: '2025-08-26'
+  breaking: false
+  type: [features, enhancements]
+  highlights:
+  - New endpoints GetPatientReportingData, UpdatePatientReportingData, SearchPharmacies.
+  - Added Pronouns to GetPatientSummary; added ReleaseOfInformation, rxHistoryConsent, SexAtBirth, Notes, Pronouns to Get/Create/UpdatePatient.
+- version: FHIR R4 1.4.0
+  date: '2025-07-01'
+  breaking: false
+  type: [enhancements]
+  highlights:
+  - Added custom search parameters to the FHIR Patient $everything endpoint.
+  - Removed legacy Ping integration and dual OAuth support; fully migrated to LKIdentity authentication.
+- version: 6.20.0
+  date: '2025-07-01'
+  breaking: false
+  type: [enhancements]
+  highlights:
+  - Added the Custom object to most API responses.
+  - CreateDocument now enforces a maximum request size of 5 MB.

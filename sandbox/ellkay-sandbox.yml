@@ -1,0 +1,28 @@
+generated: '2026-07-19'
+method: searched
+source: https://lkcloud-api.readme.io/docs/environments
+model: separate staging environment
+environments:
+- name: Staging
+  purpose: Initial integration development and user acceptance testing of new API functionality
+  interop_base_url: https://services.lkstaging.com
+  fhir_base_url: https://fhir.lkstaging.com/R4
+  notes:
+  - Can connect to both production and test data sources.
+  - Must never be used by production instances of customer software.
+  - New API functionality is released here first for compatibility testing.
+- name: Production
+  purpose: Production access to live accounts after Staging certification
+  interop_base_url: https://services.lkcloud.com
+  fhir_base_url: https://fhir.lkcloud.com/R4
+credentials:
+  model: issued
+  detail: >-
+    OAuth2 client_id/client_secret and non-secret SiteServiceKey routing keys are issued by an
+    ELLKAY technical project team member per organization/project. No self-serve test credentials
+    or magic test values are published; test data sources are set up per integration.
+test_data:
+  note: >-
+    Integration testing uses real adapters connected to customer test data sources; ELLKAY
+    publishes no synthetic test cards / magic identifiers. GetBridgeInfo reports adapter
+    version and availability for a given connection.

@@ -1,0 +1,48 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: https://lkcloud-api.readme.io/reference
+note: >-
+  No official ELLKAY-hosted MCP server was found. This is a CANDIDATE tool surface derived from
+  documented LKCloud Interop API operations (grounded in the published API reference), for a
+  potential MCP wrapper. Tool names map to real documented operations; not an ELLKAY product.
+server:
+  name: ellkay-lkcloud
+  transport: http
+  url: null
+auth:
+  type: oauth2
+  flow: clientCredentials
+  token_url: https://auth2.lkidentity.com/connect/token
+  additional_headers: [SiteServiceKey]
+tools:
+- name: smart_search
+  description: Search patients with a pipe-delimited query (name, SSN, chart number, DOB, MRN, etc.).
+  source_operation: LKBridge.SmartSearch
+- name: get_patient_summary
+  description: Return a summary of a patient's demographics, contacts, insurance, and primary facility.
+  source_operation: LKBridge.GetPatientSummary
+- name: get_patient
+  description: Return comprehensive patient detail including providers and insurances.
+  source_operation: LKBridge.GetPatient
+- name: get_appointments
+  description: List appointments (excludes deleted/cancelled).
+  source_operation: LKAppointments.GetAppointments
+- name: get_open_appointment_slots
+  description: List open appointment slots by physician/facility.
+  source_operation: LKAppointments.GetOpenAppointmentSlots
+- name: schedule_appointment
+  description: Schedule an appointment in an available slot.
+  source_operation: LKAppointments.ScheduleAppointment
+- name: get_balance_summary
+  description: Return a patient balance summary (balance, charges, payments, adjustments).
+  source_operation: LKPatientBalance.GetBalanceSummary
+- name: apply_payment
+  description: Record a copay/deposit/balance payment for a patient.
+  source_operation: LKPatientBalance.ApplyPayment
+- name: get_patient_documents
+  description: List documents associated with a patient.
+  source_operation: LKDocuments.GetPatientDocuments
+- name: send_charge
+  description: Send a charge to the target system (processed asynchronously).
+  source_operation: LKCharges.SendCharge

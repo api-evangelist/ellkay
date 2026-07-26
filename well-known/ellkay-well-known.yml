@@ -1,0 +1,31 @@
+generated: '2026-07-19'
+method: searched
+source: live probes of ELLKAY API, auth, and web hosts
+hosts:
+- host: https://auth2.lkidentity.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: ellkay-openid-configuration.json
+    note: OIDC discovery for the LKIdentity OAuth 2.0 authorization server (IdentityServer/Duende)
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://services.lkcloud.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://fhir.lkcloud.com
+  documents:
+  - path: /R4/metadata
+    status: 200
+    note: FHIR R4 CapabilityStatement (not under /.well-known/; documents token endpoint + supported resources)
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://www.ellkay.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404

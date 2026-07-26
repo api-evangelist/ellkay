@@ -1,0 +1,45 @@
+generated: '2026-07-19'
+method: searched
+source: https://lkcloud-api.readme.io/docs/error-handling-codes
+format: proprietary
+envelope:
+  interop:
+    fields:
+    - {name: Detail, type: text, description: Additional details describing the error}
+    - {name: ErrorCode, type: code, description: Unique error code for this error type}
+    - {name: Handle, type: guid, description: Unique request-trace identifier within ELLKAY infrastructure}
+    - {name: Message, type: text, description: Summary message of the error}
+    - {name: RecoverySteps, type: text, description: Remediation steps for the error}
+    - {name: Type, type: text, description: ELLKAY internal exception type; no external meaning}
+    sample:
+      Detail: null
+      ErrorCode: BadFieldInput
+      Handle: 17f9fc33-d78d-4207-855b-1d6377826299
+      Message: 'Invalid fields: FirstName (MaxLength:255)'
+      Type: Ellkay.Bridging.Exceptions.BadFieldInputException
+  fhir:
+    resource: OperationOutcome
+    reference: https://www.hl7.org/fhir/operationoutcome.html
+    note: May be returned with issues even on HTTP 200; inspect response content.
+error_codes:
+- {code: FeatureNotEnabled, description: The API endpoint you're trying to access is not enabled for this data source.}
+- {code: PatientNotFound, description: No patient record was located using the patient ID provided.}
+- {code: MissingRequiredField, description: The request is missing a required field; requirements vary by data source.}
+- {code: FeatureNotSupported, description: The API feature is not supported for this data source - contact ELLKAY.}
+- {code: SearchParameterNotSupported, description: The request includes unsupported search parameters; support varies by data source.}
+- {code: BadFieldInput, description: A field has an incorrect format; formatting requirements vary by data source.}
+- {code: TemporaryBridgeError, description: Contact ELLKAY if this code is encountered.}
+- {code: EntityNotFound, description: The specified entity could not be found in the target data source using the given identifier.}
+- {code: OperationFailed, description: See error detail for more information.}
+- {code: Unauthorized, description: The credentials configured for this data source are invalid and need to be updated.}
+- {code: BridgeForbidden, description: The credentials are valid but not authorized to access the specified resource.}
+- {code: PageRequestTimeout, description: The request for this page of data timed out; wait and retry. Paged operations only.}
+- {code: PageRequestFaulted, description: The page request failed for an unknown reason; pages can no longer be retrieved for the paging request.}
+- {code: ServiceUnavailable, description: The adapter is not activated (deactivated or failed to load); contact ELLKAY support if persistent.}
+- {code: BRIDGE_OFFLINE, description: The process hosting the adapter is not connected to LKCloud infrastructure (network, power, uninstall, or crash).}
+- {code: OperationCancelled, description: ELLKAY proactively cancelled the operation to avoid over-stressing the target system (concurrency too high or filters too broad).}
+- {code: ExternalApiRateLimitReached, description: The adapter reached the target data source's API rate limit (not ELLKAY-enforced).}
+- {code: ExternalInternalServerError, description: The target data source responded with an internal server error.}
+- {code: ExternalServerUnavailable, description: The target data source is currently unavailable (e.g. responded 503).}
+- {code: Forbidden, description: The subscriber being used does not have permissions to access this resource.}
+- {code: LKCloudFileTransmitFailed, description: File transmission from LKCloudFileStore failed; safe to retry.}

@@ -1,0 +1,36 @@
+generated: '2026-07-19'
+method: searched
+source: https://lkcloud-api.readme.io/docs/authentication-2
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    LKCloud and FHIR APIs authenticate with OAuth 2.0 client_credentials against
+    https://auth2.lkidentity.com/connect/token (RFC 6749).
+- id: oidc
+  conforms: true
+  evidence: >-
+    LKIdentity authorization server publishes a live OIDC discovery document at
+    https://auth2.lkidentity.com/.well-known/openid-configuration (IdentityServer/Duende).
+- id: fhir-r4
+  conforms: true
+  evidence: >-
+    Full FHIR R4 RESTful surface (read/search/create/update/delete across R4 resources) with a
+    CapabilityStatement at https://fhir.lkcloud.com/R4/metadata.
+- id: hl7-v2
+  conforms: true
+  evidence: ELLKAY platform documents HL7 v2/v3 connectivity across 750+ EHR/PM systems.
+- id: ccda
+  conforms: true
+  evidence: ELLKAY platform documents C-CDA support as part of its interoperability standards.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Interop errors use a proprietary envelope (ErrorCode/Handle/Message/RecoverySteps/Type),
+    not application/problem+json; FHIR errors use OperationOutcome.
+- id: openid-connect-discovery
+  conforms: true
+  evidence: /.well-known/openid-configuration returns 200 with issuer, token, jwks, and introspection endpoints.
+- id: oauth2-scopes
+  conforms: false
+  evidence: Documentation states OAuth2 scopes are not supported; scope headers are ignored.

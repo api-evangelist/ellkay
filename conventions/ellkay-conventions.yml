@@ -1,0 +1,57 @@
+generated: '2026-07-19'
+method: searched
+source: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+docs: https://lkcloud-api.readme.io/docs
+authentication:
+  style: OAuth 2.0 client_credentials Bearer token + non-secret SiteServiceKey routing header
+  ref: authentication/ellkay-authentication.yml
+transport:
+  interop_style: JSON over HTTPS; Interop operations are invoked as POST requests
+  fhir_style: FHIR R4 RESTful (read/search/create/update/delete) over HTTPS
+  content_type: application/json
+pagination:
+  style: token / continuation
+  pattern: >-
+    Long/searched result sets use a Begin<Op> call that returns a next token, then
+    repeated Next<Op> calls that carry the token until exhausted
+  examples:
+  - BeginSearchAppointments -> NextSearchAppointments
+  response_field: token
+idempotency:
+  supported: false
+  note: No idempotency-key contract is documented for the LKCloud or FHIR APIs.
+request_tracing:
+  field: Handle
+  location: error response body
+  format: GUID
+  note: >-
+    Every Interop error carries a Handle GUID that uniquely identifies the request within
+    ELLKAY infrastructure; supply it when opening a support ticket.
+error_envelope:
+  interop:
+    fields: [Detail, ErrorCode, Handle, Message, RecoverySteps, Type]
+    ref: errors/ellkay-error-codes.yml
+  fhir:
+    resource: OperationOutcome
+    note: >-
+      FHIR errors are returned as an OperationOutcome resource; the API may return an
+      OperationOutcome with issues even when the HTTP status is 200 OK, so clients must
+      inspect response content.
+rate_limiting:
+  model: concurrency
+  limit: 5 concurrent requests per SiteService Key
+  recommendation: start at concurrency of 1 per data source; raise with ELLKAY technical contact
+  external_signal: ExternalApiRateLimitReached error code surfaces downstream data-source limits
+  ref: rate-limits/ellkay-rate-limits.yml
+versioning:
+  scheme: release-numbered (server-side API + FHIR module versioned separately)
+  current_interop: 6.23.0
+  breaking_change_policy: ELLKAY does not make breaking changes to the LKCloud APIs
+  release_channel: new functionality deploys to Staging first with a release announcement
+  ref: lifecycle/ellkay-lifecycle.yml
+environments:
+  staging: https://services.lkstaging.com
+  production: https://services.lkcloud.com
+  fhir_staging: https://fhir.lkstaging.com/R4
+  fhir_production: https://fhir.lkcloud.com/R4
+  ref: sandbox/ellkay-sandbox.yml
