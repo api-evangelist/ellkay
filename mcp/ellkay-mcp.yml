@@ -2,10 +2,9 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: https://lkcloud-api.readme.io/reference
-note: >-
-  No official ELLKAY-hosted MCP server was found. This is a CANDIDATE tool surface derived from
-  documented LKCloud Interop API operations (grounded in the published API reference), for a
-  potential MCP wrapper. Tool names map to real documented operations; not an ELLKAY product.
+note: No official ELLKAY-hosted MCP server was found. This is a CANDIDATE tool surface derived from documented
+  LKCloud Interop API operations (grounded in the published API reference), for a potential MCP wrapper.
+  Tool names map to real documented operations; not an ELLKAY product.
 server:
   name: ellkay-lkcloud
   transport: http
@@ -14,7 +13,8 @@ auth:
   type: oauth2
   flow: clientCredentials
   token_url: https://auth2.lkidentity.com/connect/token
-  additional_headers: [SiteServiceKey]
+  additional_headers:
+  - SiteServiceKey
 tools:
 - name: smart_search
   description: Search patients with a pipe-delimited query (name, SSN, chart number, DOB, MRN, etc.).
@@ -46,3 +46,9 @@ tools:
 - name: send_charge
   description: Send a charge to the target system (processed asynchronously).
   source_operation: LKCharges.SendCharge
+deployment:
+  mode: none
+  verified: derived
+  tools: 10
+  checked: '2026-08-12'
+  source: catalog MCP census
