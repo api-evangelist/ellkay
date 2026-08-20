@@ -40,6 +40,14 @@ tags:
 - HL7
 - EHR Integration
 - Health Data
+tags_raw:
+- Company
+- Healthcare
+- Interoperability
+- FHIR
+- HL7
+- EHR Integration
+- Health Data
 - API
 maintainers:
 - FN: Kin Lane
