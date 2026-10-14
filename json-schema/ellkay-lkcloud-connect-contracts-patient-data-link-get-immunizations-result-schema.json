@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ellkay/main/json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json",
+  "title": "LKCloudConnect.Contracts.PatientDataLink.GetImmunizationsResult",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.PatientDataLink.GetImmunizationsResult",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "description": "Date e.g. \"01/20/2022 14:20:00\""
+    },
+    "created": {
+      "type": "string",
+      "description": "Date created e.g. \"01/20/2022 14:20:00\""
+    },
+    "modified": {
+      "type": "string",
+      "description": "Date last modified e.g. \"01/20/2022 14:20:00\""
+    },
+    "comments": {
+      "type": "string",
+      "description": "Immunization comments"
+    },
+    "encounterId": {
+      "type": "string",
+      "description": "Encounter id"
+    },
+    "patientId": {
+      "type": "string",
+      "description": "Patient Id"
+    },
+    "physicianId": {
+      "type": "string",
+      "description": "Physician Id"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of immunization"
+    },
+    "vaccine": {
+      "type": "string",
+      "description": "Vaccine string"
+    },
+    "dateAdministered": {
+      "type": "string",
+      "description": "Date the immunization was administered e.g. \"01/20/2022 14:20:00\""
+    },
+    "timeAdministered": {
+      "type": "string",
+      "description": "The time the immunization was administered"
+    },
+    "vaccineCode": {
+      "type": "string",
+      "description": "Vaccine code string"
+    },
+    "lotNumber": {
+      "type": "string",
+      "description": "Lot number string"
+    },
+    "site": {
+      "type": "string",
+      "description": "Site the immunization was administered"
+    },
+    "route": {
+      "type": "string",
+      "description": "The route of immunization"
+    },
+    "dose": {
+      "type": "string",
+      "description": "The dose administered"
+    },
+    "strength": {
+      "type": "string",
+      "description": "Strength of immunization"
+    },
+    "unit": {
+      "type": "string",
+      "description": "unit of immunization"
+    },
+    "manufacturer": {
+      "type": "string",
+      "description": "Manufacturer of immunization"
+    },
+    "dueDate": {
+      "type": "string",
+      "description": "Due date of immunization e.g. \"01/20/2022 14:20:00\""
+    },
+    "expirationDate": {
+      "type": "string",
+      "description": "Expiration date of immunization e.g. \"01/20/2022 14:20:00\""
+    },
+    "cptCode": {
+      "type": "string",
+      "description": "CPT code string"
+    },
+    "cvxCode": {
+      "type": "string",
+      "description": "CVX code string"
+    },
+    "manufacturerCode": {
+      "type": "string",
+      "description": "Manufacturer code string"
+    },
+    "locationCode": {
+      "type": "string",
+      "description": "Location code string"
+    },
+    "administeredBy": {
+      "type": "string",
+      "description": "Who administered the immunization"
+    },
+    "id": {
+      "type": "string",
+      "description": "Immunization Id"
+    },
+    "updatedBy": {
+      "type": "string",
+      "description": "Who updated the record last"
+    },
+    "updated": {
+      "type": "string",
+      "description": "Date record last updated e.g. \"01/20/2022 14:20:00\""
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": "System-specific data for special cases"
+    }
+  },
+  "additionalProperties": false
+}

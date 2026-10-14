@@ -1,0 +1,421 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/ellkay-lkcloud-api-openapi.yml
+- openapi/ellkay-r4-fhir-api-openapi.yml
+vocabulary:
+  name: ELLKAY Domain Vocabulary
+  description: 'Terms declared by ELLKAY''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-14'
+  terms:
+  - term: LKAppointments
+    definition: Ellkay Appointment endpoints
+    tags:
+    - Resource Group
+    source: openapi/ellkay-lkcloud-api-openapi.yml
+  - term: LKBridge
+    definition: Ellkay Bridge
+    tags:
+    - Resource Group
+    source: openapi/ellkay-lkcloud-api-openapi.yml
+  - term: LKCharges
+    definition: Charge details
+    tags:
+    - Resource Group
+    source: openapi/ellkay-lkcloud-api-openapi.yml
+  - term: LKDocuments
+    definition: LKDocuments endpoints
+    tags:
+    - Resource Group
+    source: openapi/ellkay-lkcloud-api-openapi.yml
+  - term: LKMasterList
+    definition: Master List.
+    tags:
+    - Resource Group
+    source: openapi/ellkay-lkcloud-api-openapi.yml
+  - term: LKPatientBalance
+    definition: Load patient's balances. Allows patients to apply payments.
+    tags:
+    - Resource Group
+    source: openapi/ellkay-lkcloud-api-openapi.yml
+  - term: LKPatientDataLink
+    definition: PatientDataLink endpoint
+    tags:
+    - Resource Group
+    source: openapi/ellkay-lkcloud-api-openapi.yml
+  - term: UpdatePatient
+    definition: UpdatePatient endpoint
+    tags:
+    - Resource Group
+    source: openapi/ellkay-lkcloud-api-openapi.yml
+  - term: LKCloudConnect.Contracts.Appointments.Appointment
+    definition: Appointment object
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.Appointment
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentResource
+    definition: A resource related to an appointment
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentResource
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentResourceFilter
+    definition: Resource filter
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentResourceFilter
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentStatusCodeFilter
+    definition: 'Object declared by the contract with fields: code.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentStatusCodeFilter
+  - term: LKCloudConnect.Contracts.Appointments.DateRange
+    definition: Date range object
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.DateRange
+  - term: LKCloudConnect.Contracts.Appointments.Department
+    definition: 'Object declared by the contract with fields: name.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.Department
+  - term: LKCloudConnect.Contracts.Appointments.GetAppointmentsRequest
+    definition: Search for appointments which meet the specified criteria
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.GetAppointmentsRequest
+  - term: LKCloudConnect.Contracts.Bridge.MappedCode
+    definition: 'Object declared by the contract with fields: code, source, sourceText.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.MappedCode
+  - term: LKCloudConnect.Contracts.LKCloudConnectFault
+    definition: LKCloud Connect Fault
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault
+  - term: LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentsSwaggerRequest
+    definition: 'Object declared by the contract with fields: request.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentsSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.GetAppointmentRequest
+    definition: 'Object declared by the contract with fields: appointmentId.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.GetAppointmentRequest
+  - term: LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentSwaggerRequest
+    definition: 'Object declared by the contract with fields: request.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentType
+    definition: An appointment type from the target system
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentType
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentTypesResult
+    definition: 'Object declared by the contract with fields: appointmentTypes.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentTypesResult
+  - term: LKCloudConnect.Contracts.Appointments.GetAppointmentTypesRequest
+    definition: Represents a request to retrieve appointment types.
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.GetAppointmentTypesRequest
+  - term: LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentTypesSwaggerRequest
+    definition: 'Object declared by the contract with fields: request.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentTypesSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentStatuses.AppointmentStatusDetail
+    definition: Appointment status detail
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentStatuses.AppointmentStatusDetail
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesRequest
+    definition: Appointment statuses request
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesRequest
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesResult
+    definition: System-specific appointment statuses
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesResult
+  - term: LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentStatusesSwaggerRequest
+    definition: 'Object declared by the contract with fields: request.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentStatusesSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesRequest
+    definition: A request for appointment types which can be used to schedule appointments for a given provider and facility combination
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesRequest
+  - term: LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesResponse
+    definition: A response including appointment types which can be used to schedule appointments for a given provider and facility combination
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesResponse
+  - term: LKCloudConnect.Contracts.Appointments.ScheduleAppointmentType
+    definition: An appointment type which can be used to schedule appointments for a given provider and facility combination
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.ScheduleAppointmentType
+  - term: LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetScheduleAppointmentTypesSwaggerRequest
+    definition: 'Object declared by the contract with fields: request.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetScheduleAppointmentTypesSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.Physician
+    definition: 'Object declared by the contract with fields: id, firstName, lastName, address1, address2, city, state, zip, phone, fax, email,
+      specialty. (4 more)'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.Physician
+  - term: LKCloudConnect.Contracts.Appointments.Facility
+    definition: 'Object declared by the contract with fields: id, code, name, address1, address2, city, state, zip, phone, placeOfService, organizationId,
+      custom.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.Facility
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentSlotDateRange
+    definition: 'Object declared by the contract with fields: start, end.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentSlotDateRange
+  - term: LKCloudConnect.Contracts.Appointments.OpenAppointmentSlotRequest
+    definition: Search for available appointment slots request object
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.OpenAppointmentSlotRequest
+  - term: LKCloudConnect.Contracts.Appointments.OpenAppointmentSlots
+    definition: A period in a systems schedule where an appointment can be booked
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.OpenAppointmentSlots
+  - term: LKCloudConnect.Swagger.SwaggerRequests.Appointments.OpenAppointmentSlotSwaggerRequest
+    definition: 'Object declared by the contract with fields: request.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.OpenAppointmentSlotSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentSlot
+    definition: A period in a systems schedule where an appointment can be booked
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentSlot
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentSlotRequest
+    definition: Appointment slot request object
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentSlotRequest
+  - term: LKCloudConnect.Swagger.SwaggerRequests.Appointments.AppointmentSlotSwaggerRequest
+    definition: 'Object declared by the contract with fields: request.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.AppointmentSlotSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.AppointmentDateRange
+    definition: 'Object declared by the contract with fields: start, end.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentDateRange
+  - term: LKCloudConnect.Contracts.Appointments.ScheduleAppointmentResponse
+    definition: 'Object declared by the contract with fields: appointmentId.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.ScheduleAppointmentResponse
+  - term: LKCloudConnect.Contracts.Appointments.ScheduleAppointmentsRequest
+    definition: 'Object declared by the contract with fields: start, end, dateRange, notes, physicianId, facilityId, patientId, appointmentType,
+      slotId, externalId, appointmentStatus, resources. (3 more)'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.ScheduleAppointmentsRequest
+  - term: LKCloudConnect.Swagger.SwaggerRequests.Appointments.ScheduleAppointmentsSwaggerRequest
+    definition: 'Object declared by the contract with fields: scheduleAppointmentRequest.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.ScheduleAppointmentsSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.EditAppointmentRequest
+    definition: 'Object declared by the contract with fields: facilityId, locationId, providerId, start, end, dateRange, id, patientId, notes,
+      status, rawStatus, appointmentType. (4 more)'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.EditAppointmentRequest
+  - term: LKCloudConnect.Swagger.SwaggerRequests.Appointments.EditAppointmentSwaggerRequest
+    definition: 'Object declared by the contract with fields: request.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.EditAppointmentSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsRequest
+    definition: Request for appointments matching filters
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsRequest
+  - term: LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsSwaggerRequest
+    definition: 'Object declared by the contract with fields: request.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsSwaggerRequest
+  - term: LKCloudConnect.Contracts.Appointments.SearchAppointmentRequestDateRange
+    definition: Date range filter
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentRequestDateRange
+  - term: LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestFacility
+    definition: Facility filter
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestFacility
+  - term: LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPatient
+    definition: Patient filter
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPatient
+  - term: LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPractitioner
+    definition: Practitioner filter
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPractitioner
+  - term: LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestStatusCodeFilter
+    definition: Appointment status filter
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestStatusCodeFilter
+  - term: LKCloudConnect.Contracts.PagedResult
+    definition: PagesResult object containing the next token string
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.PagedResult
+  - term: LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsResponse
+    definition: 'Object declared by the contract with fields: appointments, nextToken.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsResponse
+  - term: LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsSwaggerRequest
+    definition: 'Object declared by the contract with fields: token.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsSwaggerRequest
+  - term: LKCloudConnect.Contracts.Bridge.BridgeAlerts.Alert
+    definition: 'Object declared by the contract with fields: updated, code, message, expirationDate.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.BridgeAlerts.Alert
+  - term: LKCloudConnect.Contracts.Bridge.BridgeCapabilityDescription
+    definition: 'Object declared by the contract with fields: smartSearch.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.BridgeCapabilityDescription
+  - term: LKCloudConnect.Contracts.Bridge.BridgeInfo
+    definition: Service info object
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.BridgeInfo
+  - term: LKCloudConnect.Contracts.Bridge.SiteServiceSetting
+    definition: Site service configuration setting
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.SiteServiceSetting
+  - term: LKCloudConnect.Contracts.Bridge.DateOfBirth
+    definition: 'Object declared by the contract with fields: value, raw.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.DateOfBirth
+  - term: LKCloudConnect.Contracts.Bridge.SmartSearchPatientDetail
+    definition: 'Object declared by the contract with fields: chartNumber, lastName, middleName, firstName, socialSecurityNumber, dateOfBirth,
+      sex, id, zipCode, custom, mrn.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.SmartSearchPatientDetail
+  - term: LKCloudConnect.Contracts.Bridge.SmartSearchResult
+    definition: 'Object declared by the contract with fields: patients, text.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.SmartSearchResult
+  - term: LKCloudConnect.Contracts.Bridge.SocialSecurityNumber
+    definition: 'Object declared by the contract with fields: formatted, raw.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.SocialSecurityNumber
+  - term: LKCloudConnect.Swagger.SwaggerRequests.LKBridge.SmartSearchSwaggerRequest
+    definition: 'Object declared by the contract with fields: query.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKBridge.SmartSearchSwaggerRequest
+  - term: LKCloudConnect.Contracts.Bridge.CommunicationInformation
+    definition: Patient Communication Information
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.CommunicationInformation
+  - term: LKCloudConnect.Contracts.Bridge.ContactPreferences
+    definition: Patient Contact Preferences
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.ContactPreferences
+  - term: LKCloudConnect.Contracts.Bridge.Demographic
+    definition: Patient data
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.Demographic
+  - term: LKCloudConnect.Contracts.Bridge.EmergencyContactDetail
+    definition: 'Object declared by the contract with fields: address1, address2, city, state, zipCode, firstName, middleName, lastName, homePhone,
+      workPhone, workPhoneExt, cellPhone. (3 more)'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.EmergencyContactDetail
+  - term: LKCloudConnect.Contracts.Bridge.EmergencyContactDetailReference
+    definition: 'Object declared by the contract with fields: contactId, emergencyContactDetail.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.EmergencyContactDetailReference
+  - term: LKCloudConnect.Contracts.Bridge.EmployerDetail
+    definition: 'Object declared by the contract with fields: name, id, phone, address1, address2, city, state, zip, statusText.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.EmployerDetail
+  - term: LKCloudConnect.Contracts.Bridge.GuarantorDetail
+    definition: 'Object declared by the contract with fields: relationToPatient, relationshipToPatient, prefix, chartNumber, lastName, suffix,
+      firstName, middleName, preferredName, dateOfBirth, sex, socialSecurityNumber. (34 more)'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.GuarantorDetail
+  - term: LKCloudConnect.Contracts.Bridge.IdentifierType
+    definition: Represents the type of patient identifier, including a standardized code and optional source-specific value.
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.IdentifierType
+  - term: LKCloudConnect.Contracts.Bridge.InsuranceDetail
+    definition: 'Object declared by the contract with fields: holder, code, name, groupNumber, policyNumber, phone, patientRelationToHolder, address1,
+      address2, city, state, zip. (8 more)'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.InsuranceDetail
+  - term: LKCloudConnect.Contracts.Bridge.PatientDetail
+    definition: 'Object declared by the contract with fields: prefix, chartNumber, lastName, suffix, firstName, middleName, preferredName, dateOfBirth,
+      sex, socialSecurityNumber, ssnNotProvidedReason, maritalStatus. (32 more)'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.PatientDetail
+  - term: LKCloudConnect.Contracts.Bridge.PatientIdentifiers
+    definition: Represents a patient identifiers.
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.PatientIdentifiers
+  - term: LKCloudConnect.Contracts.Bridge.PharmacyDetail
+    definition: 'Object declared by the contract with fields: id, name, address1, address2, city, state, zip, phone.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.PharmacyDetail
+  - term: LKCloudConnect.Contracts.Bridge.PrimaryFacility
+    definition: 'Object declared by the contract with fields: id.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.PrimaryFacility
+  - term: LKCloudConnect.Contracts.Bridge.ProviderDetail
+    definition: 'Object declared by the contract with fields: id, lastName, firstName, middleName, upin, license, npi.'
+    tags:
+    - Object
+    source: openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.ProviderDetail

@@ -1,3 +1,20 @@
+generated: '2026-10-14'
+method: searched
+source:
+- https://zapier.com/apps/ellkay/integrations
+- https://n8n.io/integrations/ellkay/
+- https://composio.dev/toolkits/ellkay
+- https://monid.ai/tools/ellkay
+checked:
+- https://azuremarketplace.microsoft.com/
+- https://composio.dev/toolkits/ellkay
+- https://monid.ai/tools/ellkay
+- https://n8n.io/integrations/ellkay/
+- https://www.commonwellalliance.org/wp-json/wp/v2/pages?slug=commonwell-connected-products&_fields=id,link,content
+- https://www.commonwellalliance.org/wp-json/wp/v2/pages?slug=commonwell-members&_fields=id,link,content
+- https://zapier.com/apps/ellkay/integrations
+summary: null
+marketplace_apps: []
 edges:
 - partner_name: CommonWell Health Alliance
   partner: null
@@ -48,10 +65,4 @@ edges:
   seller_name: 'ELLKAY '
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
-generated: '2026-10-12'
-method: searched
-checked:
-- https://azuremarketplace.microsoft.com/
-- https://www.commonwellalliance.org/wp-json/wp/v2/pages?slug=commonwell-connected-products&_fields=id,link,content
-- https://www.commonwellalliance.org/wp-json/wp/v2/pages?slug=commonwell-members&_fields=id,link,content
-marketplace_apps: []
+templates: []

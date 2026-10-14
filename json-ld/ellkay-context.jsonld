@@ -1,0 +1,956 @@
+{
+  "@context": {
+    "@vocab": "https://ellkay.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "ellkay": "https://ellkay.com/schema#",
+    "LKCloudConnect.Contracts.Appointments.Appointment": "ellkay:LKCloudConnect.Contracts.Appointments.Appointment",
+    "id": {
+      "@id": "ellkay:id",
+      "@type": "xsd:string"
+    },
+    "start": {
+      "@id": "ellkay:start",
+      "@type": "xsd:dateTime"
+    },
+    "duration": {
+      "@id": "ellkay:duration",
+      "@type": "xsd:string"
+    },
+    "patientId": {
+      "@id": "ellkay:patientId",
+      "@type": "xsd:string"
+    },
+    "patientAlternateId": {
+      "@id": "ellkay:patientAlternateId",
+      "@type": "xsd:string"
+    },
+    "physicianId": {
+      "@id": "ellkay:physicianId",
+      "@type": "xsd:string"
+    },
+    "facilityId": {
+      "@id": "ellkay:facilityId",
+      "@type": "xsd:string"
+    },
+    "facilityName": {
+      "@id": "ellkay:facilityName",
+      "@type": "xsd:string"
+    },
+    "notes": {
+      "@id": "ellkay:notes",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "ellkay:status",
+      "@type": "xsd:string"
+    },
+    "modified": {
+      "@id": "ellkay:modified",
+      "@type": "xsd:dateTime"
+    },
+    "type": {
+      "@id": "ellkay:type",
+      "@type": "xsd:string"
+    },
+    "billable": {
+      "@id": "ellkay:billable",
+      "@type": "xsd:string"
+    },
+    "department": {
+      "@id": "ellkay:department"
+    },
+    "resources": {
+      "@id": "ellkay:resources",
+      "@container": "@list"
+    },
+    "statusCode": {
+      "@id": "ellkay:statusCode"
+    },
+    "appointmentTypeId": {
+      "@id": "ellkay:appointmentTypeId",
+      "@type": "xsd:string"
+    },
+    "reason": {
+      "@id": "ellkay:reason"
+    },
+    "created": {
+      "@id": "ellkay:created",
+      "@type": "xsd:dateTime"
+    },
+    "custom": {
+      "@id": "ellkay:custom"
+    },
+    "LKCloudConnect.Contracts.Appointments.AppointmentResource": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentResource",
+    "LKCloudConnect.Contracts.Appointments.AppointmentResourceFilter": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentResourceFilter",
+    "LKCloudConnect.Contracts.Appointments.AppointmentStatusCodeFilter": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentStatusCodeFilter",
+    "code": {
+      "@id": "ellkay:code",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Appointments.DateRange": "ellkay:LKCloudConnect.Contracts.Appointments.DateRange",
+    "end": {
+      "@id": "ellkay:end",
+      "@type": "xsd:dateTime"
+    },
+    "LKCloudConnect.Contracts.Appointments.Department": "ellkay:LKCloudConnect.Contracts.Appointments.Department",
+    "name": {
+      "@id": "ellkay:name",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Appointments.GetAppointmentsRequest": "ellkay:LKCloudConnect.Contracts.Appointments.GetAppointmentsRequest",
+    "dateRange": {
+      "@id": "ellkay:dateRange"
+    },
+    "statusCodes": {
+      "@id": "ellkay:statusCodes",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Bridge.MappedCode": "ellkay:LKCloudConnect.Contracts.Bridge.MappedCode",
+    "source": {
+      "@id": "ellkay:source",
+      "@type": "xsd:string"
+    },
+    "sourceText": {
+      "@id": "ellkay:sourceText",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.LKCloudConnectFault": "ellkay:LKCloudConnect.Contracts.LKCloudConnectFault",
+    "message": {
+      "@id": "ellkay:message",
+      "@type": "xsd:string"
+    },
+    "detail": {
+      "@id": "ellkay:detail",
+      "@type": "xsd:string"
+    },
+    "recoverySteps": {
+      "@id": "ellkay:recoverySteps",
+      "@type": "xsd:string"
+    },
+    "handle": {
+      "@id": "ellkay:handle",
+      "@type": "xsd:string"
+    },
+    "errorCode": {
+      "@id": "ellkay:errorCode",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentsSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentsSwaggerRequest",
+    "request": {
+      "@id": "ellkay:request"
+    },
+    "LKCloudConnect.Contracts.Appointments.GetAppointmentRequest": "ellkay:LKCloudConnect.Contracts.Appointments.GetAppointmentRequest",
+    "appointmentId": {
+      "@id": "ellkay:appointmentId",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentSwaggerRequest",
+    "LKCloudConnect.Contracts.Appointments.AppointmentType": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentType",
+    "LKCloudConnect.Contracts.Appointments.AppointmentTypesResult": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentTypesResult",
+    "appointmentTypes": {
+      "@id": "ellkay:appointmentTypes",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Appointments.GetAppointmentTypesRequest": "ellkay:LKCloudConnect.Contracts.Appointments.GetAppointmentTypesRequest",
+    "includeInactive": {
+      "@id": "ellkay:includeInactive",
+      "@type": "xsd:boolean"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentTypesSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentTypesSwaggerRequest",
+    "LKCloudConnect.Contracts.Appointments.AppointmentStatuses.AppointmentStatusDetail": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentStatuses.AppointmentStatusDetail",
+    "LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesResult": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesResult",
+    "appointmentStatuses": {
+      "@id": "ellkay:appointmentStatuses",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentStatusesSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentStatusesSwaggerRequest",
+    "LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesRequest": "ellkay:LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesRequest",
+    "LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesResponse": "ellkay:LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesResponse",
+    "LKCloudConnect.Contracts.Appointments.ScheduleAppointmentType": "ellkay:LKCloudConnect.Contracts.Appointments.ScheduleAppointmentType",
+    "LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetScheduleAppointmentTypesSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetScheduleAppointmentTypesSwaggerRequest",
+    "LKCloudConnect.Contracts.Appointments.Physician": "ellkay:LKCloudConnect.Contracts.Appointments.Physician",
+    "firstName": {
+      "@id": "ellkay:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "ellkay:lastName",
+      "@type": "xsd:string"
+    },
+    "address1": {
+      "@id": "ellkay:address1",
+      "@type": "xsd:string"
+    },
+    "address2": {
+      "@id": "ellkay:address2",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "ellkay:city",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "ellkay:state",
+      "@type": "xsd:string"
+    },
+    "zip": {
+      "@id": "ellkay:zip",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "ellkay:phone",
+      "@type": "xsd:string"
+    },
+    "fax": {
+      "@id": "ellkay:fax",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "ellkay:email",
+      "@type": "xsd:string"
+    },
+    "specialty": {
+      "@id": "ellkay:specialty",
+      "@type": "xsd:string"
+    },
+    "inactive": {
+      "@id": "ellkay:inactive",
+      "@type": "xsd:boolean"
+    },
+    "npi": {
+      "@id": "ellkay:npi",
+      "@type": "xsd:string"
+    },
+    "upin": {
+      "@id": "ellkay:upin",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Appointments.Facility": "ellkay:LKCloudConnect.Contracts.Appointments.Facility",
+    "placeOfService": {
+      "@id": "ellkay:placeOfService"
+    },
+    "organizationId": {
+      "@id": "ellkay:organizationId",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Appointments.AppointmentSlotDateRange": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentSlotDateRange",
+    "LKCloudConnect.Contracts.Appointments.OpenAppointmentSlotRequest": "ellkay:LKCloudConnect.Contracts.Appointments.OpenAppointmentSlotRequest",
+    "startDate": {
+      "@id": "ellkay:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "endDate": {
+      "@id": "ellkay:endDate",
+      "@type": "xsd:dateTime"
+    },
+    "facilityIds": {
+      "@id": "ellkay:facilityIds",
+      "@container": "@list"
+    },
+    "physicianIds": {
+      "@id": "ellkay:physicianIds",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Appointments.OpenAppointmentSlots": "ellkay:LKCloudConnect.Contracts.Appointments.OpenAppointmentSlots",
+    "startTime": {
+      "@id": "ellkay:startTime",
+      "@type": "xsd:dateTime"
+    },
+    "slotId": {
+      "@id": "ellkay:slotId",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.Appointments.OpenAppointmentSlotSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.Appointments.OpenAppointmentSlotSwaggerRequest",
+    "LKCloudConnect.Contracts.Appointments.AppointmentSlot": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentSlot",
+    "LKCloudConnect.Contracts.Appointments.AppointmentSlotRequest": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentSlotRequest",
+    "LKCloudConnect.Swagger.SwaggerRequests.Appointments.AppointmentSlotSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.Appointments.AppointmentSlotSwaggerRequest",
+    "LKCloudConnect.Contracts.Appointments.AppointmentDateRange": "ellkay:LKCloudConnect.Contracts.Appointments.AppointmentDateRange",
+    "LKCloudConnect.Contracts.Appointments.ScheduleAppointmentResponse": "ellkay:LKCloudConnect.Contracts.Appointments.ScheduleAppointmentResponse",
+    "LKCloudConnect.Contracts.Appointments.ScheduleAppointmentsRequest": "ellkay:LKCloudConnect.Contracts.Appointments.ScheduleAppointmentsRequest",
+    "appointmentType": {
+      "@id": "ellkay:appointmentType",
+      "@type": "xsd:string"
+    },
+    "externalId": {
+      "@id": "ellkay:externalId",
+      "@type": "xsd:string"
+    },
+    "appointmentStatus": {
+      "@id": "ellkay:appointmentStatus"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.Appointments.ScheduleAppointmentsSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.Appointments.ScheduleAppointmentsSwaggerRequest",
+    "scheduleAppointmentRequest": {
+      "@id": "ellkay:scheduleAppointmentRequest"
+    },
+    "LKCloudConnect.Contracts.Appointments.EditAppointmentRequest": "ellkay:LKCloudConnect.Contracts.Appointments.EditAppointmentRequest",
+    "locationId": {
+      "@id": "ellkay:locationId",
+      "@type": "xsd:string"
+    },
+    "providerId": {
+      "@id": "ellkay:providerId",
+      "@type": "xsd:string"
+    },
+    "rawStatus": {
+      "@id": "ellkay:rawStatus",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.Appointments.EditAppointmentSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.Appointments.EditAppointmentSwaggerRequest",
+    "LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsRequest": "ellkay:LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsRequest",
+    "patients": {
+      "@id": "ellkay:patients",
+      "@container": "@list"
+    },
+    "facilities": {
+      "@id": "ellkay:facilities",
+      "@container": "@list"
+    },
+    "statuses": {
+      "@id": "ellkay:statuses",
+      "@container": "@list"
+    },
+    "lastModified": {
+      "@id": "ellkay:lastModified"
+    },
+    "limit": {
+      "@id": "ellkay:limit",
+      "@type": "xsd:integer"
+    },
+    "LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsSwaggerRequest": "ellkay:LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsSwaggerRequest",
+    "LKCloudConnect.Contracts.Appointments.SearchAppointmentRequestDateRange": "ellkay:LKCloudConnect.Contracts.Appointments.SearchAppointmentRequestDateRange",
+    "LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestFacility": "ellkay:LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestFacility",
+    "LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPatient": "ellkay:LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPatient",
+    "LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPractitioner": "ellkay:LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPractitioner",
+    "LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestStatusCodeFilter": "ellkay:LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestStatusCodeFilter",
+    "LKCloudConnect.Contracts.PagedResult": "ellkay:LKCloudConnect.Contracts.PagedResult",
+    "nextToken": {
+      "@id": "ellkay:nextToken",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsResponse": "ellkay:LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsResponse",
+    "appointments": {
+      "@id": "ellkay:appointments",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsSwaggerRequest": "ellkay:LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsSwaggerRequest",
+    "token": {
+      "@id": "ellkay:token"
+    },
+    "LKCloudConnect.Contracts.Bridge.BridgeAlerts.Alert": "ellkay:LKCloudConnect.Contracts.Bridge.BridgeAlerts.Alert",
+    "updated": {
+      "@id": "ellkay:updated",
+      "@type": "xsd:dateTime"
+    },
+    "expirationDate": {
+      "@id": "ellkay:expirationDate",
+      "@type": "xsd:dateTime"
+    },
+    "LKCloudConnect.Contracts.Bridge.BridgeCapabilityDescription": "ellkay:LKCloudConnect.Contracts.Bridge.BridgeCapabilityDescription",
+    "smartSearch": {
+      "@id": "ellkay:smartSearch",
+      "@type": "xsd:boolean"
+    },
+    "LKCloudConnect.Contracts.Bridge.BridgeInfo": "ellkay:LKCloudConnect.Contracts.Bridge.BridgeInfo",
+    "available": {
+      "@id": "ellkay:available",
+      "@type": "xsd:boolean"
+    },
+    "capabilities": {
+      "@id": "ellkay:capabilities"
+    },
+    "moduleVersion": {
+      "@id": "ellkay:moduleVersion",
+      "@type": "xsd:string"
+    },
+    "deploymentDate": {
+      "@id": "ellkay:deploymentDate",
+      "@type": "xsd:dateTime"
+    },
+    "publishedDate": {
+      "@id": "ellkay:publishedDate",
+      "@type": "xsd:dateTime"
+    },
+    "alerts": {
+      "@id": "ellkay:alerts",
+      "@container": "@list"
+    },
+    "configuration": {
+      "@id": "ellkay:configuration",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Bridge.SiteServiceSetting": "ellkay:LKCloudConnect.Contracts.Bridge.SiteServiceSetting",
+    "value": {
+      "@id": "ellkay:value",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.DateOfBirth": "ellkay:LKCloudConnect.Contracts.Bridge.DateOfBirth",
+    "raw": {
+      "@id": "ellkay:raw",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.SmartSearchPatientDetail": "ellkay:LKCloudConnect.Contracts.Bridge.SmartSearchPatientDetail",
+    "chartNumber": {
+      "@id": "ellkay:chartNumber",
+      "@type": "xsd:string"
+    },
+    "middleName": {
+      "@id": "ellkay:middleName",
+      "@type": "xsd:string"
+    },
+    "socialSecurityNumber": {
+      "@id": "ellkay:socialSecurityNumber"
+    },
+    "dateOfBirth": {
+      "@id": "ellkay:dateOfBirth"
+    },
+    "sex": {
+      "@id": "ellkay:sex",
+      "@type": "xsd:string"
+    },
+    "zipCode": {
+      "@id": "ellkay:zipCode",
+      "@type": "xsd:string"
+    },
+    "mrn": {
+      "@id": "ellkay:mrn",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.SmartSearchResult": "ellkay:LKCloudConnect.Contracts.Bridge.SmartSearchResult",
+    "text": {
+      "@id": "ellkay:text",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.SocialSecurityNumber": "ellkay:LKCloudConnect.Contracts.Bridge.SocialSecurityNumber",
+    "formatted": {
+      "@id": "ellkay:formatted",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.LKBridge.SmartSearchSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.LKBridge.SmartSearchSwaggerRequest",
+    "query": {
+      "@id": "ellkay:query",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.CommunicationInformation": "ellkay:LKCloudConnect.Contracts.Bridge.CommunicationInformation",
+    "contactPreferences": {
+      "@id": "ellkay:contactPreferences",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Bridge.ContactPreferences": "ellkay:LKCloudConnect.Contracts.Bridge.ContactPreferences",
+    "method": {
+      "@id": "ellkay:method",
+      "@type": "xsd:string"
+    },
+    "priority": {
+      "@id": "ellkay:priority",
+      "@type": "xsd:string"
+    },
+    "consent": {
+      "@id": "ellkay:consent",
+      "@type": "xsd:boolean"
+    },
+    "LKCloudConnect.Contracts.Bridge.Demographic": "ellkay:LKCloudConnect.Contracts.Bridge.Demographic",
+    "patientFound": {
+      "@id": "ellkay:patientFound",
+      "@type": "xsd:boolean"
+    },
+    "patient": {
+      "@id": "ellkay:patient"
+    },
+    "provider": {
+      "@id": "ellkay:provider"
+    },
+    "referringProvider": {
+      "@id": "ellkay:referringProvider"
+    },
+    "attendingProvider": {
+      "@id": "ellkay:attendingProvider"
+    },
+    "employer": {
+      "@id": "ellkay:employer"
+    },
+    "guarantor": {
+      "@id": "ellkay:guarantor"
+    },
+    "insurances": {
+      "@id": "ellkay:insurances",
+      "@container": "@list"
+    },
+    "pharmacy": {
+      "@id": "ellkay:pharmacy"
+    },
+    "emergencyContact": {
+      "@id": "ellkay:emergencyContact"
+    },
+    "primaryFacility": {
+      "@id": "ellkay:primaryFacility"
+    },
+    "emergencyContactDetailReferences": {
+      "@id": "ellkay:emergencyContactDetailReferences",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Bridge.EmergencyContactDetail": "ellkay:LKCloudConnect.Contracts.Bridge.EmergencyContactDetail",
+    "homePhone": {
+      "@id": "ellkay:homePhone",
+      "@type": "xsd:string"
+    },
+    "workPhone": {
+      "@id": "ellkay:workPhone",
+      "@type": "xsd:string"
+    },
+    "workPhoneExt": {
+      "@id": "ellkay:workPhoneExt",
+      "@type": "xsd:string"
+    },
+    "cellPhone": {
+      "@id": "ellkay:cellPhone",
+      "@type": "xsd:string"
+    },
+    "relationToPatient": {
+      "@id": "ellkay:relationToPatient",
+      "@type": "xsd:string"
+    },
+    "relationshipToPatient": {
+      "@id": "ellkay:relationshipToPatient"
+    },
+    "LKCloudConnect.Contracts.Bridge.EmergencyContactDetailReference": "ellkay:LKCloudConnect.Contracts.Bridge.EmergencyContactDetailReference",
+    "contactId": {
+      "@id": "ellkay:contactId",
+      "@type": "xsd:string"
+    },
+    "emergencyContactDetail": {
+      "@id": "ellkay:emergencyContactDetail"
+    },
+    "LKCloudConnect.Contracts.Bridge.EmployerDetail": "ellkay:LKCloudConnect.Contracts.Bridge.EmployerDetail",
+    "statusText": {
+      "@id": "ellkay:statusText",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.GuarantorDetail": "ellkay:LKCloudConnect.Contracts.Bridge.GuarantorDetail",
+    "prefix": {
+      "@id": "ellkay:prefix",
+      "@type": "xsd:string"
+    },
+    "suffix": {
+      "@id": "ellkay:suffix",
+      "@type": "xsd:string"
+    },
+    "preferredName": {
+      "@id": "ellkay:preferredName",
+      "@type": "xsd:string"
+    },
+    "ssnNotProvidedReason": {
+      "@id": "ellkay:ssnNotProvidedReason"
+    },
+    "maritalStatus": {
+      "@id": "ellkay:maritalStatus",
+      "@type": "xsd:string"
+    },
+    "maritalStatusCode": {
+      "@id": "ellkay:maritalStatusCode"
+    },
+    "race": {
+      "@id": "ellkay:race",
+      "@type": "xsd:string"
+    },
+    "races": {
+      "@id": "ellkay:races",
+      "@container": "@list"
+    },
+    "mobilePhone": {
+      "@id": "ellkay:mobilePhone",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "ellkay:countryCode"
+    },
+    "languages": {
+      "@id": "ellkay:languages",
+      "@container": "@list"
+    },
+    "ethnicity": {
+      "@id": "ellkay:ethnicity",
+      "@type": "xsd:string"
+    },
+    "ethnicities": {
+      "@id": "ellkay:ethnicities",
+      "@container": "@list"
+    },
+    "deceased": {
+      "@id": "ellkay:deceased",
+      "@type": "xsd:boolean"
+    },
+    "deceasedDate": {
+      "@id": "ellkay:deceasedDate",
+      "@type": "xsd:dateTime"
+    },
+    "patientStatus": {
+      "@id": "ellkay:patientStatus",
+      "@type": "xsd:string"
+    },
+    "genderIdentities": {
+      "@id": "ellkay:genderIdentities",
+      "@container": "@list"
+    },
+    "sexualOrientation": {
+      "@id": "ellkay:sexualOrientation"
+    },
+    "alternatePatientId": {
+      "@id": "ellkay:alternatePatientId",
+      "@type": "xsd:string"
+    },
+    "identifiers": {
+      "@id": "ellkay:identifiers",
+      "@container": "@list"
+    },
+    "communicationInformation": {
+      "@id": "ellkay:communicationInformation"
+    },
+    "releaseOfInformation": {
+      "@id": "ellkay:releaseOfInformation",
+      "@type": "xsd:string"
+    },
+    "rxHistoryConsent": {
+      "@id": "ellkay:rxHistoryConsent",
+      "@type": "xsd:string"
+    },
+    "sexAtBirth": {
+      "@id": "ellkay:sexAtBirth",
+      "@type": "xsd:string"
+    },
+    "pronouns": {
+      "@id": "ellkay:pronouns",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.IdentifierType": "ellkay:LKCloudConnect.Contracts.Bridge.IdentifierType",
+    "LKCloudConnect.Contracts.Bridge.InsuranceDetail": "ellkay:LKCloudConnect.Contracts.Bridge.InsuranceDetail",
+    "holder": {
+      "@id": "ellkay:holder"
+    },
+    "groupNumber": {
+      "@id": "ellkay:groupNumber",
+      "@type": "xsd:string"
+    },
+    "policyNumber": {
+      "@id": "ellkay:policyNumber",
+      "@type": "xsd:string"
+    },
+    "patientRelationToHolder": {
+      "@id": "ellkay:patientRelationToHolder",
+      "@type": "xsd:string"
+    },
+    "copay": {
+      "@id": "ellkay:copay",
+      "@type": "xsd:decimal"
+    },
+    "specialistCopay": {
+      "@id": "ellkay:specialistCopay",
+      "@type": "xsd:decimal"
+    },
+    "patientRelationshipToHolder": {
+      "@id": "ellkay:patientRelationshipToHolder"
+    },
+    "effectiveDate": {
+      "@id": "ellkay:effectiveDate",
+      "@type": "xsd:dateTime"
+    },
+    "order": {
+      "@id": "ellkay:order",
+      "@type": "xsd:integer"
+    },
+    "payerId": {
+      "@id": "ellkay:payerId",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.PatientDetail": "ellkay:LKCloudConnect.Contracts.Bridge.PatientDetail",
+    "LKCloudConnect.Contracts.Bridge.PatientIdentifiers": "ellkay:LKCloudConnect.Contracts.Bridge.PatientIdentifiers",
+    "LKCloudConnect.Contracts.Bridge.PharmacyDetail": "ellkay:LKCloudConnect.Contracts.Bridge.PharmacyDetail",
+    "LKCloudConnect.Contracts.Bridge.PrimaryFacility": "ellkay:LKCloudConnect.Contracts.Bridge.PrimaryFacility",
+    "LKCloudConnect.Contracts.Bridge.ProviderDetail": "ellkay:LKCloudConnect.Contracts.Bridge.ProviderDetail",
+    "license": {
+      "@id": "ellkay:license",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetPatientSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetPatientSwaggerRequest",
+    "patientID": {
+      "@id": "ellkay:patientID",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.EmergencyContact": "ellkay:LKCloudConnect.Contracts.Bridge.EmergencyContact",
+    "LKCloudConnect.Contracts.Bridge.EmergencyContactReference": "ellkay:LKCloudConnect.Contracts.Bridge.EmergencyContactReference",
+    "LKCloudConnect.Contracts.Bridge.Employer": "ellkay:LKCloudConnect.Contracts.Bridge.Employer",
+    "LKCloudConnect.Contracts.Bridge.GetPatientSummaryRequest": "ellkay:LKCloudConnect.Contracts.Bridge.GetPatientSummaryRequest",
+    "LKCloudConnect.Contracts.Bridge.GetPatientSummaryResult": "ellkay:LKCloudConnect.Contracts.Bridge.GetPatientSummaryResult",
+    "emergencyContactReferences": {
+      "@id": "ellkay:emergencyContactReferences",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Bridge.Guarantor": "ellkay:LKCloudConnect.Contracts.Bridge.Guarantor",
+    "LKCloudConnect.Contracts.Bridge.Holder": "ellkay:LKCloudConnect.Contracts.Bridge.Holder",
+    "LKCloudConnect.Contracts.Bridge.Insurance": "ellkay:LKCloudConnect.Contracts.Bridge.Insurance",
+    "LKCloudConnect.Contracts.Bridge.Patient": "ellkay:LKCloudConnect.Contracts.Bridge.Patient",
+    "LKCloudConnect.Contracts.Bridge.Pharmacy": "ellkay:LKCloudConnect.Contracts.Bridge.Pharmacy",
+    "LKCloudConnect.Contracts.Bridge.Provider": "ellkay:LKCloudConnect.Contracts.Bridge.Provider",
+    "LKCloudConnect.Contracts.Bridge.ReferringProvider": "ellkay:LKCloudConnect.Contracts.Bridge.ReferringProvider",
+    "LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetPatientSummarySwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetPatientSummarySwaggerRequest",
+    "LKCloudConnect.Contracts.Bridge.GetGuarantorRequest": "ellkay:LKCloudConnect.Contracts.Bridge.GetGuarantorRequest",
+    "guarantorId": {
+      "@id": "ellkay:guarantorId",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.GetGuarantorResult": "ellkay:LKCloudConnect.Contracts.Bridge.GetGuarantorResult",
+    "ssn": {
+      "@id": "ellkay:ssn",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetGuarantorSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetGuarantorSwaggerRequest",
+    "LKCloudConnect.Contracts.Bridge.GetPatientAlertsRequest": "ellkay:LKCloudConnect.Contracts.Bridge.GetPatientAlertsRequest",
+    "LKCloudConnect.Contracts.Bridge.GetPatientAlertsResult": "ellkay:LKCloudConnect.Contracts.Bridge.GetPatientAlertsResult",
+    "patientAlert": {
+      "@id": "ellkay:patientAlert",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Bridge.PatientAlert": "ellkay:LKCloudConnect.Contracts.Bridge.PatientAlert",
+    "expiryDate": {
+      "@id": "ellkay:expiryDate",
+      "@type": "xsd:dateTime"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetPatientAlertsSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetPatientAlertsSwaggerRequest",
+    "LKCloudConnect.Contracts.Bridge.GetPatientReportingDataRequest": "ellkay:LKCloudConnect.Contracts.Bridge.GetPatientReportingDataRequest",
+    "LKCloudConnect.Contracts.Bridge.GetPatientReportingDataResponse": "ellkay:LKCloudConnect.Contracts.Bridge.GetPatientReportingDataResponse",
+    "dateRecorded": {
+      "@id": "ellkay:dateRecorded",
+      "@type": "xsd:dateTime"
+    },
+    "factors": {
+      "@id": "ellkay:factors",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Bridge.ReportingFactor": "ellkay:LKCloudConnect.Contracts.Bridge.ReportingFactor",
+    "sourceName": {
+      "@id": "ellkay:sourceName",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetPatientReportingDataSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetPatientReportingDataSwaggerRequest",
+    "LKCloudConnect.Contracts.Bridge.AdvanceDirectiveData": "ellkay:LKCloudConnect.Contracts.Bridge.AdvanceDirectiveData",
+    "displayName": {
+      "@id": "ellkay:displayName",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Bridge.GetAdvanceDirectivesRequest": "ellkay:LKCloudConnect.Contracts.Bridge.GetAdvanceDirectivesRequest",
+    "LKCloudConnect.Contracts.Bridge.GetAdvanceDirectivesResponse": "ellkay:LKCloudConnect.Contracts.Bridge.GetAdvanceDirectivesResponse",
+    "advanceDirectives": {
+      "@id": "ellkay:advanceDirectives",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetAdvanceDirectivesSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetAdvanceDirectivesSwaggerRequest",
+    "LKCloudConnect.Contracts.Bridge.GetReferralsRequest": "ellkay:LKCloudConnect.Contracts.Bridge.GetReferralsRequest",
+    "LKCloudConnect.Contracts.Bridge.GetReferralsResponse": "ellkay:LKCloudConnect.Contracts.Bridge.GetReferralsResponse",
+    "referrals": {
+      "@id": "ellkay:referrals",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Bridge.ReferralData": "ellkay:LKCloudConnect.Contracts.Bridge.ReferralData",
+    "authorizationNumber": {
+      "@id": "ellkay:authorizationNumber",
+      "@type": "xsd:string"
+    },
+    "referralId": {
+      "@id": "ellkay:referralId",
+      "@type": "xsd:string"
+    },
+    "referralNumber": {
+      "@id": "ellkay:referralNumber",
+      "@type": "xsd:string"
+    },
+    "referralType": {
+      "@id": "ellkay:referralType",
+      "@type": "xsd:string"
+    },
+    "reasons": {
+      "@id": "ellkay:reasons",
+      "@container": "@list"
+    },
+    "insCode": {
+      "@id": "ellkay:insCode",
+      "@type": "xsd:string"
+    },
+    "encounterId": {
+      "@id": "ellkay:encounterId",
+      "@type": "xsd:string"
+    },
+    "fromFacilityId": {
+      "@id": "ellkay:fromFacilityId",
+      "@type": "xsd:string"
+    },
+    "fromPhysicianId": {
+      "@id": "ellkay:fromPhysicianId",
+      "@type": "xsd:string"
+    },
+    "toFacilityId": {
+      "@id": "ellkay:toFacilityId",
+      "@type": "xsd:string"
+    },
+    "toPhysicianId": {
+      "@id": "ellkay:toPhysicianId",
+      "@type": "xsd:string"
+    },
+    "appointmentDate": {
+      "@id": "ellkay:appointmentDate",
+      "@type": "xsd:dateTime"
+    },
+    "referralDate": {
+      "@id": "ellkay:referralDate",
+      "@type": "xsd:dateTime"
+    },
+    "diagnosis": {
+      "@id": "ellkay:diagnosis",
+      "@container": "@list"
+    },
+    "procedure": {
+      "@id": "ellkay:procedure",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Bridge.ReferralReason": "ellkay:LKCloudConnect.Contracts.Bridge.ReferralReason",
+    "LKCloudConnect.Contracts.Bridge.ReferralsDiagnosis": "ellkay:LKCloudConnect.Contracts.Bridge.ReferralsDiagnosis",
+    "system": {
+      "@id": "ellkay:system",
+      "@type": "xsd:string"
+    },
+    "isPrimary": {
+      "@id": "ellkay:isPrimary",
+      "@type": "xsd:boolean"
+    },
+    "LKCloudConnect.Contracts.Bridge.ReferralsProcedure": "ellkay:LKCloudConnect.Contracts.Bridge.ReferralsProcedure",
+    "LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetReferralsRequestSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.LKBridge.GetReferralsRequestSwaggerRequest",
+    "LKCloudConnect.Contracts.Charges.BillDetail": "ellkay:LKCloudConnect.Contracts.Charges.BillDetail",
+    "encounter": {
+      "@id": "ellkay:encounter"
+    },
+    "supervisingProvider": {
+      "@id": "ellkay:supervisingProvider"
+    },
+    "transactions": {
+      "@id": "ellkay:transactions",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Charges.ChargeDetail": "ellkay:LKCloudConnect.Contracts.Charges.ChargeDetail",
+    "transactionId": {
+      "@id": "ellkay:transactionId",
+      "@type": "xsd:string"
+    },
+    "sendingFacility": {
+      "@id": "ellkay:sendingFacility",
+      "@type": "xsd:string"
+    },
+    "receivingFacility": {
+      "@id": "ellkay:receivingFacility",
+      "@type": "xsd:string"
+    },
+    "bill": {
+      "@id": "ellkay:bill"
+    },
+    "LKCloudConnect.Contracts.Charges.Diagnosis": "ellkay:LKCloudConnect.Contracts.Charges.Diagnosis",
+    "problemId": {
+      "@id": "ellkay:problemId",
+      "@type": "xsd:string"
+    },
+    "icdVersion": {
+      "@id": "ellkay:icdVersion",
+      "@type": "xsd:string"
+    },
+    "alternateCode": {
+      "@id": "ellkay:alternateCode",
+      "@type": "xsd:string"
+    },
+    "alternateICDVersion": {
+      "@id": "ellkay:alternateICDVersion",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Charges.EncounterDetail": "ellkay:LKCloudConnect.Contracts.Charges.EncounterDetail",
+    "locationName": {
+      "@id": "ellkay:locationName",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "ellkay:date",
+      "@type": "xsd:dateTime"
+    },
+    "LKCloudConnect.Contracts.Charges.ModifierCode": "ellkay:LKCloudConnect.Contracts.Charges.ModifierCode",
+    "LKCloudConnect.Contracts.Charges.PatientDetail": "ellkay:LKCloudConnect.Contracts.Charges.PatientDetail",
+    "internalId": {
+      "@id": "ellkay:internalId",
+      "@type": "xsd:string"
+    },
+    "dob": {
+      "@id": "ellkay:dob",
+      "@type": "xsd:dateTime"
+    },
+    "LKCloudConnect.Contracts.Charges.Procedure": "ellkay:LKCloudConnect.Contracts.Charges.Procedure",
+    "LKCloudConnect.Contracts.Charges.ProviderDetail": "ellkay:LKCloudConnect.Contracts.Charges.ProviderDetail",
+    "LKCloudConnect.Contracts.Charges.SendChargeResult": "ellkay:LKCloudConnect.Contracts.Charges.SendChargeResult",
+    "chargeId": {
+      "@id": "ellkay:chargeId",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Contracts.Charges.TransactionDetail": "ellkay:LKCloudConnect.Contracts.Charges.TransactionDetail",
+    "renderingProvider": {
+      "@id": "ellkay:renderingProvider"
+    },
+    "dateOfService": {
+      "@id": "ellkay:dateOfService",
+      "@type": "xsd:dateTime"
+    },
+    "postingDate": {
+      "@id": "ellkay:postingDate",
+      "@type": "xsd:dateTime"
+    },
+    "diagnoses": {
+      "@id": "ellkay:diagnoses",
+      "@container": "@list"
+    },
+    "modifiers": {
+      "@id": "ellkay:modifiers",
+      "@container": "@list"
+    },
+    "units": {
+      "@id": "ellkay:units",
+      "@type": "xsd:integer"
+    },
+    "insuranceId": {
+      "@id": "ellkay:insuranceId",
+      "@type": "xsd:string"
+    },
+    "placeOfServiceCode": {
+      "@id": "ellkay:placeOfServiceCode",
+      "@type": "xsd:string"
+    },
+    "typeOfServiceCode": {
+      "@id": "ellkay:typeOfServiceCode",
+      "@type": "xsd:string"
+    },
+    "LKCloudConnect.Swagger.SwaggerRequests.LKCharges.SendChargeSwaggerRequest": "ellkay:LKCloudConnect.Swagger.SwaggerRequests.LKCharges.SendChargeSwaggerRequest",
+    "charges": {
+      "@id": "ellkay:charges",
+      "@container": "@list"
+    },
+    "LKCloudConnect.Contracts.Charges.ChargeExceptionDetail": "ellkay:LKCloudConnect.Contracts.Charges.ChargeExceptionDetail",
+    "LKCloudConnect.Contracts.Charges.GetChargeStatusResult": "ellkay:LKCloudConnect.Contracts.Charges.GetChargeStatusResult",
+    "exceptionDetail": {
+      "@id": "ellkay:exceptionDetail"
+    },
+    "postedTransactionDetails": {
+      "@id": "ellkay:postedTransactionDetails",
+      "@container": "@list"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "ELLKAY API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects ELLKAY's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-14) from openapi/ellkay-lkcloud-api-openapi.yml, openapi/ellkay-r4-fhir-api-openapi.yml.",
+  "dcterms:created": "2026-10-14",
+  "dcterms:source": [
+    "openapi/ellkay-lkcloud-api-openapi.yml",
+    "openapi/ellkay-r4-fhir-api-openapi.yml"
+  ]
+}

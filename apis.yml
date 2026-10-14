@@ -1,21 +1,26 @@
 aid: ellkay
+
 name: ELLKAY
-description: >-
-  ELLKAY is a healthcare data interoperability and data-management company that connects
-  disparate health IT systems so clinical and financial data can move where it is needed.
-  Its LKOpera, LKOrbit, and LKOasis product lines provide interface-engine integration,
-  orders and results, payer data retrieval, network/lab connectivity, and data
-  archiving/migration across 750+ EMR/PM systems, 400+ hospitals, 58k+ practices, and 725+
-  laboratories. For developers, ELLKAY exposes the LKCloud platform: a single-endpoint Interop
-  API (proprietary LK* operations) and a full HL7 FHIR R4 RESTful API, both authenticated with
-  OAuth 2.0 against the LKIdentity authorization server and routed with a SiteServiceKey.
+
+description: 'ELLKAY is a healthcare data interoperability and data-management company that connects disparate health IT systems so clinical and
+  financial data can move where it is needed. Its LKOpera, LKOrbit, and LKOasis product lines provide interface-engine integration, orders and
+  results, payer data retrieval, network/lab connectivity, and data archiving/migration across 750+ EMR/PM systems, 400+ hospitals, 58k+ practices,
+  and 725+ laboratories. For developers, ELLKAY exposes the LKCloud platform: a single-endpoint Interop API (proprietary LK* operations) and a
+  full HL7 FHIR R4 RESTful API, both authenticated with OAuth 2.0 against the LKIdentity authorization server and routed with a SiteServiceKey.'
+
 url: https://raw.githubusercontent.com/api-evangelist/ellkay/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: vc-portfolio
+
 x-backed-by:
 - insight-partners
+
 x-tier: stub
+
 x-tier-reason: portfolio-lead
+
 deliveryModel:
   model: saas
   open_source: false
@@ -27,6 +32,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -39,13 +45,21 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
+
 image: https://cdn.prod.website-files.com/68470d9028f4a074323fde70/689b3ac60177b4bae93d407b_Asset%2028.png
+
 specificationVersion: '0.23'
+
 created: '2026-07-17'
+
 modified: '2026-07-19'
+
 x-docs-platform: readme
+
 x-docs-platform-confidence: high
+
 x-docs-platform-checked: 2026-10-03
+
 tags:
 - Company
 - Healthcare
@@ -54,6 +68,7 @@ tags:
 - HL7
 - EHR Integration
 - Health Data
+
 tags_raw:
 - Company
 - Healthcare
@@ -63,46 +78,34 @@ tags_raw:
 - EHR Integration
 - Health Data
 - API
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
-apis:
-- name: LKCloud Interop API
-  description: >-
-    Single-endpoint healthcare interoperability API exposing proprietary LK* operations
-    (appointments, patient bridge/search, documents, charges, patient balance, master lists)
-    that bi-directionally connect applications to hundreds of EHR/PM data sources. JSON over
-    HTTPS, invoked as POST operations; OAuth 2.0 Bearer + SiteServiceKey.
-  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
-  baseURL: https://services.lkcloud.com
-  tags:
-  - Interoperability
-  - EHR Integration
-  - Healthcare
-  properties:
-  - type: Documentation
-    url: https://lkcloud-api.readme.io/docs/lk-cloud-overview
-  - type: APIReference
-    url: https://lkcloud-api.readme.io/reference
-- name: LKCloud FHIR R4 API
-  description: >-
-    HL7 FHIR R4 RESTful API (read/search/create/update/delete across R4 resources) over the
-    ELLKAY interoperability platform, with a published CapabilityStatement. OAuth 2.0 Bearer +
-    SiteServiceKey; errors returned as FHIR OperationOutcome resources.
-  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
-  baseURL: https://fhir.lkcloud.com/R4
-  tags:
-  - FHIR
-  - HL7
-  - Healthcare
-  properties:
-  - type: APIReference
-    url: https://lkcloud-api.readme.io/reference
-  - type: CapabilityStatement
-    url: https://fhir.lkcloud.com/R4/metadata
+
 common:
+- type: AgenticAccess
+  url: agentic-access/ellkay-agentic-access.yml
+- type: Spectral
+  url: rules/ellkay-rules.yml
+- type: JSONLD
+  url: json-ld/ellkay-context.jsonld
+- type: Vocabulary
+  url: vocabulary/ellkay-vocabulary.yml
+- type: DataModel
+  url: data-model/ellkay-data-model.yml
+- type: ErrorCatalog
+  url: errors/ellkay-problem-types.yml
+- type: Hosts
+  url: hosts/ellkay-hosts.yml
+- type: IntegrationEdges
+  url: integrations/ellkay-integration-edges.yml
+- type: Vendors
+  url: vendors/ellkay-vendors.yml
+- type: Leadership
+  url: https://www.ellkay.com/leadership
 - type: Website
   url: https://www.ellkay.com/
 - type: DeveloperPortal
@@ -123,8 +126,6 @@ common:
   url: https://dashboard.ellkay.com/Login
 - type: PrivacyPolicy
   url: https://www.ellkay.com/privacy-policy
-- type: LLMsTxt
-  url: llms/ellkay-llms.txt
 - type: WellKnown
   url: well-known/ellkay-well-known.yml
 - type: Conventions
@@ -141,11 +142,97 @@ common:
   url: sandbox/ellkay-sandbox.yml
 - type: X-MCPServerCandidate
   url: mcp/ellkay-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
+    API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
+    the artifact-type surfaces with a server that does not exist.'
 - type: DomainSecurity
   url: security/ellkay-domain-security.yml
+
+apis:
+- name: LKCloud Interop API
+  description: Single-endpoint healthcare interoperability API exposing proprietary LK* operations (appointments, patient bridge/search, documents,
+    charges, patient balance, master lists) that bi-directionally connect applications to hundreds of EHR/PM data sources. JSON over HTTPS, invoked
+    as POST operations; OAuth 2.0 Bearer + SiteServiceKey.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Interoperability
+  - EHR Integration
+  - Healthcare
+  properties:
+  - type: Documentation
+    url: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  - type: APIReference
+    url: https://lkcloud-api.readme.io/reference
+  aid: ellkay:lkcloud-interop-api
+- name: LKCloud FHIR R4 API
+  description: HL7 FHIR R4 RESTful API (read/search/create/update/delete across R4 resources) over the ELLKAY interoperability platform, with
+    a published CapabilityStatement. OAuth 2.0 Bearer + SiteServiceKey; errors returned as FHIR OperationOutcome resources.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://fhir.lkcloud.com/R4
+  tags:
+  - FHIR
+  - HL7
+  - Healthcare
+  properties:
+  - type: APIReference
+    url: https://lkcloud-api.readme.io/reference
+  - type: CapabilityStatement
+    url: https://fhir.lkcloud.com/R4/metadata
+  aid: ellkay:lkcloud-fhir-r4-api
+- aid: ellkay:ellkay-lkcloud-api
+  name: ELLKAY LK Appointments API
+  description: Ellkay Appointment endpoints
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - LKAppointments
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-lkcloud-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+- aid: ellkay:ellkay-r4-fhir-api
+  name: ELLKAY Account API
+  description: The Account API from ELLKAY — 61 operation(s) for account.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-r4-fhir-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+
 x-enrichment:
   date: '2026-07-19'
   status: backfilled
   pass: local-v1
   note: backfilled from .gitignore signal + verified work evidence
+
+x-readme-harvest:
+  date: '2026-10-14'
+  ops: 233
+  tool: harvest-readme-openapi.py
+  portal: https://lkcloud-api.readme.io

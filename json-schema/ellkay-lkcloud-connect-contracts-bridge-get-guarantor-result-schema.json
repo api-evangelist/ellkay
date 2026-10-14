@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ellkay/main/json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json",
+  "title": "LKCloudConnect.Contracts.Bridge.GetGuarantorResult",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Bridge.GetGuarantorResult",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Id"
+    },
+    "relationshipToPatient": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+        }
+      ],
+      "description": "Relationship To Patient"
+    },
+    "chartNumber": {
+      "type": "string",
+      "description": "Chart Number"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Guarantor first name"
+    },
+    "middleName": {
+      "type": "string",
+      "description": "Guarantor middle name"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Guarantor last name"
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Suffix"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "description": "Date of birth. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00",
+      "format": "date-time"
+    },
+    "sex": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+        }
+      ],
+      "description": "Guarantor sex"
+    },
+    "ssn": {
+      "type": "string",
+      "description": "Social security number"
+    },
+    "maritalStatus": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+        }
+      ],
+      "description": "Marital status"
+    },
+    "races": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+      },
+      "description": "Races"
+    },
+    "homePhone": {
+      "type": "string",
+      "description": "Home phone"
+    },
+    "workPhone": {
+      "type": "string",
+      "description": "Work phone"
+    },
+    "workPhoneExt": {
+      "type": "string",
+      "description": "Work phone ext"
+    },
+    "mobilePhone": {
+      "type": "string",
+      "description": "Mobile phone"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email"
+    },
+    "address1": {
+      "type": "string",
+      "description": "Address1"
+    },
+    "address2": {
+      "type": "string",
+      "description": "Address2"
+    },
+    "city": {
+      "type": "string",
+      "description": "City"
+    },
+    "state": {
+      "type": "string",
+      "description": "State"
+    },
+    "zip": {
+      "type": "string",
+      "description": "Zip code"
+    },
+    "countryCode": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+        }
+      ],
+      "description": "Country"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+      },
+      "description": "Languages"
+    },
+    "ethnicities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+      },
+      "description": "Ethnicities"
+    },
+    "deceased": {
+      "type": "boolean",
+      "description": "Deceased"
+    },
+    "deceasedDate": {
+      "type": "string",
+      "description": "Deceased date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00",
+      "format": "date-time"
+    },
+    "genderIdentities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+      },
+      "description": "Gender identities"
+    },
+    "sexualOrientation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+        }
+      ],
+      "description": "Sexual orientation"
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": "System-specific data for special cases"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "LKCloudConnect.Contracts.Bridge.MappedCode": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Our mapped code (If one is available)"
+        },
+        "source": {
+          "type": "string",
+          "description": "System-specific code"
+        },
+        "sourceText": {
+          "type": "string",
+          "description": "System-specific free text when additional free text is allowed, usually found with “other” fields"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

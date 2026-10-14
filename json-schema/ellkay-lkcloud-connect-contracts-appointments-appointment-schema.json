@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ellkay/main/json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json",
+  "title": "LKCloudConnect.Contracts.Appointments.Appointment",
+  "description": "Appointment object",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.Appointments.Appointment",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Appointment id"
+    },
+    "start": {
+      "type": "string",
+      "description": "Appointment start date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00",
+      "format": "date-time"
+    },
+    "duration": {
+      "type": "string",
+      "description": "Appointment duration e.g. 00:30:00"
+    },
+    "patientId": {
+      "type": "string",
+      "description": "Appointment patient id"
+    },
+    "patientAlternateId": {
+      "type": "string",
+      "description": "Appointment patient alternate id"
+    },
+    "physicianId": {
+      "type": "string",
+      "description": "Appointment physician id"
+    },
+    "facilityId": {
+      "type": "string",
+      "description": "Appointment facility id"
+    },
+    "facilityName": {
+      "type": "string",
+      "description": "Appointment facility name"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Appointment notes"
+    },
+    "status": {
+      "enum": [
+        "InvalidStatus",
+        "Other",
+        "Pending",
+        "Waitlist",
+        "Booked",
+        "Started",
+        "Complete",
+        "Cancelled",
+        "Discontinued",
+        "Deleted",
+        "Blocked",
+        "Overbook",
+        "NoShow",
+        "Rescheduled",
+        "Confirmed"
+      ],
+      "type": "string",
+      "description": "Appointment status"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Appointment last modified date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00",
+      "format": "date-time"
+    },
+    "type": {
+      "type": "string",
+      "description": "Appointment type display"
+    },
+    "billable": {
+      "enum": [
+        "Unspecified",
+        "True",
+        "False"
+      ],
+      "type": "string",
+      "description": "Appointment billable status"
+    },
+    "department": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/LKCloudConnect.Contracts.Appointments.Department"
+        }
+      ],
+      "description": "Appointment department"
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LKCloudConnect.Contracts.Appointments.AppointmentResource"
+      },
+      "description": "Appointment resources"
+    },
+    "statusCode": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+        }
+      ],
+      "description": "Appointment status code\r\n'InvalidStatus 'Other' 'Pending' 'Waitlist' 'Booked' 'Started' 'Complete' 'Cancelled' 'Discontinued' 'Deleted' 'Blocked' 'Overbook' 'NoShow' 'Rescheduled' 'Confirmed'"
+    },
+    "appointmentTypeId": {
+      "type": "string",
+      "description": "Appointment type id"
+    },
+    "reason": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/LKCloudConnect.Contracts.Bridge.MappedCode"
+        }
+      ],
+      "description": "Appointment reason\r\nAppointment reason is not standardized, and only source code is provided."
+    },
+    "created": {
+      "type": "string",
+      "description": "Appointment created date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00",
+      "format": "date-time"
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": "System-specific data for special cases"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "LKCloudConnect.Contracts.Appointments.AppointmentResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the appointment resource"
+        }
+      },
+      "additionalProperties": false,
+      "description": "A resource related to an appointment"
+    },
+    "LKCloudConnect.Contracts.Appointments.Department": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the department"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LKCloudConnect.Contracts.Bridge.MappedCode": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Our mapped code (If one is available)"
+        },
+        "source": {
+          "type": "string",
+          "description": "System-specific code"
+        },
+        "sourceText": {
+          "type": "string",
+          "description": "System-specific free text when additional free text is allowed, usually found with “other” fields"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ellkay/main/json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json",
+  "title": "LKCloudConnect.Contracts.PatientDataLink.GetDiagnosesResult",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.PatientDataLink.GetDiagnosesResult",
+  "type": "object",
+  "properties": {
+    "legacyRowId": {
+      "type": "string",
+      "description": "Legacy row id"
+    },
+    "codeSystemId": {
+      "type": "string",
+      "description": "Code system id"
+    },
+    "mapped": {
+      "type": "string",
+      "description": "Diagnoses mapped code"
+    },
+    "updatedBy": {
+      "type": "string",
+      "description": "Who last updated the record"
+    },
+    "updatedDate": {
+      "type": "string",
+      "description": "Record last updated datetime eg \"08/31/1984 14:20:00\""
+    },
+    "bcpFlag": {
+      "type": "string",
+      "description": "Bcp Flag"
+    },
+    "icd10": {
+      "type": "string",
+      "description": "Icd10 code"
+    },
+    "snomedCode": {
+      "type": "string",
+      "description": "Diagnosis snomed code"
+    },
+    "lifeCycle": {
+      "type": "string",
+      "description": "Diagnosis life cycle"
+    },
+    "processId": {
+      "type": "string",
+      "description": "Process id"
+    },
+    "xmlComments": {
+      "type": "string",
+      "description": "Optional system-specific comments in XML format"
+    },
+    "physicianId": {
+      "type": "string",
+      "description": "Physician id"
+    },
+    "original_StatusDescription": {
+      "type": "string",
+      "description": "Original status description"
+    },
+    "legacyRowStatusDescription": {
+      "type": "string",
+      "description": "Legacy row status description"
+    },
+    "rowState": {
+      "type": "string",
+      "description": "The row state"
+    },
+    "deltaIdentifier": {
+      "type": "string",
+      "description": "Delta identifier string"
+    },
+    "laterality": {
+      "type": "string",
+      "description": "Laterality"
+    },
+    "status": {
+      "type": "string",
+      "description": "Diagnosis status"
+    },
+    "resolvedBy": {
+      "type": "string",
+      "description": "What resolved the diagnosis"
+    },
+    "createDt": {
+      "type": "string",
+      "description": "Create date string eg \"08/31/1984 14:20:00\""
+    },
+    "dateRecorded": {
+      "type": "string",
+      "description": "Date the diagnosis was recorded eg \"08/31/1984 14:20:00\""
+    },
+    "srcCreateDate": {
+      "type": "string",
+      "description": "Date the record was recorded in target system eg \"08/31/1984 14:20:00\""
+    },
+    "srcModifiedDate": {
+      "type": "string",
+      "description": "Date the record was modified in target system eg \"08/31/1984 14:20:00\""
+    },
+    "textType": {
+      "type": "string",
+      "description": "Diagnosis text type"
+    },
+    "miscText": {
+      "type": "string",
+      "description": "Miscellaneous text"
+    },
+    "comments": {
+      "type": "string",
+      "description": "Diagnosis comments"
+    },
+    "encounterId": {
+      "type": "string",
+      "description": "Encounter id"
+    },
+    "patientId": {
+      "type": "string",
+      "description": "Patient id"
+    },
+    "code": {
+      "type": "string",
+      "description": "Diagnosis code"
+    },
+    "description": {
+      "type": "string",
+      "description": "Diagnosis description"
+    },
+    "resolvedDate": {
+      "type": "string",
+      "description": "Diagnosis resolution date eg \"08/31/1984 14:20:00\""
+    },
+    "onsetDate": {
+      "type": "string",
+      "description": "Diagnosis onset date eg \"08/31/1984 14:20:00\""
+    },
+    "result": {
+      "type": "string",
+      "description": "Result text"
+    },
+    "udv": {
+      "type": "string",
+      "description": "Unit dose vial text"
+    },
+    "accessLevel": {
+      "type": "string",
+      "description": "Access level text"
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": "System-specific data for special cases"
+    }
+  },
+  "additionalProperties": false
+}

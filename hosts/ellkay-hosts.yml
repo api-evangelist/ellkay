@@ -1,0 +1,67 @@
+generated: '2026-10-14'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 5
+  own: 2
+  other_domain: 3
+  platform: 0
+  roles:
+  - identity
+  - other
+  - portal
+  - website
+hosts:
+- host: dashboard.ellkay.com
+  found_by:
+  - pointer
+  types:
+  - Login
+  serves: []
+  registrable_domain: ellkay.com
+  role: identity
+  relation: own
+- host: fhir.lkcloud.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: lkcloud.com
+  role: other
+  relation: other-domain
+- host: lkcloud-api.readme.io
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  serves:
+  - docs
+  registrable_domain: readme.io
+  role: portal
+  relation: other-domain
+- host: services.lkcloud.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: lkcloud.com
+  role: other
+  relation: other-domain
+- host: www.ellkay.com
+  found_by:
+  - pointer
+  types:
+  - Website
+  - Blog
+  - Support
+  - PrivacyPolicy
+  serves: []
+  registrable_domain: ellkay.com
+  role: website
+  relation: own

@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ellkay/main/json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json",
+  "title": "LKCloudConnect.Contracts.PatientDataLink.GetProceduresResult",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.PatientDataLink.GetProceduresResult",
+  "type": "object",
+  "properties": {
+    "createDt": {
+      "type": "string",
+      "description": "Create date eg \"08/31/1984 14:20:00\""
+    },
+    "dateRecorded": {
+      "type": "string",
+      "description": "Date procedure recorded eg \"08/31/1984 14:20:00\""
+    },
+    "srcCreateDate": {
+      "type": "string",
+      "description": "Source created date eg \"08/31/1984 14:20:00\""
+    },
+    "srcModifiedDate": {
+      "type": "string",
+      "description": "Source modified date eg \"08/31/1984 14:20:00\""
+    },
+    "encounterId": {
+      "type": "string",
+      "description": "Encounter id"
+    },
+    "patientId": {
+      "type": "string",
+      "description": "Patient id"
+    },
+    "orderingPhysicianId": {
+      "type": "string",
+      "description": "Ordering physician id"
+    },
+    "physicianId": {
+      "type": "string",
+      "description": "Physician id"
+    },
+    "dueDate": {
+      "type": "string",
+      "description": "Procedures due date eg \"08/31/1984 14:20:00\""
+    },
+    "procedureCode": {
+      "type": "string",
+      "description": "Procedure code"
+    },
+    "procedureName": {
+      "type": "string",
+      "description": "Procedure name"
+    },
+    "icdCode": {
+      "type": "string",
+      "description": "Icd code"
+    },
+    "cptCode": {
+      "type": "string",
+      "description": "CPT code"
+    },
+    "performedDate": {
+      "type": "string",
+      "description": "Date procedure performed eg \"08/31/1984 14:20:00\""
+    },
+    "status": {
+      "type": "string",
+      "description": "Procedure status string"
+    },
+    "comments": {
+      "type": "string",
+      "description": "Procedure comments"
+    },
+    "performingPhysician": {
+      "type": "string",
+      "description": "Performing physician"
+    },
+    "location": {
+      "type": "string",
+      "description": "Procedure location"
+    },
+    "procedureType": {
+      "type": "string",
+      "description": "Procedure type"
+    },
+    "procedurOutCome": {
+      "type": "string",
+      "description": "Procedure outcome"
+    },
+    "icdCode2": {
+      "type": "string",
+      "description": "Icd code 2"
+    },
+    "icdCode3": {
+      "type": "string",
+      "description": "Icd code 3"
+    },
+    "icdCode4": {
+      "type": "string",
+      "description": "Icd code 4"
+    },
+    "modifierCode1": {
+      "type": "string",
+      "description": "Modifier code 1"
+    },
+    "modifierCode2": {
+      "type": "string",
+      "description": "Modifier code 2"
+    },
+    "modifierCode3": {
+      "type": "string",
+      "description": "Modifier code 3"
+    },
+    "modifierCode4": {
+      "type": "string",
+      "description": "Modifier code 4"
+    },
+    "quantity": {
+      "type": "string",
+      "description": "Quantity string"
+    },
+    "udv": {
+      "type": "string",
+      "description": "Udv string"
+    },
+    "deltaidentifier": {
+      "type": "string",
+      "description": "Delta identifier"
+    },
+    "legacyrowId": {
+      "type": "string",
+      "description": "Legacy row id"
+    },
+    "updatedBy": {
+      "type": "string",
+      "description": "Who updated the record"
+    },
+    "updatedDate": {
+      "type": "string",
+      "description": "The date the record was updated last eg \"08/31/1984 14:20:00\""
+    },
+    "bcpFlag": {
+      "type": "string",
+      "description": "Bcp flag"
+    },
+    "processid": {
+      "type": "string",
+      "description": "Process id"
+    },
+    "xmlComments": {
+      "type": "string",
+      "description": "Xml comments"
+    },
+    "legacyRowStatusDescription": {
+      "type": "string",
+      "description": "legacy row status description"
+    },
+    "rowState": {
+      "type": "string",
+      "description": "RowState"
+    },
+    "mapped": {
+      "type": "string",
+      "description": "Mapped text"
+    },
+    "accessLevel": {
+      "type": "string",
+      "description": "Access level text"
+    },
+    "codeSystemId": {
+      "type": "string",
+      "description": "Procedure code system Id"
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": "System-specific data for special cases"
+    },
+    "loincCode": {
+      "type": "string",
+      "description": "The LOINC code associated with the procedure"
+    }
+  },
+  "additionalProperties": false
+}

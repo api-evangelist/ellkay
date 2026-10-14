@@ -1,6 +1,7 @@
 generated: '2026-07-19'
 method: searched
 source: https://lkcloud-api.readme.io/docs/rate-limits
+name: ELLKAY API Rate Limits
 model: concurrency
 limits:
 - scope: SiteService Key

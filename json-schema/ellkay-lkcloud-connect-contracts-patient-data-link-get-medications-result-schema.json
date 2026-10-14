@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ellkay/main/json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json",
+  "title": "LKCloudConnect.Contracts.PatientDataLink.GetMedicationsResult",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ellkay-lkcloud-api-openapi.yml#/components/schemas/LKCloudConnect.Contracts.PatientDataLink.GetMedicationsResult",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "description": "Medication date eg \"08/31/1984 14:20:00\""
+    },
+    "created": {
+      "type": "string",
+      "description": "Medication date created eg \"08/31/1984 14:20:00\""
+    },
+    "modified": {
+      "type": "string",
+      "description": "Record last modified datetime eg \"08/31/1984 14:20:00\""
+    },
+    "comments": {
+      "type": "string",
+      "description": "Medications comments"
+    },
+    "encounterId": {
+      "type": "string",
+      "description": "Encounter id"
+    },
+    "patientId": {
+      "type": "string",
+      "description": "Patient id"
+    },
+    "physicianId": {
+      "type": "string",
+      "description": "Physician id"
+    },
+    "medication": {
+      "type": "string",
+      "description": "Medication"
+    },
+    "dosage": {
+      "type": "string",
+      "description": "Dosage of a particular medication. Can be numeric or free-text. Sometimes dosages are available with unit information.\r\n<example>80 mg</example>"
+    },
+    "dosageUnit": {
+      "type": "string",
+      "description": "Unit of a particular medication(mg, gm, etc.). This unit may already exists in Dosage.\r\n<example>mg</example><example>gm</example>"
+    },
+    "direction": {
+      "type": "string",
+      "description": "Medications directions"
+    },
+    "startDate": {
+      "type": "string",
+      "description": "Start date of medication eg \"08/31/1984 14:20:00\""
+    },
+    "stopDate": {
+      "type": "string",
+      "description": "Stop date of medication eg \"08/31/1984 14:20:00\""
+    },
+    "stopReason": {
+      "type": "string",
+      "description": "Reason for stopping medication"
+    },
+    "active": {
+      "type": "string",
+      "description": "Medication active"
+    },
+    "doseQuantity": {
+      "type": "string",
+      "description": "Numeric quantity of medication (example: 90 tablets - for 3 months, 50 mg tab or 180 Tablets for 3 months 25mg)\r\n<example>90</example><example>180</example>"
+    },
+    "doseUnit": {
+      "type": "string",
+      "description": "Unit of a particular medication(mg, gm, etc.). This unit may already exists in Dosage.\r\n<example>mg</example><example>gm</example>"
+    },
+    "doseRoute": {
+      "type": "string",
+      "description": "Dose route"
+    },
+    "doseTiming": {
+      "type": "string",
+      "description": "Dose timing"
+    },
+    "doseNotes": {
+      "type": "string",
+      "description": "Dosage notes"
+    },
+    "dispense": {
+      "type": "string",
+      "description": "Medication dispense"
+    },
+    "dispenseUnit": {
+      "type": "string",
+      "description": "Medication dispense unit"
+    },
+    "refills": {
+      "type": "string",
+      "description": "Medication refills"
+    },
+    "ndcCode": {
+      "type": "string",
+      "description": "NDC code"
+    },
+    "codeSystemId": {
+      "type": "string",
+      "description": "Code system id"
+    },
+    "drugCode": {
+      "type": "string",
+      "description": "The drug code"
+    },
+    "pharmacyId": {
+      "type": "string",
+      "description": "Pharmacy id"
+    },
+    "id": {
+      "type": "string",
+      "description": "Medication id"
+    },
+    "updatedBy": {
+      "type": "string",
+      "description": "Who last updated the record"
+    },
+    "updated": {
+      "type": "string",
+      "description": "Date updated last eg \"08/31/1984 14:20:00\""
+    },
+    "isPrescription": {
+      "type": "string",
+      "description": "Indicates whether the medication is a prescription drug or not.\r\nThis field returns the raw string value provided by the source system."
+    },
+    "mappedMedication": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/LKCloudConnect.Contracts.PatientDataLink.MappedMedication"
+        }
+      ],
+      "description": "MappedCode mapped by LiveMapping"
+    },
+    "srcstatus": {
+      "type": "string",
+      "description": "Medication Srcstatus"
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": "System-specific data for special cases"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "LKCloudConnect.Contracts.PatientDataLink.MappedMedication": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "codeSystemId": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
