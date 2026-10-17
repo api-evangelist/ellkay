@@ -1,0 +1,1997 @@
+openapi: 3.2.0
+info:
+  title: LKCloud LK Appointments API
+  description: Ellkay Api documentation 6.6 Ellkay api
+  contact:
+    name: Ellkay
+    url: https://ellkay.com
+    email: ''
+  version: '6.6'
+  x-logo:
+    url: ./logo.png
+    altText: Ellkay Logo
+servers:
+- url: https://services.lkcloud.com
+  description: prod url
+tags:
+- name: LKAppointments
+  description: Ellkay Appointment endpoints
+paths:
+  /LKAppointments/BeginSearchAppointments:
+    post:
+      tags:
+      - LKAppointments
+      summary: BeginSearchAppointments
+      description: The BeginSearchAppointments endpoint initiates the process to search for appointments, providing a next token for pagination purposes.
+      requestBody:
+        description: Request message
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsSwaggerRequest'
+            example:
+              request:
+                dateRange:
+                  start: '2022-01-01T00:00:00+00:00'
+                  end: '2022-12-01T00:00:00+00:00'
+                patients:
+                - id: '1442678381000620'
+                resources:
+                - id: '7'
+                facilities:
+                - id: '3'
+                statuses:
+                - id: '12810'
+                lastModified:
+                  start: '2022-01-01T00:00:00+00:00'
+                  end: '2022-12-01T00:00:00+00:00'
+                rawRequest: null
+                limit: 500
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PagedResult'
+              example:
+                nextToken: eyJSZXF1ZXN0SWQiOiJyV0lDdWp2d01CaEpvOXRaM2pON2U0QT09IiwiVG9rZW4iOiJwMHZwMEQ2OVZHRitEWHdvRExfSFUwTlE9PSJ9
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsBeginSearchAppointments
+      x-operation-id-source: derived
+  /LKAppointments/EditAppointment:
+    post:
+      tags:
+      - LKAppointments
+      summary: EditAppointment
+      description: Edit an existing appointment, including status change for cancelling an appointment
+      requestBody:
+        description: Request message
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.EditAppointmentSwaggerRequest'
+            example:
+              request:
+                facilityId: '3'
+                locationId: '34'
+                providerId: '7'
+                start: '2023-09-01T00:00:00+00:00'
+                end: '2023-09-01T00:00:00+00:00'
+                dateRange:
+                  start: '2023-09-01T02:30:00+00:00'
+                  end: '2023-09-30T03:30:00+00:00'
+                id: '282'
+                patientId: '1442678380100620'
+                notes: Patient follow up
+                status: Other
+                rawStatus: Other
+                appointmentType: Follow Up Patient
+                externalId: ''
+                resources:
+                - id: '460'
+                reason: null
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+                rawRequest: null
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.EditAppointmentResponse'
+              example: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsEditAppointment
+      x-operation-id-source: derived
+  /LKAppointments/GetAppointment:
+    post:
+      tags:
+      - LKAppointments
+      summary: GetAppointment
+      description: The GetAppointment endpoint returns comprehensive information about an appointment, including its ID, start time, duration, and associated patient and physician IDs.
+      requestBody:
+        description: Request object
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentSwaggerRequest'
+            example:
+              request:
+                appointmentId: '19'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.Appointment'
+              example:
+                id: '12'
+                start: '2022-01-01T00:00:00+00:00'
+                duration: 00:05:00
+                patientId: '2456851'
+                patientAlternateId: '2456851'
+                physicianId: '235'
+                facilityId: '148'
+                facilityName: Davis Family Physicians
+                notes: notes
+                status: Other
+                modified: '2022-01-01T00:00:00+00:00'
+                type: OV
+                billable: Unspecified
+                department:
+                  name: Patient Scheduling
+                resources:
+                - id: '13013603'
+                statusCode:
+                  code: Booked
+                  source: CHK
+                  sourceText: Check Out
+                appointmentTypeId: '114'
+                reason:
+                  code: ''
+                  source: spirometry
+                  sourceText: spirometry
+                created: '2022-01-01T00:00:00+00:00'
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsGetAppointment
+      x-operation-id-source: derived
+  /LKAppointments/GetAppointmentSlot:
+    post:
+      tags:
+      - LKAppointments
+      summary: GetAppointmentSlot
+      description: The GetAppointmentSlot endpoint returns details of an available appointment slot, including physician and facility IDs, start time, duration, slot ID, type, and status.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.AppointmentSlotSwaggerRequest'
+            example:
+              request:
+                slotId: '3_7_980_30_202208101024'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentSlot'
+              example:
+                physicianId: '7'
+                facilityId: '3'
+                startTime: '2022-01-01T00:00:00+00:00'
+                duration: 00:00:00
+                slotId: '980'
+                type: '30'
+                status: Booked
+                custom:
+                  producer: Nvestment
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsGetAppointmentSlot
+      x-operation-id-source: derived
+  /LKAppointments/GetAppointmentStatuses:
+    post:
+      tags:
+      - LKAppointments
+      summary: GetAppointmentStatuses
+      description: The GetAppointmentStatuses endpoint returns a list of appointment statuses, each containing the code, name, and unique ID of the status.
+      requestBody:
+        description: Request object
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentStatusesSwaggerRequest'
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesResult'
+              example:
+                appointmentStatuses:
+                - code: PEN
+                  name: Pending
+                  id: '5'
+                  custom:
+                    reviewedBy: Dr. Alice Grey
+                    technician: John Smith
+                - code: CHK
+                  name: Check Out
+                  id: '6'
+                  custom:
+                    reviewedBy: Dr. James Martin
+                    technician: Alen stok
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsGetAppointmentStatuses
+      x-operation-id-source: derived
+  /LKAppointments/GetAppointmentTypes:
+    post:
+      tags:
+      - LKAppointments
+      summary: GetAppointmentTypes
+      description: The GetAppointmentTypes endpoint returns a list of appointment types, each containing the name, code, and unique ID of the appointment type.
+      requestBody:
+        description: Request filter
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentTypesSwaggerRequest'
+            example:
+              request:
+                includeInactive: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentTypesResult'
+              example:
+                appointmentTypes:
+                - name: Office Visit
+                  code: OV
+                  id: '114'
+                  custom:
+                    reviewedBy: Dr. Alice Grey
+                    technician: John Smith
+                - name: Consultation
+                  code: CONSULT
+                  id: '66'
+                  custom:
+                    reviewedBy: Dr. Leil Mark
+                    technician: Koll Alen
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsGetAppointmentTypes
+      x-operation-id-source: derived
+  /LKAppointments/GetAppointments:
+    post:
+      tags:
+      - LKAppointments
+      summary: GetAppointments
+      description: 'The GetAppointments endpoint returns a list of appointments, each containing details such as ID, start time, duration, and associated patient and physician IDs.
+
+
+        Does not include deleted or cancelled appointments'
+      requestBody:
+        description: Request object
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentsSwaggerRequest'
+            example:
+              request:
+                dateRange:
+                  start: '2022-01-01T00:00:00+00:00'
+                  end: '2022-12-01T00:00:00+00:00'
+                patientId: '1442678380100620'
+                physicianId: ''
+                facilityId: '3'
+                statusCodes:
+                - code: Booked
+                resources:
+                - id: '13013603'
+                rawRequest: null
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.Appointment'
+              example:
+              - id: '12'
+                start: '2022-01-01T00:00:00+00:00'
+                duration: 00:05:00
+                patientId: '2456851'
+                patientAlternateId: '2456851'
+                physicianId: '235'
+                facilityId: '148'
+                facilityName: Davis Family Physicians
+                notes: notes
+                status: Other
+                modified: '2022-01-01T00:00:00+00:00'
+                type: OV
+                billable: Unspecified
+                department:
+                  name: Patient Scheduling
+                resources:
+                - id: '13013603'
+                statusCode:
+                  code: Booked
+                  source: CHK
+                  sourceText: Check Out
+                appointmentTypeId: '114'
+                reason:
+                  code: ''
+                  source: spirometry
+                  sourceText: spirometry
+                created: '2022-01-01T00:00:00+00:00'
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsGetAppointments
+      x-operation-id-source: derived
+  /LKAppointments/GetFacilities:
+    post:
+      tags:
+      - LKAppointments
+      summary: GetFacilities
+      description: The GetFacilities endpoint provides a list of facilities, each containing details such as facility ID, code, name, address, city, state, zip code, and phone number.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.Facility'
+              example:
+              - id: '2'
+                code: PCN
+                name: Professional Center North
+                address1: 460 Harrison Blvd
+                address2: address2
+                city: Ogden
+                state: UT
+                zip: '84034303'
+                phone: 980-098-6789
+                placeOfService:
+                  code: '11'
+                  source: OFFICE
+                  sourceText: Professional Center North
+                organizationId: '12'
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsGetFacilities
+      x-operation-id-source: derived
+  /LKAppointments/GetOpenAppointmentSlots:
+    post:
+      tags:
+      - LKAppointments
+      summary: GetOpenAppointmentSlots
+      description: The GetOpenAppointmentSlots endpoint provides a list of open appointment slots, each containing details such as physician ID, facility ID, start time, duration, and slot ID.
+      requestBody:
+        description: Request filters
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.OpenAppointmentSlotSwaggerRequest'
+            example:
+              request:
+                startDate: '2022-08-10T00:00:00+00:00'
+                endDate: '2022-08-15T00:00:00+00:00'
+                dateRange:
+                  start: '2022-08-10T00:00:00+00:00'
+                  end: '2022-08-15T00:00:00+00:00'
+                facilityIds:
+                - '3'
+                physicianIds:
+                - '7'
+                - '8'
+                appointmentTypes:
+                - '81'
+                resources:
+                - id: '1'
+                custom:
+                  referralSource: Dr. Smith
+                  priority: High
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.OpenAppointmentSlots'
+              example:
+              - physicianId: '7'
+                facilityId: '3'
+                startTime: '2022-01-01T00:00:00+00:00'
+                duration: 00:00:00
+                slotId: '980'
+                type: '30'
+                resources:
+                - id: '23'
+                custom:
+                  producer: Nvestment
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsGetOpenAppointmentSlots
+      x-operation-id-source: derived
+  /LKAppointments/GetPhysicians:
+    post:
+      tags:
+      - LKAppointments
+      summary: GetPhysicians
+      description: The GetPhysicians endpoint returns a list of physicians, each containing details such as physician ID, name, address, city, state, zip code, phone, fax, and specialty.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.Physician'
+              example:
+              - id: '122'
+                firstName: Edward
+                lastName: Adams
+                address1: 460 Harrison Blvd
+                address2: ''
+                city: Ogden
+                state: UT
+                zip: '844034303'
+                phone: 801-500-3800
+                fax: 801-475-3211
+                email: edward.1234@clinic.com
+                specialty: Orthopedic Hand
+                inactive: true
+                npi: '1500757080'
+                upin: '1500757080'
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsGetPhysicians
+      x-operation-id-source: derived
+  /LKAppointments/GetScheduleAppointmentTypes:
+    post:
+      tags:
+      - LKAppointments
+      summary: GetScheduleAppointmentTypes
+      description: The GetScheduleAppointmentTypes endpoint returns a list of appointment types available for scheduling, including details such as ID, name, physician ID, and facility ID.
+      requestBody:
+        description: Request object
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetScheduleAppointmentTypesSwaggerRequest'
+            example:
+              request:
+                physicianId: '7'
+                facilityId: '3'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesResponse'
+              example:
+                appointmentTypes:
+                - id: '1'
+                  name: Follow Up Patient
+                  physicianId: '7'
+                  facilityId: '3'
+                  custom:
+                    reviewedBy: Dr. Alice Grey
+                    technician: John Smith
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsGetScheduleAppointmentTypes
+      x-operation-id-source: derived
+  /LKAppointments/NextSearchAppointments:
+    post:
+      tags:
+      - LKAppointments
+      summary: NextSearchAppointments
+      description: 'The NextSearchAppointments endpoint retrieves the next set of appointments using the initial token from BeginGetUpdatedAppointments The returned data includes details such as appointment ID, start time, duration, patient and physician IDs, and status.
+
+
+        The response also includes a token for the next page, which should be passed to the NextGetUpdatedAppointments endpoint.For guidance on handling errors in paginated responses, refer to the error codes guide.'
+      requestBody:
+        description: Request message
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsSwaggerRequest'
+            example:
+              token:
+                nextToken: eyJSZXF1ZXN0SWQiOiJyV0lDdWp2d01CaEpvOXRaM2pON2U0QT09IiwiVG9rZW4iOiJwMHZwMEQ2OVZHRitEWHdvRExfSFUwTlE9PSJ9
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsResponse'
+              example:
+                appointments:
+                - id: '789265'
+                  start: '2025-06-01T09:00:00+00:00'
+                  duration: 00:30:00
+                  patientId: '780910'
+                  patientAlternateId: '465001'
+                  physicianId: '456'
+                  facilityId: '101'
+                  facilityName: Downtown Medical Center
+                  notes: Patient requested early morning slot.
+                  status: Booked
+                  modified: '2025-05-10T15:30:00+00:00'
+                  type: Follow-up Visit
+                  billable: Unspecified
+                  department:
+                    name: Internal Medicine
+                  resources:
+                  - id: '101'
+                  statusCode:
+                    code: Open
+                    source: null
+                    sourceText: null
+                  appointmentTypeId: '05'
+                  reason:
+                    code: R10
+                    source: ehr-specific-code
+                    sourceText: Routine Checkup
+                  created: '2025-05-01T08:00:00+00:00'
+                  custom:
+                    referralSource: Dr. Smith
+                    priority: High
+                nextToken: eyJSZXF1ZXN0SWQiOiJyV0lDdWp2d01CaEpvOXRaM2pON2U0QT09IiwiVG9rZW4iOiJwMHZwMEQ2OVZHRitEWHdvRExfSFUwTlE9PSJ9
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsNextSearchAppointments
+      x-operation-id-source: derived
+  /LKAppointments/ScheduleAppointment:
+    post:
+      tags:
+      - LKAppointments
+      summary: ScheduleAppointment
+      description: Schedule an appointment in an available appointment slot
+      requestBody:
+        description: Schedule appointment request
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.Appointments.ScheduleAppointmentsSwaggerRequest'
+            example:
+              scheduleAppointmentRequest:
+                start: '2023-09-01T00:00:00'
+                end: '2023-09-01T00:00:00'
+                dateRange:
+                  start: '2023-09-01T02:30:00+00:00'
+                  end: '2023-09-30T03:30:00+00:00'
+                notes: Test notes
+                physicianId: '7'
+                facilityId: '3'
+                patientId: '1442678380100620'
+                appointmentType: Follow Up Patient
+                slotId: '3_7_980_30_202208101024'
+                externalId: ''
+                appointmentStatus:
+                  code: Booked
+                  source: CHK
+                  sourceText: Check Out
+                resources:
+                - id: '460'
+                reason: null
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+                department:
+                  name: Patient Scheduling
+                rawRequest: null
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.ScheduleAppointmentResponse'
+              example:
+                appointmentId: '15'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKAppointmentsScheduleAppointment
+      x-operation-id-source: derived
+components:
+  schemas:
+    LKCloudConnect.Contracts.Appointments.ScheduleAppointmentsRequest:
+      required:
+      - patientId
+      - slotId
+      type: object
+      properties:
+        start:
+          type: string
+          description: 'Start date. Not required when using slot id e.g. 2019-01-01T00:00:00.112
+
+
+            Deprecated. Use dateRange object instead.'
+          format: date-time
+          example: '2019-01-01T00:00:00.112'
+          deprecated: true
+        end:
+          type: string
+          description: 'End date. Not required when using slot id e.g. 2019-01-01T00:00:00.112
+
+
+            Deprecated. Use dateRange object instead.'
+          format: date-time
+          example: '2019-01-02T00:00:00'
+          deprecated: true
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentDateRange'
+          description: 'The Date Range field defines the window of time during which appointments can be scheduled.
+
+            Not required when using slot id.'
+        notes:
+          type: string
+          description: Notes to be associated with the appointment
+        physicianId:
+          type: string
+          description: Id of the provider to associate with the appointment. Not required when using slot id
+        facilityId:
+          type: string
+          description: Id of the facility to associate with the appointment. Not required when using slot id
+        patientId:
+          minLength: 1
+          type: string
+          description: Id of the patient to schedule an appointment for
+        appointmentType:
+          type: string
+          description: Appointment type id to associate with this appointment. Not required when using slot id
+        slotId:
+          minLength: 1
+          type: string
+          description: 'Unique slot id to schedule for this appointment. A slot id identifies the physician, facility, start time and duration. When slot Id
+
+            is sent the only other required parameter is patient id.'
+        externalId:
+          type: string
+          description: External appointment id if the appointment exists in another system
+        appointmentStatus:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.MappedCode'
+          description: 'Status with which appointment should be created
+
+            ''InvalidStatus'' ''Other'' ''Pending'' ''Waitlist'' ''Booked'' ''Started'' ''Complete'' ''Cancelled'' ''Discontinued'' ''Deleted'' ''Blocked'' ''Overbook'' ''NoShow'' ''Rescheduled'' ''Confirmed'''
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentResource'
+          description: Array of AppointmentResource to associate with this appointment
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.MappedCode'
+          description: Appointment Reason
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+        department:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.Department'
+          description: Appointment department
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.GetAppointmentsRequest:
+      type: object
+      properties:
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.DateRange'
+          description: Only get appointments whose start time is within this range
+        patientId:
+          type: string
+          description: Only get appointments associated with this patient identifier
+        physicianId:
+          type: string
+          description: Only get appointments associated with this provider identifier
+        facilityId:
+          type: string
+          description: Only get appointments associated with this facility identifier
+        statusCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentStatusCodeFilter'
+          description: 'Only get appointments that match at least one of these status codes
+
+            `Cancelled` `Booked` `NoShow` `InvalidStatus` `Pending` `Waitlist` `Started` `Complete` `Discontinued` `Deleted` `Blocked` `Overbook` `Rescheduled` `Confirmed` `Other` `null`'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentResourceFilter'
+          description: Resource filter
+      additionalProperties: false
+      description: Search for appointments which meet the specified criteria
+    LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestStatusCodeFilter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of status
+      additionalProperties: false
+      description: Appointment status filter
+    LKCloudConnect.Contracts.Appointments.EditAppointmentRequest:
+      required:
+      - id
+      - patientId
+      type: object
+      properties:
+        facilityId:
+          type: string
+          description: Id of the facility to associate with the appointment
+        locationId:
+          type: string
+          description: Id of the location to associate with the appointment
+        providerId:
+          type: string
+          description: Id of the provider to associate with the appointment
+        start:
+          type: string
+          description: 'Appointment start date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset
+
+
+            Deprecated. Use dateRange object instead.'
+          format: date-time
+          example: '2001-01-01T13:00:00+00:00'
+          deprecated: true
+        end:
+          type: string
+          description: 'Appointment end date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset
+
+
+            Deprecated. Use dateRange object instead.'
+          format: date-time
+          example: '2001-01-01T13:30:00+00:00'
+          deprecated: true
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentDateRange'
+          description: The Date Range field defines the time window during which existing appointments can be updated.
+        id:
+          minLength: 1
+          type: string
+          description: Appointment id
+        patientId:
+          minLength: 1
+          type: string
+          description: Id of the patient whose appointment is to be edited
+        notes:
+          type: string
+          description: Notes to be associated with the appointment
+        status:
+          enum:
+          - InvalidStatus
+          - Other
+          - Pending
+          - Waitlist
+          - Booked
+          - Started
+          - Complete
+          - Cancelled
+          - Discontinued
+          - Deleted
+          - Blocked
+          - Overbook
+          - NoShow
+          - Rescheduled
+          - Confirmed
+          type: string
+          description: Status to set the appointment to
+        rawStatus:
+          type: string
+          description: System-specific status id to set the appointment to
+        appointmentType:
+          type: string
+          description: Appointment type id to associate with this appointment
+        externalId:
+          type: string
+          description: External Id to associate with this appointment
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentResource'
+          description: Array of AppointmentResource to associate with this appointment
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.MappedCode'
+          description: Appointment Reason
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.ScheduleAppointmentType:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Appointment type unique id
+        name:
+          type: string
+          description: Appointment type name
+        physicianId:
+          type: string
+          description: Physician id this appointment type can be scheduled with
+        facilityId:
+          type: string
+          description: Facility id this appointment type can be scheduled at
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: An appointment type which can be used to schedule appointments for a given provider and facility combination
+    LKCloudConnect.Swagger.SwaggerRequests.Appointments.AppointmentSlotSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentSlotRequest'
+          description: Appointment slot request object
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsRequest:
+      type: object
+      properties:
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentRequestDateRange'
+          description: Date Range Filter. This field is mutually exclusive with LastModified
+        patients:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPatient'
+          description: Patient filter
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPractitioner'
+          description: Resource or practitioner filter
+        facilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestFacility'
+          description: Facility filter
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestStatusCodeFilter'
+          description: Appointment status filter
+        lastModified:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.SearchAppointmentRequestDateRange'
+          description: Date range filter by appointment modified date. This field is mutually exclusive with dateRange. Not all EMRs support this field.
+        limit:
+          type: integer
+          description: Maximum number of results per page
+          format: int32
+      additionalProperties: false
+      description: Request for appointments matching filters
+    LKCloudConnect.Contracts.Appointments.Facility:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the facility
+        code:
+          type: string
+          description: System-specific code for the facility. Not guaranteed to be unique.
+        name:
+          type: string
+          description: The name of the facility
+        address1:
+          type: string
+          description: The address of the facility
+        address2:
+          type: string
+          description: The 2nd address line of the facility
+        city:
+          type: string
+          description: The city of the facility
+        state:
+          type: string
+          description: The state of the facility
+        zip:
+          type: string
+          description: The zip code of the facility
+        phone:
+          type: string
+          description: The phone number of the facility
+        placeOfService:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.MappedCode'
+          description: The Place of Service code of the facility
+        organizationId:
+          type: string
+          description: The organization id of the facility
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.AppointmentSlotDateRange:
+      required:
+      - end
+      - start
+      type: object
+      properties:
+        start:
+          type: string
+          description: 'Date range start. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset'
+          format: date-time
+          example: '2001-01-01T13:00:00+00:00'
+        end:
+          type: string
+          description: 'Date range end. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset'
+          format: date-time
+          example: '2001-12-31T13:00:00+00:00'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesResponse:
+      type: object
+      properties:
+        appointmentTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.ScheduleAppointmentType'
+          description: List of schedule appointment types which can be used to schedule appointments for a given provider and facility combination
+      additionalProperties: false
+      description: A response including appointment types which can be used to schedule appointments for a given provider and facility combination
+    LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesRequest:
+      required:
+      - facilityId
+      - physicianId
+      type: object
+      properties:
+        physicianId:
+          minLength: 1
+          type: string
+          description: Physician id to get schedule appointment types for
+        facilityId:
+          minLength: 1
+          type: string
+          description: Facility id to get schedule appointment types for
+      additionalProperties: false
+      description: A request for appointment types which can be used to schedule appointments for a given provider and facility combination
+    LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPractitioner:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Practitioner Id
+      additionalProperties: false
+      description: Practitioner filter
+    LKCloudConnect.Contracts.Appointments.OpenAppointmentSlotRequest:
+      type: object
+      properties:
+        startDate:
+          type: string
+          description: 'Search date range start datetime. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset
+
+
+            Deprecated. Use dateRange object instead.'
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+          deprecated: true
+        endDate:
+          type: string
+          description: 'Search date range end datetime. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset
+
+
+            Deprecated. Use dateRange object instead.'
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+          deprecated: true
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentSlotDateRange'
+          description: Specifies the time window within which available appointment slots are retrieved.
+        facilityIds:
+          type: array
+          items:
+            type: string
+          description: List of facility ids to filter search results
+          example:
+          - '1'
+          - '2'
+        physicianIds:
+          type: array
+          items:
+            type: string
+          description: List of physician ids to filter search results
+          example:
+          - '1'
+          - '2'
+        appointmentTypes:
+          type: array
+          items:
+            type: string
+          description: List of appointment type ids to filter search results
+          example:
+          - '1'
+          - '2'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentResource'
+          description: Resource or practitioner filter
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Search for available appointment slots request object
+    LKCloudConnect.Contracts.Appointments.AppointmentSlotRequest:
+      required:
+      - slotId
+      type: object
+      properties:
+        slotId:
+          minLength: 1
+          type: string
+          description: Id of the slot to retrieve
+      additionalProperties: false
+      description: Appointment slot request object
+    LKCloudConnect.Contracts.Appointments.AppointmentStatusCodeFilter:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Appointment status code
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.GetAppointmentTypesRequest:
+      type: object
+      properties:
+        includeInactive:
+          type: boolean
+          description: 'Indicates whether inactive appointment types should be included.
+
+            Defaults to true. Set to false to return only active types.'
+      additionalProperties: false
+      description: Represents a request to retrieve appointment types.
+    LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentTypesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.GetAppointmentTypesRequest'
+          description: Represents a request to retrieve appointment types.
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentsSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.GetAppointmentsRequest'
+          description: Search for appointments which meet the specified criteria
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.BeginSearchAppointmentsRequest'
+          description: Request for appointments matching filters
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.MappedCode:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Our mapped code (If one is available)
+        source:
+          type: string
+          description: System-specific code
+        sourceText:
+          type: string
+          description: System-specific free text when additional free text is allowed, usually found with “other” fields
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.AppointmentStatuses.AppointmentStatusDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Appointment status code
+        name:
+          type: string
+          description: Appointment status display value
+        id:
+          type: string
+          description: Appointment status unique id
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Appointment status detail
+    LKCloudConnect.Contracts.Appointments.Physician:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of physician
+        firstName:
+          type: string
+          description: Physician first name
+        lastName:
+          type: string
+          description: Physician last name
+        address1:
+          type: string
+          description: Physician address line 1
+        address2:
+          type: string
+          description: Physician address line 2
+        city:
+          type: string
+          description: Physician city
+        state:
+          type: string
+          description: Physician state
+        zip:
+          type: string
+          description: Physician zip
+        phone:
+          type: string
+          description: Physician phone number
+        fax:
+          type: string
+          description: Physician fax
+        email:
+          type: string
+          description: Physician email
+        specialty:
+          type: string
+          description: Physician specialty
+        inactive:
+          type: boolean
+          description: Indicates whether the physician is inactive or not
+        npi:
+          type: string
+          description: Physician NPI
+        upin:
+          type: string
+          description: Physician Upin
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.OpenAppointmentSlots:
+      type: object
+      properties:
+        physicianId:
+          type: string
+          description: The physician id
+        facilityId:
+          type: string
+          description: The facility id
+        startTime:
+          type: string
+          description: The datetime of the start of the open appointment slot. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+        duration:
+          type: string
+          description: 'The duration of the appointment e.g. 00:30:00.
+
+            Please note: If appointments duration is more then 1 day the value will be returned
+
+            in the following format, [d.]hh:mm:ss.
+
+            e.g. 1.00.45.00.'
+          format: date-span
+        slotId:
+          type: string
+          description: The id of the open appointment slot
+        type:
+          type: string
+          description: The appointment type id
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentResource'
+          description: Resources and/or practitioners associated with this appointment slot
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: A period in a systems schedule where an appointment can be booked
+    LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.GetAppointmentRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.AppointmentSlot:
+      type: object
+      properties:
+        physicianId:
+          type: string
+          description: The physician id
+        facilityId:
+          type: string
+          description: The facility id
+        startTime:
+          type: string
+          description: The start datetime of the appointment slot. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        duration:
+          type: string
+          description: The duration of the appointment slot. e.g. 00:30:00
+          format: date-span
+          example: 00:30:00
+        slotId:
+          type: string
+          description: The id of the appointment slot
+        type:
+          type: string
+          description: The type id of the appointment slot
+        status:
+          type: string
+          description: The status of the slot. Booked or Open
+          example: Booked
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: A period in a systems schedule where an appointment can be booked
+    LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestPatient:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Appointment patient id
+      additionalProperties: false
+      description: Patient filter
+    LKCloudConnect.Contracts.Appointments.Appointment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Appointment id
+        start:
+          type: string
+          description: Appointment start date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        duration:
+          type: string
+          description: Appointment duration e.g. 00:30:00
+          example: 00:30:00
+        patientId:
+          type: string
+          description: Appointment patient id
+        patientAlternateId:
+          type: string
+          description: Appointment patient alternate id
+        physicianId:
+          type: string
+          description: Appointment physician id
+        facilityId:
+          type: string
+          description: Appointment facility id
+        facilityName:
+          type: string
+          description: Appointment facility name
+        notes:
+          type: string
+          description: Appointment notes
+        status:
+          enum:
+          - InvalidStatus
+          - Other
+          - Pending
+          - Waitlist
+          - Booked
+          - Started
+          - Complete
+          - Cancelled
+          - Discontinued
+          - Deleted
+          - Blocked
+          - Overbook
+          - NoShow
+          - Rescheduled
+          - Confirmed
+          type: string
+          description: Appointment status
+          example: Other
+        modified:
+          type: string
+          description: Appointment last modified date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        type:
+          type: string
+          description: Appointment type display
+        billable:
+          enum:
+          - Unspecified
+          - 'True'
+          - 'False'
+          type: string
+          description: Appointment billable status
+        department:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.Department'
+          description: Appointment department
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentResource'
+          description: Appointment resources
+        statusCode:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.MappedCode'
+          description: 'Appointment status code
+
+            ''InvalidStatus ''Other'' ''Pending'' ''Waitlist'' ''Booked'' ''Started'' ''Complete'' ''Cancelled'' ''Discontinued'' ''Deleted'' ''Blocked'' ''Overbook'' ''NoShow'' ''Rescheduled'' ''Confirmed'''
+        appointmentTypeId:
+          type: string
+          description: Appointment type id
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.MappedCode'
+          description: 'Appointment reason
+
+            Appointment reason is not standardized, and only source code is provided.'
+        created:
+          type: string
+          description: Appointment created date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Appointment object
+    LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesResult:
+      type: object
+      properties:
+        appointmentStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentStatuses.AppointmentStatusDetail'
+          description: List of system-specific appointment statuses
+      additionalProperties: false
+      description: System-specific appointment statuses
+    LKCloudConnect.Swagger.SwaggerRequests.Appointments.EditAppointmentSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.EditAppointmentRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.PagedResult:
+      type: object
+      properties:
+        nextToken:
+          type: string
+          description: The token needed for the next API call
+      additionalProperties: false
+      description: PagesResult object containing the next token string
+    LKCloudConnect.Contracts.Appointments.SearchAppointmentsRequestFacility:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Facility Id
+      additionalProperties: false
+      description: Facility filter
+    LKCloudConnect.Contracts.Appointments.GetAppointmentRequest:
+      required:
+      - appointmentId
+      type: object
+      properties:
+        appointmentId:
+          minLength: 1
+          type: string
+          description: Id of the appointment whose details are to be retrieved
+      additionalProperties: false
+    LKCloudConnect.Contracts.LKCloudConnectFault:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Target system credentials are invalid
+        detail:
+          type: string
+          description: Additional error detail
+        recoverySteps:
+          type: string
+          description: Error recovery steps
+          example: Contact support to update credentials
+        handle:
+          type: string
+          description: Our unique message id, you should provide this when you open a support ticket
+          example: 3e4d0b7f-e3fa-4462-9cc3-860be812d696
+        errorCode:
+          type: string
+          description: Error code, please see error code section of the guide for details
+          example: Unauthorized
+        type:
+          type: string
+          description: Error type
+      additionalProperties: false
+      description: LKCloud Connect Fault
+    LKCloudConnect.Contracts.Appointments.SearchAppointmentRequestDateRange:
+      required:
+      - end
+      - start
+      type: object
+      properties:
+        start:
+          type: string
+          description: 'Date range start. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset'
+          format: date-time
+          example: '2001-01-01T13:00:00+00:00'
+        end:
+          type: string
+          description: 'Date range end. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00]
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset'
+          format: date-time
+          example: '2001-12-31T13:00:00.000+00:00'
+      additionalProperties: false
+      description: Date range filter
+    LKCloudConnect.Contracts.Appointments.DateRange:
+      required:
+      - start
+      type: object
+      properties:
+        start:
+          type: string
+          description: 'Date range start. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset'
+          format: date-time
+          example: '2001-01-01T13:00:00+00:00'
+        end:
+          type: string
+          description: 'Date range end. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset'
+          format: date-time
+          example: '2001-12-31T13:00:00+00:00'
+      additionalProperties: false
+      description: Date range object
+    LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesRequest:
+      type: object
+      additionalProperties: false
+      description: Appointment statuses request
+    LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetScheduleAppointmentTypesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.GetScheduleAppointmentTypesRequest'
+          description: A request for appointment types which can be used to schedule appointments for a given provider and facility combination
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.ScheduleAppointmentResponse:
+      type: object
+      properties:
+        appointmentId:
+          type: string
+          description: The appointment id of the scheduled appointment
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.Appointments.GetAppointmentStatusesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentStatuses.GetAppointmentStatusesRequest'
+          description: Appointment statuses request
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.AppointmentDateRange:
+      type: object
+      properties:
+        start:
+          type: string
+          description: 'Date range start. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset'
+          format: date-time
+          example: '2001-01-01T13:00:00+00:00'
+        end:
+          type: string
+          description: 'Date range end. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Timezone offset is mandatory. If not provided, it will default to the system''s timezone offset'
+          format: date-time
+          example: '2001-12-31T13:00:00+00:00'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.AppointmentTypesResult:
+      type: object
+      properties:
+        appointmentTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.AppointmentType'
+          description: An array of appointment types
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.EditAppointmentResponse:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsSwaggerRequest:
+      type: object
+      properties:
+        token:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PagedResult'
+          description: Next page token
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.AppointmentResource:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the appointment resource
+      additionalProperties: false
+      description: A resource related to an appointment
+    LKCloudConnect.Swagger.SwaggerRequests.Appointments.OpenAppointmentSlotSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.OpenAppointmentSlotRequest'
+          description: Search for available appointment slots request object
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.AppointmentResourceFilter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Resource Id
+      additionalProperties: false
+      description: Resource filter
+    LKCloudConnect.Contracts.Appointments.Department:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the department
+      additionalProperties: false
+    LKCloudConnect.Contracts.Appointments.AppointmentType:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the appointment type
+        code:
+          type: string
+          description: The code of the appointment type
+        id:
+          type: string
+          description: The id of the appointment type
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: An appointment type from the target system
+    LKCloudConnect.Contracts.Appointments.NextSearchAppointmentsResponse:
+      type: object
+      properties:
+        appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.Appointment'
+          description: Appointments returned for query
+        nextToken:
+          type: string
+          description: The token needed for the next API call
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.Appointments.ScheduleAppointmentsSwaggerRequest:
+      type: object
+      properties:
+        scheduleAppointmentRequest:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Appointments.ScheduleAppointmentsRequest'
+      additionalProperties: false
+x-provenance:
+  method: searched
+  source: https://lkcloud-api.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-beginsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-editappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentslot.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getfacilities.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getopenappointmentslots.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getphysicians.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getscheduleappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-nextsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-scheduleappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getadvancedirectives.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getbridgeinfo.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getguarantor.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatient.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientalerts.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientsummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getreferrals.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-smartsearch.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-getchargestatus.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-sendcharge.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-createdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocumenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getpatientdocuments.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-createemployer.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcodeset.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemployers.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemploymentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getencounterreasons.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getethnicities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getgenderidentities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getinsurances.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getlanguages.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getmaritalstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getraces.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getrelationships.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getsexualorientations.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpractitioners.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchresources.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-applypayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-beginsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getaccount.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalance.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalancesummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getpatientcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-nextsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatebillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatepatientcollectionbucket.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-voidpayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-begingetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-closeencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-createencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getallergies.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getdiagnoses.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotebody.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotes.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounters.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getfamilyhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getimmunizations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getlabresults.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedications.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getophthalmologyobservations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getproblems.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getprocedures.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsocialhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsurgicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitals.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitalsdefinition.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-nextgetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-postvitals.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createpatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createreferral.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updateadvancedirective.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatereferral.md
+  merge:
+    pages: 85
+    deduped: 158
+    conflicts_kept_first: 0

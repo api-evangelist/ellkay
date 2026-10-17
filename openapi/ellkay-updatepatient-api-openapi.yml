@@ -1,0 +1,2010 @@
+openapi: 3.2.0
+info:
+  title: LKCloud Update Patient API
+  description: Ellkay Api documentation 6.6 Ellkay api
+  contact:
+    name: Ellkay
+    url: https://ellkay.com
+    email: ''
+  version: '6.6'
+  x-logo:
+    url: ./logo.png
+    altText: Ellkay Logo
+servers:
+- url: https://services.lkcloud.com
+  description: prod url
+tags:
+- name: UpdatePatient
+  description: UpdatePatient endpoint
+paths:
+  /UpdatePatient/UpdatePatientService.svc/CreatePatient:
+    post:
+      tags:
+      - UpdatePatient
+      summary: CreatePatient
+      description: Create patient record in the target system
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.CreatePatientSwaggerRequest'
+            example:
+              request:
+                createPatient:
+                  createPatientDetails:
+                    firstName: William
+                    middleName: M
+                    lastName: Brown
+                    dateOfBirth: '1984-05-23T00:00:00'
+                    sex: M
+                    email: TestPatient@yahoo.com
+                    mobilePhone: +1-985-237-3495
+                    homePhone: +1-985-237-3495
+                    address1: 7690 Monroe Blvd
+                    address2: Suite 12
+                    city: Atlantic City
+                    state: NJ
+                    zip: '00255'
+                    socialSecurityNumber: null
+                    ssnNotProvidedReason:
+                      code: null
+                      source: '14'
+                      sourceText: SSN unknown
+                    providerId: '7'
+                    externalId: ''
+                    releaseOfInformation: 'Yes'
+                    rxHistoryConsent: 'Yes'
+                    notes: Patient prefers morning appointments.
+                    sexAtBirth: Male
+                    pronouns: he/him
+                    workPhone: +1-985-237-3495
+                    workPhoneExt: '2546'
+                    countryCode:
+                      code: US
+                      sourceText: UNITED STATES
+                      source: US
+                    identifiers:
+                    - value: '6057'
+                      type:
+                        code: MedicalRecordNumber
+                        source: MedicalRec#
+                    - value: 00046057-008
+                      type:
+                        code: ChartNumber
+                        source: Account No
+                  primaryFacility:
+                    id: '3'
+                  custom:
+                    renderingProviderName: Christensen, Tyler
+                    renderingProviderId: '9141'
+                    releaseOfInformation: Y
+                    selfPay: 'False'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.CreatePatientResult'
+              example:
+                createdPatientId: '7887683'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postUpdatePatientUpdatePatientServiceSvcCreatePatient
+      x-operation-id-source: derived
+  /UpdatePatient/UpdatePatientService.svc/CreateReferral:
+    post:
+      tags:
+      - UpdatePatient
+      summary: CreateReferral
+      description: CreateReferral endpoint for create referral record.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.CreateReferralSwaggerRequest'
+            example:
+              request:
+                patientId: '123456'
+                authorizationNumber: '987654'
+                referralId: '001122'
+                referralNumber: '20250201'
+                status: Pending
+                priority: routine
+                referralType: Consultation
+                reasons:
+                - reason: Knee pain evaluation
+                insCode: '4455'
+                encounterId: '778899'
+                fromFacilityId: '1001'
+                fromPhysicianId: '2001'
+                toFacilityId: '3001'
+                toPhysicianId: '4001'
+                specialty: Orthopedics
+                appointmentDate: '2025-11-02T03:30:00.112+00:00'
+                referralDate: '2025-09-12T10:00:00.112+00:00'
+                effectiveDate: '2025-11-02T03:30:00.112+00:00'
+                expirationDate: '2025-12-01T03:30:00.112+00:00'
+                dateRecorded: '2025-11-02T03:30:00.112+00:00'
+                diagnosis:
+                - text: Right knee pain
+                  code: M25.561
+                  system: ICD-10
+                  isPrimary: true
+                - text: Difficulty walking
+                  code: R26.2
+                  system: ICD-10
+                  isPrimary: false
+                procedure:
+                - text: Knee X-ray
+                  code: '73560'
+                  system: CPT
+                - text: Office visit (new patient)
+                  code: '99203'
+                  system: CPT
+                notes: Morning appointment preferred.
+                custom:
+                  caseManager: John Smith
+                  flag: Expedite
+                rawRequest: null
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatient.CreateReferralResponse'
+              example:
+                id: '7887683'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postUpdatePatientUpdatePatientServiceSvcCreateReferral
+      x-operation-id-source: derived
+  /UpdatePatient/UpdatePatientService.svc/UpdateAdvanceDirective:
+    post:
+      tags:
+      - UpdatePatient
+      summary: UpdateAdvanceDirective
+      description: UpdateAdvanceDirective endpoint for update advance directive record.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.UpdateAdvanceDirectiveSwaggerRequest'
+            example:
+              request:
+                patientId: '789456'
+                id: '20240115'
+                code: DNR
+                displayName: Do Not Resuscitate
+                effectiveDate: '2024-01-15T00:00:00.112+00:00'
+                expirationDate: '2030-01-15T00:00:00.112+00:00'
+                custom:
+                  createdBy: Nurse.Alex
+                  reviewedBy: Dr.Smith
+                rawRequest: null
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatient.UpdateAdvanceDirectiveResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postUpdatePatientUpdatePatientServiceSvcUpdateAdvanceDirective
+      x-operation-id-source: derived
+  /UpdatePatient/UpdatePatientService.svc/UpdatePatient:
+    post:
+      tags:
+      - UpdatePatient
+      summary: UpdatePatient
+      description: 'Update patient information such as demographics, emergency contact, financial responsible
+
+        person/guarantor, insurance holder, and pharmacy information'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.UpdatePatientSwaggerRequest'
+            example:
+              request:
+                patientId: '7887683'
+                updatePatient:
+                  updatePatientDetails:
+                    prefix: Mrs
+                    suffix: suffix
+                    firstName: DUSTIN
+                    lastName: BREWER
+                    dateOfBirth: '1965-01-27T00:00:00'
+                    email: abc@gmail.com
+                    middleName: BOWEN
+                    preferredName: Michael
+                    sex: F
+                    address1: Wahington DC
+                    address2: Wahington DC2
+                    city: Maryland
+                    state: californica
+                    zip: '517520'
+                    homePhone: ''
+                    workPhone: +1-909-468-8777
+                    workPhoneExt: '234'
+                    mobilePhone: +1-909-468-8777
+                    ethnicity: unknown
+                    language: English
+                    race: White
+                    employmentStatus: s
+                    employerId: '1'
+                    providerId: '2'
+                    maritalStatus: Single
+                    emergencyContact:
+                      address1: 7951 DOVES CT
+                      address2: Suite 12
+                      city: SCOTT CITY
+                      state: KS
+                      zipCode: '67871'
+                      firstName: Michael
+                      middleName: A
+                      lastName: Johnson
+                      homePhone: +1-909-468-8777
+                      workPhone: +1-909-468-8777
+                      workPhoneExt: '234'
+                      cellPhone: +1-909-468-8777
+                      email: mich.john@test.com
+                      relationToPatient: son
+                      relationshipToPatient:
+                        code: Son
+                        source: Son
+                        sourceText: Son
+                    pharmacy:
+                      id: '3'
+                    financialResponsibleParty:
+                      id: '45'
+                      firstName: DUSTIN
+                      lastName: BREWER
+                      dateOfBirth: '1984-05-23T00:00:00'
+                      relationToPatient: Self
+                      relationshipToPatient:
+                        code: S
+                        sourceText: Self
+                        source: S
+                      sex: F
+                      address1: 6790 Oak St
+                      address2: Apt. 4B
+                      city: Plano
+                      state: IL
+                      zip: '60448'
+                      homePhone: +1-909-468-8777
+                      workPhone: +1-909-468-8777
+                      mobilePhone: +1-909-468-8777
+                      employerId: '1'
+                    genderIdentities:
+                    - code: Female
+                      sourceText: female
+                      source: female
+                    sexualOrientation:
+                      code: F
+                      sourceText: Female
+                      source: F
+                    races:
+                    - code: 2106-3
+                      source: White
+                    ethnicities:
+                    - code: 2180-8
+                      source: Puerto Rican
+                    maritalStatusCode:
+                      code: s
+                      source: single
+                    socialSecurityNumber: null
+                    countryCode:
+                      code: USA
+                      sourceText: United States of America
+                      source: United States of America
+                    ssnNotProvidedReason:
+                      code: null
+                      sourceText: SSN unknown
+                      source: '14'
+                    externalId: ''
+                    photo:
+                      content: AA==
+                    languages:
+                    - code: en
+                      source: English
+                    releaseOfInformation: 'Yes'
+                    rxHistoryConsent: 'Yes'
+                    notes: Patient prefers morning appointments.
+                    sexAtBirth: female
+                    pronouns: she/her
+                    identifiers:
+                    - value: '6057'
+                      type:
+                        code: MedicalRecordNumber
+                        source: MedicalRec#
+                    - value: 00046057-008
+                      type:
+                        code: ChartNumber
+                        source: Account No
+                  updatePrimaryInsurance:
+                    updateInsuranceDetails:
+                      code: '268'
+                      policyNumber: XSB804356544
+                      groupNumber: '987820321'
+                      responsibleParty:
+                        id: '980'
+                        firstName: DUSTIN
+                        lastName: BREWER
+                        dateOfBirth: '1965-01-27T00:00:00'
+                        relationToPatient: Self
+                        relationshipToPatient:
+                          code: S
+                          sourceText: Self
+                          source: S
+                        sex: F
+                        address1: 6790 Oak St
+                        address2: Suite 12
+                        city: Plano
+                        state: IL
+                        zip: '60448'
+                        homePhone: +1-909-468-8777
+                        workPhone: +1-909-468-8777
+                        mobilePhone: +1-909-468-8777
+                        employerId: '1'
+                      copay: 2.3
+                      effectiveDate: '2024-05-15T00:00:00+00:00'
+                      expirationDate: '2025-05-14T00:00:00+00:00'
+                    updateInsuranceCard:
+                      front:
+                        image: AA==
+                      back:
+                        image: AA==
+                  updateSecondaryInsurance:
+                    updateInsuranceDetails:
+                      code: '1047'
+                      policyNumber: '514589788'
+                      groupNumber: '235256'
+                      responsibleParty:
+                        id: '3445'
+                        firstName: DUSTIN
+                        lastName: BREWER
+                        dateOfBirth: '1965-01-27T00:00:00'
+                        relationToPatient: Self
+                        relationshipToPatient:
+                          code: S
+                          sourceText: Self
+                          source: S
+                        sex: F
+                        address1: 6790 Oak St
+                        address2: Apt. 12
+                        city: Plano
+                        state: IL
+                        zip: '60448'
+                        homePhone: +1-909-468-8777
+                        workPhone: +1-909-468-8777
+                        mobilePhone: +1-909-468-8777
+                        employerId: '1'
+                      copay: 0
+                      effectiveDate: '2025-01-01T00:00:00+00:00'
+                      expirationDate: '2025-12-31T00:00:00+00:00'
+                    updateInsuranceCard:
+                      front:
+                        image: AA==
+                      back:
+                        image: AA==
+                  guarantor:
+                    id: '321'
+                    firstName: DUSTIN
+                    lastName: BREWER
+                    dateOfBirth: '1984-05-23T00:00:00'
+                    relationToPatient: Self
+                    relationshipToPatient:
+                      code: S
+                      sourceText: Self
+                      source: S
+                    sex: F
+                    address1: 6790 Oak St
+                    address2: Apt. 4B
+                    city: Plano
+                    state: IL
+                    zip: '60448'
+                    homePhone: '1234567890'
+                    workPhone: '2146690123123'
+                    mobilePhone: '2661046390'
+                    employerId: '1'
+                  provider:
+                    id: '902'
+                    lastName: ROSIN
+                    firstName: ROBERT
+                    middleName: A
+                    upin: D05381
+                    license: 123456789UT
+                    npi: '1124058755'
+                  referringProvider:
+                    id: '18'
+                    lastName: AHMAD
+                    firstName: MIRZA
+                    middleName: Q
+                    upin: C24753
+                    license: '1234567890'
+                    npi: '1942281506'
+                  renderingProvider:
+                    id: '78'
+                    lastName: Smith
+                    firstName: Jane
+                    middleName: S
+                    upin: '7659821340'
+                    license: '1234567890'
+                    npi: '9876543210'
+                  custom:
+                    renderingProviderName: Christensen, Tyler
+                    renderingProviderId: '9141'
+                    releaseOfInformation: Y
+                    selfPay: 'False'
+                  primaryFacility:
+                    id: '3'
+                  emergencyContactDetailReferences:
+                  - contactId: '1'
+                    emergencyContactDetail:
+                      address1: 146 Test Ave
+                      address2: Apt 1
+                      city: Ogden
+                      state: UT
+                      zipCode: '84401'
+                      firstName: John
+                      middleName: C
+                      lastName: Doe
+                      homePhone: '7705829834'
+                      workPhone: '5829834234'
+                      workPhoneExt: '567'
+                      cellPhone: '6765890412'
+                      email: testO@gmail.com
+                      relationToPatient: '4'
+                      relationshipToPatient:
+                        code: BRO
+                        source: BRO
+                        sourceText: Brother
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatientResult'
+              example: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postUpdatePatientUpdatePatientServiceSvcUpdatePatient
+      x-operation-id-source: derived
+  /UpdatePatient/UpdatePatientService.svc/UpdatePatientReportingData:
+    post:
+      tags:
+      - UpdatePatient
+      summary: UpdatePatientReportingData
+      description: UpdatePatientReportingData endpoint for update patient reporting data.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.UpdatePatientReportingDataSwaggerRequest'
+            example:
+              request:
+                patientId: '12396245'
+                dateRecorded: '2023-09-01T00:00:00+00:00'
+                factors:
+                - type: Homeless
+                  sourceName: Street Outreach Program
+                  value: 'Yes'
+                  notes: Living in vehicle; not accessing shelter services
+                rawRequest: null
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatient.UpdatePatientReportingDataResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postUpdatePatientUpdatePatientServiceSvcUpdatePatientReportingData
+      x-operation-id-source: derived
+  /UpdatePatient/UpdatePatientService.svc/UpdateReferral:
+    post:
+      tags:
+      - UpdatePatient
+      summary: UpdateReferral
+      description: UpdateReferral endpoint for update referral record.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.UpdateReferralSwaggerRequest'
+            example:
+              request:
+                patientId: '284615'
+                id: '423953'
+                authorizationNumber: '987654'
+                referralId: '001122'
+                referralNumber: '20250201'
+                status: Pending
+                priority: routine
+                referralType: Consultation
+                reasons:
+                - reason: Knee pain evaluation
+                insCode: '4455'
+                encounterId: '778899'
+                fromFacilityId: '1001'
+                fromPhysicianId: '2001'
+                toFacilityId: '3001'
+                toPhysicianId: '4001'
+                specialty: Orthopedics
+                appointmentDate: '2025-11-02T03:30:00.112+00:00'
+                referralDate: '2025-09-12T10:00:00.112+00:00'
+                effectiveDate: '2025-11-02T03:30:00.112+00:00'
+                expirationDate: '2025-12-01T03:30:00.112+00:00'
+                dateRecorded: '2025-11-02T03:30:00.112+00:00'
+                diagnosis:
+                - text: Right knee pain
+                  code: M25.561
+                  system: ICD-10
+                  isPrimary: true
+                - text: Difficulty walking
+                  code: R26.2
+                  system: ICD-10
+                  isPrimary: false
+                procedure:
+                - text: Knee X-ray
+                  code: '73560'
+                  system: CPT
+                - text: Office visit (new patient)
+                  code: '99203'
+                  system: CPT
+                notes: Morning appointment preferred.
+                custom:
+                  caseManager: John Smith
+                  flag: Expedite
+                rawRequest: null
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatient.UpdateReferralResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postUpdatePatientUpdatePatientServiceSvcUpdateReferral
+      x-operation-id-source: derived
+components:
+  schemas:
+    LKCloudConnect.Contracts.Bridge.CreatePatient:
+      type: object
+      properties:
+        createPatientDetails:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.CreatePatientDetail'
+          description: Details and demographics of the patient to store
+        primaryFacility:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.PrimaryFacility'
+          description: Facility the patient primarily visits
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.UpdatePatient.UpdateReferralResponse:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.UpdateAdvanceDirectiveSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatient.UpdateAdvanceDirectiveRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.ReferralsDiagnosis:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Description of the diagnosis
+        code:
+          type: string
+          description: Diagnosis code
+        system:
+          type: string
+          description: Coding system for the diagnosis
+        isPrimary:
+          type: boolean
+          description: Indicates if this is the primary diagnosis
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.UpdateReferralSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatient.UpdateReferralRequest'
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.CreateReferralSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatient.CreateReferralRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.PatientDetailUpdate:
+      type: object
+      properties:
+        prefix:
+          type: string
+          description: Patient prefix
+        suffix:
+          type: string
+          description: Patient suffix
+        firstName:
+          type: string
+          description: Patient first name
+        lastName:
+          type: string
+          description: Patient last name
+        dateOfBirth:
+          type: string
+          description: Patient date of birth e.g. 2019-01-01
+          format: date-time
+          example: '2019-01-01'
+        email:
+          type: string
+          description: Patient email
+        middleName:
+          type: string
+          description: Patient middle name
+        preferredName:
+          type: string
+          description: Patient preferred name
+        sex:
+          type: string
+          description: Patient sex code
+        address1:
+          type: string
+          description: Patient address1
+        address2:
+          type: string
+          description: Patient address2
+        city:
+          type: string
+          description: Patient city
+        state:
+          type: string
+          description: Patient state
+        zip:
+          type: string
+          description: Patient zip
+        homePhone:
+          type: string
+          description: 'Patient home phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        workPhone:
+          type: string
+          description: 'Patient work phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        workPhoneExt:
+          type: string
+          description: Patient work phone extension
+        mobilePhone:
+          type: string
+          description: 'Patient mobile phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        ethnicity:
+          type: string
+          description: 'Patient ethnicity
+
+
+            Superseded by "ethnicities"'
+          deprecated: true
+        language:
+          type: string
+          description: 'Patient language
+
+
+            Superseded by "languages"'
+          deprecated: true
+        race:
+          type: string
+          description: 'Patient race
+
+
+            Superseded by "races"'
+          deprecated: true
+        employmentStatus:
+          type: string
+          description: Patient employment status
+        employerId:
+          type: string
+          description: Patient employer id
+        providerId:
+          type: string
+          description: Patient provider id
+        maritalStatus:
+          enum:
+          - Unknown
+          - Married
+          - Divorced
+          - Partner
+          - Single
+          - Widowed
+          - LegallySeparated
+          type: string
+          description: Patient marital status
+        emergencyContact:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.EmergencyContactDetail'
+          description: Patient emergency contact detail
+        pharmacy:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatient.UpdatePharmacyDetail'
+          description: Patient pharmacy detail
+        financialResponsibleParty:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ResponsibleParty'
+          description: Financial responsible party
+        genderIdentities:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.GenderIdentity'
+          description: 'Patient gender identity codes
+
+            `Default` `TransgenderFemale` `TransgenderMale` `NonBinary` `Male` `Female` `Other` `NonDisclose`'
+        sexualOrientation:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.SexualOrientation'
+          description: 'Patient sexual orientation code
+
+            `LesbianGayOrHomosexual` `StraightOrHeterosexual` `Bisexual` `Other` `Unknown` `NonDisclosed`'
+        races:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.Race'
+          description: 'Patient race codes.
+
+            Supports all HL7 v3 Race codes defined in:
+
+            https://terminology.hl7.org/2.0.0/CodeSystem-v3-Race.html'
+        ethnicities:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.Ethnicity'
+          description: 'Patient ethnicity codes
+
+            Supports all HL7 v3 Ethnicity codes defined in:
+
+            https://terminology.hl7.org/5.1.0/CodeSystem-v3-Ethnicity.html'
+        maritalStatusCode:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.MaritalStatusCode'
+          description: 'Marital Status code
+
+            Hl7 Marital Status Codes https://www.hl7.org/fhir/valueset-marital-status.html
+
+            `Annulled` `Divorced` `Interlocutory` `LegallySeparated` `Married` `Polygamous` `NeverMarried` `DomesticPartner` `Unmarried` `Widowed` `Unknown`'
+        socialSecurityNumber:
+          type: string
+          description: Patient social security number
+        countryCode:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.CountryCode'
+          description: Patient Country code
+        ssnNotProvidedReason:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.SsnNotProvidedReason'
+          description: Reason for not providing Social Security Number
+        externalId:
+          type: string
+          description: External Id
+        photo:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.PatientPhoto'
+          description: Patient Photo
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.Language'
+          description: Patient language codes
+        releaseOfInformation:
+          type: string
+          description: Indicates patient consent to share medical records
+        rxHistoryConsent:
+          type: string
+          description: Captures consent for sharing prescription history
+        notes:
+          type: string
+          description: Stores general patient notes
+        sexAtBirth:
+          type: string
+          description: Records the patient's sex assigned at birth
+        pronouns:
+          type: string
+          description: Specifies the pronouns that the patient identifies with (e.g., he/him, she/her, they/them)
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.PatientIdentifierInputs'
+          description: Additional patient identifiers
+      additionalProperties: false
+    LKCloudConnect.Contracts.UpdatePatient.UpdateReferralRequest:
+      required:
+      - id
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: PatientId id
+        id:
+          minLength: 1
+          type: string
+          description: Unique identifier for the authorization or referral record
+        authorizationNumber:
+          type: string
+          description: Authorization number assigned by payer or internal system
+        referralId:
+          type: string
+          description: Linked referral ID, if applicable
+        referralNumber:
+          type: string
+          description: External or human-readable referral number
+        status:
+          type: string
+          description: Current status of the referral (e.g., pending, approved, denied)
+        priority:
+          enum:
+          - Unknown
+          - routine
+          - urgent
+          - stat
+          type: string
+          description: Indicates urgency level of the request
+        referralType:
+          type: string
+          description: 'Specifies the classification or subtype of the referral authorization.
+
+            Examples include "Incoming" or "Outgoing".'
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ReferralReason'
+          description: Medical justification or reason for the referral or authorization
+        insCode:
+          type: string
+          description: Insurance or payer code
+        encounterId:
+          type: string
+          description: Identifier of the related clinical encounter
+        fromFacilityId:
+          type: string
+          description: ID of the referring facility
+        fromPhysicianId:
+          type: string
+          description: ID of the referring physician
+        toFacilityId:
+          type: string
+          description: ID of the facility where the service will be performed
+        toPhysicianId:
+          type: string
+          description: ID of the physician who will perform the procedure
+        specialty:
+          type: string
+          description: 'Indicates the medical specialty or area of care related to the referral.
+
+            Examples include Cardiology, Dental Care, Orthopedics, etc.'
+        appointmentDate:
+          type: string
+          description: Scheduled date of the appointment or service. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        referralDate:
+          type: string
+          description: Date when the referral or authorization was created. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        effectiveDate:
+          type: string
+          description: Start date of the authorization coverage period. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        expirationDate:
+          type: string
+          description: End date of the authorization coverage period. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        dateRecorded:
+          type: string
+          description: Timestamp when this record was entered into the system. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        diagnosis:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ReferralsDiagnosis'
+          description: List of diagnosis entries associated with this authorization
+        procedure:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ReferralsProcedure'
+          description: List of procedures or services authorized
+        notes:
+          type: string
+          description: Additional notes or comments related to the referral or authorization
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.PrimaryFacility:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Facility Id
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.EmergencyContactDetailReference:
+      type: object
+      properties:
+        contactId:
+          type: string
+          description: EmergenctContact unique identifier
+        emergencyContactDetail:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.EmergencyContactDetail'
+          description: Emergency Contact
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.InsuranceCardUpdate:
+      type: object
+      properties:
+        front:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ImageUpdate'
+          description: Insurance card front image
+        back:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ImageUpdate'
+          description: Insurance card back image
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.Language:
+      type: object
+      properties:
+        code:
+          type: string
+          description: System-specific code
+          example: Language Code
+        source:
+          type: string
+          description: System-specific code
+          example: Language Source
+      additionalProperties: false
+      description: Language
+    LKCloudConnect.Contracts.Bridge.InsuranceDetailUpdate:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Insurance unique identifier
+        policyNumber:
+          type: string
+          description: Insurance policy number
+        groupNumber:
+          type: string
+          description: Insurance group number
+        responsibleParty:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ResponsibleParty'
+          description: Insurance responsible party
+        copay:
+          type: number
+          description: Insurance copay amount
+          format: double
+        effectiveDate:
+          type: string
+          description: Insurance effective date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        expirationDate:
+          type: string
+          description: Insurance expiration date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.Ethnicity:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'HL7 v3 Ethnicity code.
+
+            For example: 2180-8 (Puerto Rican), 2148-5 (Mexican), 2162-6 (Central American Indian).'
+          example: 2180-8
+        source:
+          type: string
+          description: 'Original ethnicity value/display text from the source system.
+
+            For example: Puerto Rican, Mexican, Central American Indian.'
+          example: Puerto Rican
+      additionalProperties: false
+      description: 'Our mapped code from the HL7 v3 Ethnicity code system.
+
+        https://terminology.hl7.org/5.1.0/CodeSystem-v3-Ethnicity.html'
+    LKCloudConnect.Contracts.Bridge.ReportingFactor:
+      type: object
+      properties:
+        type:
+          enum:
+          - Unknown
+          - AgriculturalWorker
+          - AgriculturalWorkerType
+          - ConsentToTreat
+          - GenderIdentity
+          - Homeless
+          - HomelessType
+          - LanguageBarrier
+          - ProcessingID
+          - PublicHousing
+          - SchoolBased
+          - SexualOrientation
+          - VeteranStatus
+          - FamilySize
+          - FamilySizeDeclined
+          - Handicap
+          - IncomeDeclined
+          - IncomePayPeriod
+          - LivingArrangement
+          - LivingDependency
+          - LivingWill
+          - MilitaryBranch
+          - MilitaryRank
+          - MilitaryStatus
+          - MultipleBirthIndicator
+          - OrganDonor
+          - PreferredPronoun
+          - YearlyIncome
+          type: string
+          description: Represents the standardized type of the factor.
+        sourceName:
+          type: string
+          description: The original name or label of the factor as received from the source system.
+        value:
+          type: string
+          description: The actual value of the factor as recorded in the source system.
+        notes:
+          type: string
+          description: Additional notes or comments
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.UpdatePatientSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.UpdatePatientRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.CreatePatientResult:
+      type: object
+      properties:
+        createdPatientId:
+          type: string
+          description: Id of the patient created in the target system
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.ResponsibleParty:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Responsible party id
+        firstName:
+          type: string
+          description: Responsible party first name
+        lastName:
+          type: string
+          description: Responsible party last name
+        dateOfBirth:
+          type: string
+          description: Responsible party date of birth e.g. 2019-01-01
+          format: date-time
+          example: '2019-01-01'
+        relationToPatient:
+          type: string
+          description: 'Responsible party relation to patient
+
+            HL7 Related person relationship type codes -  https://www.hl7.org/fhir/valueset-relatedperson-relationshiptype.html
+
+            `C` `E` `F` `I` `N` `O` `S` `U` `FAMMEMB` `CHILD` `CHLDADOPT` `DAUADOPT` `SONADOPT` `CHLDFOST` `DAUFOST` `SONFOST` `DAUC` `DAU` `STPDAU` `NCHILD` `SON` `SONC` `STPSON` `STPCHLD` `EXT` `AUNT` `MAUNT` `PAUNT` `COUSN` `MCOUSN` `PCOUSN` `GGRPRN` `GGRFTH` `MGGRFTH` `PGGRFTH` `GGRMTH` `MGGRMTH` `PGGRMTH` `MGGRPRN` `PGGRPRN` `GRNDCHILD` `GRNDDAU` `GRNDSON` `GRPRN` `GRFTH` `MGRFTH` `PGRFTH` `GRMTH` `MGRMTH` `PGRMTH` `MGRPRN` `PGRPRN` `INLAW` `CHLDINLAW` `DAUINLAW` `SONINLAW` `PRNINLAW` `FTHINLAW` `MTHINLAW` `SIBINLAW` `BROINLAW` `SISINLAW` `NIENEPH` `NEPHEW` `NIECE` `UNCLE` `MUNCLE` `PUNCLE` `PRN` `ADOPTP` `ADOPTF` `ADOPTM` `FTH` `FTHFOST` `NFTH` `NFTHF` `STPFTH` `MTH` `GESTM` `MTHFOST` `NMTH` `NMTHF` `STPMTH` `NPRN` `PRNFOST` `STPPRN` `SIB` `BRO` `HBRO` `NBRO` `TWINBRO` `FTWINBRO` `ITWINBRO` `STPBRO` `HSIB` `HSIS` `NSIB` `NSIS` `TWINSIS` `FTWINSIS` `ITWINSIS` `TWIN` `FTWIN` `ITWIN` `SIS` `STPSIS` `STPSIB` `SIGOTHR` `DOMPART` `FMRSPS` `SPS` `HUSB` `WIFE` `FRND` `NBOR` `ONESELF` `ROOM`
+
+
+            Superseded by "RelationshipToPatient"'
+          deprecated: true
+        relationshipToPatient:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.RelationshipToPatient'
+          description: 'Relationship To Patient
+
+            HL7 Related person relationship type codes -  https://www.hl7.org/fhir/valueset-relatedperson-relationshiptype.html
+
+            `C` `E` `F` `I` `N` `O` `S` `U` `FAMMEMB` `CHILD` `CHLDADOPT` `DAUADOPT` `SONADOPT` `CHLDFOST` `DAUFOST` `SONFOST` `DAUC` `DAU` `STPDAU` `NCHILD` `SON` `SONC` `STPSON` `STPCHLD` `EXT` `AUNT` `MAUNT` `PAUNT` `COUSN` `MCOUSN` `PCOUSN` `GGRPRN` `GGRFTH` `MGGRFTH` `PGGRFTH` `GGRMTH` `MGGRMTH` `PGGRMTH` `MGGRPRN` `PGGRPRN` `GRNDCHILD` `GRNDDAU` `GRNDSON` `GRPRN` `GRFTH` `MGRFTH` `PGRFTH` `GRMTH` `MGRMTH` `PGRMTH` `MGRPRN` `PGRPRN` `INLAW` `CHLDINLAW` `DAUINLAW` `SONINLAW` `PRNINLAW` `FTHINLAW` `MTHINLAW` `SIBINLAW` `BROINLAW` `SISINLAW` `NIENEPH` `NEPHEW` `NIECE` `UNCLE` `MUNCLE` `PUNCLE` `PRN` `ADOPTP` `ADOPTF` `ADOPTM` `FTH` `FTHFOST` `NFTH` `NFTHF` `STPFTH` `MTH` `GESTM` `MTHFOST` `NMTH` `NMTHF` `STPMTH` `NPRN` `PRNFOST` `STPPRN` `SIB` `BRO` `HBRO` `NBRO` `TWINBRO` `FTWINBRO` `ITWINBRO` `STPBRO` `HSIB` `HSIS` `NSIB` `NSIS` `TWINSIS` `FTWINSIS` `ITWINSIS` `TWIN` `FTWIN` `ITWIN` `SIS` `STPSIS` `STPSIB` `SIGOTHR` `DOMPART` `FMRSPS` `SPS` `HUSB` `WIFE` `FRND` `NBOR` `ONESELF` `ROOM`'
+        sex:
+          type: string
+          description: Responsible party sex
+        address1:
+          type: string
+          description: Responsible party address1
+        address2:
+          type: string
+          description: Responsible party address2
+        city:
+          type: string
+          description: Responsible party city
+        state:
+          type: string
+          description: Responsible party state
+        zip:
+          type: string
+          description: Responsible party zip
+        homePhone:
+          type: string
+          description: 'Responsible party home phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        workPhone:
+          type: string
+          description: 'Responsible party work phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        mobilePhone:
+          type: string
+          description: 'Responsible party mobile phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        employerId:
+          type: string
+          description: Responsible party employer id
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.PatientIdentifierInputs:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The actual identifier value assigned to the patient.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.PatientIdentifierType'
+          description: The type of identifier, including standardized code and optional source mapping.
+      additionalProperties: false
+      description: Represents a patient identifiers.
+    LKCloudConnect.Contracts.UpdatePatient.UpdateAdvanceDirectiveRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: PatientId id
+        id:
+          type: string
+          description: Unique ID for the Advance Directive record
+        code:
+          type: string
+          description: Code representing the directive type
+        displayName:
+          type: string
+          description: Human-readable name or label for the directive
+        effectiveDate:
+          type: string
+          description: Date when the directive was entered or became effective. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00.000+00:00'
+        expirationDate:
+          type: string
+          description: Date when the directive expires (if applicable). (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00.000+00:00'
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.RelationshipToPatient:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Our mapped code
+        sourceText:
+          type: string
+          description: System-specific free text
+        source:
+          type: string
+          description: System-specific code
+      additionalProperties: false
+      description: Relationship To Patient
+    LKCloudConnect.Contracts.Bridge.CreatePatientRequest:
+      type: object
+      properties:
+        createPatient:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.CreatePatient'
+          description: Create patient request object
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.MappedCode:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Our mapped code (If one is available)
+        source:
+          type: string
+          description: System-specific code
+        sourceText:
+          type: string
+          description: System-specific free text when additional free text is allowed, usually found with “other” fields
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.MaritalStatusCode:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Marital Status Code.
+        source:
+          type: string
+          description: System-specific code
+      additionalProperties: false
+      description: 'Marital Status code
+
+        https://www.hl7.org/fhir/valueset-marital-status.html'
+    LKCloudConnect.Contracts.Bridge.UpdatePatientRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient id
+        updatePatient:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.DemographicUpdate'
+          description: Patient update data
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.PatientPhoto:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Base64 encoded image content
+          format: byte
+      additionalProperties: false
+    LKCloudConnect.Contracts.UpdatePatient.UpdatePatientReportingDataResponse:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.CreatePatientSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.CreatePatientRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.CountryCode:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Country code
+        sourceText:
+          type: string
+          description: Any free text accompanying the system-specific code
+        source:
+          type: string
+          description: System-specific code
+      additionalProperties: false
+      description: Country code
+    LKCloudConnect.Contracts.Bridge.CreatePatientDetail:
+      required:
+      - dateOfBirth
+      - firstName
+      - lastName
+      type: object
+      properties:
+        firstName:
+          minLength: 1
+          type: string
+          description: Patient first name
+        middleName:
+          type: string
+          description: Patient middle name
+        lastName:
+          minLength: 1
+          type: string
+          description: Patient last name
+        dateOfBirth:
+          type: string
+          description: Patient DOB e.g. 2019-01-01
+          format: date-time
+          example: '2019-01-01'
+        sex:
+          type: string
+          description: Patient sex
+        email:
+          type: string
+          description: Patient email
+        mobilePhone:
+          type: string
+          description: 'Patient mobile phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        homePhone:
+          type: string
+          description: 'Patient home phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        address1:
+          type: string
+          description: Patient address line 1
+        address2:
+          type: string
+          description: Patient address line 2
+        city:
+          type: string
+          description: Patient city
+        state:
+          type: string
+          description: Patient state
+        zip:
+          type: string
+          description: Patient zip
+        socialSecurityNumber:
+          type: string
+          description: Patient social security number
+        ssnNotProvidedReason:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.MappedCode'
+          description: Reason code for not providing social security number
+        providerId:
+          type: string
+          description: Id of the provider seeing the patient
+        externalId:
+          type: string
+          description: External Id of the patient
+        releaseOfInformation:
+          type: string
+          description: Indicates patient consent to share medical records
+        rxHistoryConsent:
+          type: string
+          description: Captures consent for sharing prescription history
+        notes:
+          type: string
+          description: Stores general patient notes
+        sexAtBirth:
+          type: string
+          description: Records the patient's sex assigned at birth
+        pronouns:
+          type: string
+          description: Specifies the pronouns that the patient identifies with (e.g., he/him, she/her, they/them)
+        workPhone:
+          type: string
+          description: 'Patient work phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        workPhoneExt:
+          type: string
+          description: Patient work phone extension
+        countryCode:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.CountryCode'
+          description: Patient Country code
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.PatientIdentifierInputs'
+          description: Additional patient identifiers
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.DemographicUpdate:
+      type: object
+      properties:
+        updatePatientDetails:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.PatientDetailUpdate'
+          description: Patient
+        updatePrimaryInsurance:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.InsuranceUpdate'
+          description: Update primary insurance
+        updateSecondaryInsurance:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.InsuranceUpdate'
+          description: Update secondary insurance
+        guarantor:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ResponsibleParty'
+          description: 'Guarantor
+
+
+            This object has been replaced by request.updatePatient.updatePatientDetails.financialResponsibleParty.
+
+
+            If both are present, the financialResponsibleParty object takes precedence and its values will override those in guarantor.'
+        provider:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ProviderDetail'
+          description: Patient primary provider
+        referringProvider:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ProviderDetail'
+          description: Patient referring provider
+        renderingProvider:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ProviderDetail'
+          description: Patient rendering provider
+        primaryFacility:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.PrimaryFacility'
+          description: Patient primary facility
+        emergencyContactDetailReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.EmergencyContactDetailReference'
+          description: Patient emergency contact details
+      additionalProperties: false
+    LKCloudConnect.Contracts.UpdatePatient.UpdatePharmacyDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Pharmacy id
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.SexualOrientation:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Our mapped code https://www.healthit.gov/isa/representing-patient-identified-sexual-orientation
+        sourceText:
+          type: string
+          description: System-specific free text
+        source:
+          type: string
+          description: System-specific code
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.ReferralReason:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: Medical justification or reason for the referral or authorization
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.EmergencyContactDetail:
+      type: object
+      properties:
+        address1:
+          type: string
+          description: Emergency contact address1
+        address2:
+          type: string
+          description: Emergency contact address2
+        city:
+          type: string
+          description: Emergency contact city
+        state:
+          type: string
+          description: Emergency contact state
+        zipCode:
+          type: string
+          description: Emergency contact zipcode
+        firstName:
+          type: string
+          description: Emergency contact first name
+        middleName:
+          type: string
+          description: Emergency contact middle name
+        lastName:
+          type: string
+          description: Emergency contact last name
+        homePhone:
+          type: string
+          description: 'Emergency contact home phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        workPhone:
+          type: string
+          description: 'Emergency contact work phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        workPhoneExt:
+          type: string
+          description: Emergency contact work phone extension
+        cellPhone:
+          type: string
+          description: 'Emergency contact cell phone, Supported formats: +1-999-999-9999, +1-9999999999, +19999999999, +1-(999) 999 9999, +1 (999) 999-9999, +1999 999 9999, 999-999-9999, 9999999999, (999) 999 9999, (999)999-9999, 999 999 9999'
+        email:
+          type: string
+          description: Emergency contact email
+        relationToPatient:
+          type: string
+          description: Emergency contact relationship to patient
+        relationshipToPatient:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.MappedCode'
+          description: Emergency contact relationship to patient code
+      additionalProperties: false
+    LKCloudConnect.Contracts.LKCloudConnectFault:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Target system credentials are invalid
+        detail:
+          type: string
+          description: Additional error detail
+        recoverySteps:
+          type: string
+          description: Error recovery steps
+          example: Contact support to update credentials
+        handle:
+          type: string
+          description: Our unique message id, you should provide this when you open a support ticket
+          example: 3e4d0b7f-e3fa-4462-9cc3-860be812d696
+        errorCode:
+          type: string
+          description: Error code, please see error code section of the guide for details
+          example: Unauthorized
+        type:
+          type: string
+          description: Error type
+      additionalProperties: false
+      description: LKCloud Connect Fault
+    LKCloudConnect.Contracts.Bridge.GenderIdentity:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Our mapped code https://www.hl7.org/fhir/codesystem-gender-identity.html
+        sourceText:
+          type: string
+          description: System-specific free-text
+        source:
+          type: string
+          description: System-specific code
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.Race:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'HL7 v3 Race code.
+
+            https://terminology.hl7.org/2.0.0/CodeSystem-v3-Race.html
+
+            For example: 2106-3 (White), 2029-7 (Asian Indian), 1167-6 (Coeur D''Alene).'
+          example: 2106-3
+        source:
+          type: string
+          description: 'Original race value/display text from the source system.
+
+            For example: White, Asian Indian, Coeur D''Alene.'
+          example: White
+      additionalProperties: false
+      description: Race
+    LKCloudConnect.Contracts.Bridge.PatientIdentifierType:
+      type: object
+      properties:
+        code:
+          enum:
+          - Other
+          - ChartNumber
+          - MedicalRecordNumber
+          type: string
+          description: Standardized identifier type code defined by Ellkay.
+        source:
+          type: string
+          description: Source-specific identifier type as defined by the originating EMR system.
+      additionalProperties: false
+      description: Represents the type of patient identifier, including a standardized code and optional source-specific value.
+    LKCloudConnect.Swagger.SwaggerRequests.UpdatePatient.UpdatePatientReportingDataSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.UpdatePatient.UpdatePatientReportingDataRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.ReferralsProcedure:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Name or description of the procedure
+        code:
+          type: string
+          description: Procedure code
+        system:
+          type: string
+          description: Coding system for procedure
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.SsnNotProvidedReason:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Always null, we don't map this code
+        sourceText:
+          type: string
+          description: System-specific free text
+        source:
+          type: string
+          description: System-specific code
+      additionalProperties: false
+      description: Reason code for not providing Social Security Number
+    LKCloudConnect.Contracts.UpdatePatient.UpdateAdvanceDirectiveResponse:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Contracts.UpdatePatient.CreateReferralResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the authorization or referral record
+      additionalProperties: false
+    LKCloudConnect.Contracts.UpdatePatient.UpdatePatientReportingDataRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: PatientId id
+        dateRecorded:
+          type: string
+          description: DateRecorded. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+        factors:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ReportingFactor'
+          description: Factors
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.ImageUpdate:
+      type: object
+      properties:
+        image:
+          type: string
+          description: Base64 encoded image content
+          format: byte
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.ProviderDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Provider id
+        lastName:
+          type: string
+          description: Provider last name
+        firstName:
+          type: string
+          description: Provider first name
+        middleName:
+          type: string
+          description: Provider middle name
+        upin:
+          type: string
+          description: Provider upin
+        license:
+          type: string
+          description: Provider license
+        npi:
+          type: string
+          description: Provider npi
+      additionalProperties: false
+    LKCloudConnect.Contracts.Bridge.InsuranceUpdate:
+      type: object
+      properties:
+        updateInsuranceDetails:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.InsuranceDetailUpdate'
+          description: Insurance details update
+        updateInsuranceCard:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.InsuranceCardUpdate'
+          description: Insurance card update
+      additionalProperties: false
+    LKCloudConnect.Contracts.UpdatePatient.CreateReferralRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: PatientId id
+        authorizationNumber:
+          type: string
+          description: Authorization number assigned by payer or internal system
+        referralId:
+          type: string
+          description: Linked referral ID, if applicable
+        referralNumber:
+          type: string
+          description: External or human-readable referral number
+        status:
+          type: string
+          description: Current status of the referral (e.g., pending, approved, denied)
+        priority:
+          enum:
+          - Unknown
+          - routine
+          - urgent
+          - stat
+          type: string
+          description: Indicates urgency level of the request
+        referralType:
+          type: string
+          description: 'Specifies the classification or subtype of the referral authorization.
+
+            Examples include "Incoming" or "Outgoing".'
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ReferralReason'
+          description: Medical justification or reason for the referral or authorization
+        insCode:
+          type: string
+          description: Insurance or payer code
+        encounterId:
+          type: string
+          description: Identifier of the related clinical encounter
+        fromFacilityId:
+          type: string
+          description: ID of the referring facility
+        fromPhysicianId:
+          type: string
+          description: ID of the referring physician
+        toFacilityId:
+          type: string
+          description: ID of the facility where the service will be performed
+        toPhysicianId:
+          type: string
+          description: ID of the physician who will perform the procedure
+        specialty:
+          type: string
+          description: 'Indicates the medical specialty or area of care related to the referral.
+
+            Examples include Cardiology, Dental Care, Orthopedics, etc.'
+        appointmentDate:
+          type: string
+          description: Scheduled date of the appointment or service. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        referralDate:
+          type: string
+          description: Date when the referral or authorization was created. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        effectiveDate:
+          type: string
+          description: Start date of the authorization coverage period. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        expirationDate:
+          type: string
+          description: End date of the authorization coverage period. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        dateRecorded:
+          type: string
+          description: Timestamp when this record was entered into the system. (DateTimeOffset) e.g. 2019-01-01T00:00:00.000+00:00
+          format: date-time
+        diagnosis:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ReferralsDiagnosis'
+          description: List of diagnosis entries associated with this authorization
+        procedure:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Bridge.ReferralsProcedure'
+          description: List of procedures or services authorized
+        notes:
+          type: string
+          description: Additional notes or comments related to the referral or authorization
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.UpdatePatientResult:
+      type: object
+      additionalProperties: false
+x-provenance:
+  method: searched
+  source: https://lkcloud-api.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-beginsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-editappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentslot.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getfacilities.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getopenappointmentslots.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getphysicians.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getscheduleappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-nextsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-scheduleappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getadvancedirectives.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getbridgeinfo.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getguarantor.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatient.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientalerts.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientsummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getreferrals.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-smartsearch.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-getchargestatus.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-sendcharge.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-createdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocumenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getpatientdocuments.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-createemployer.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcodeset.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemployers.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemploymentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getencounterreasons.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getethnicities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getgenderidentities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getinsurances.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getlanguages.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getmaritalstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getraces.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getrelationships.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getsexualorientations.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpractitioners.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchresources.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-applypayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-beginsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getaccount.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalance.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalancesummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getpatientcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-nextsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatebillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatepatientcollectionbucket.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-voidpayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-begingetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-closeencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-createencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getallergies.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getdiagnoses.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotebody.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotes.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounters.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getfamilyhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getimmunizations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getlabresults.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedications.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getophthalmologyobservations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getproblems.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getprocedures.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsocialhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsurgicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitals.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitalsdefinition.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-nextgetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-postvitals.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createpatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createreferral.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updateadvancedirective.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatereferral.md
+  merge:
+    pages: 85
+    deduped: 158
+    conflicts_kept_first: 0

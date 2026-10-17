@@ -1,0 +1,1982 @@
+openapi: 3.2.0
+info:
+  title: LKCloud LK Patient Balance API
+  description: Ellkay Api documentation 6.6 Ellkay api
+  contact:
+    name: Ellkay
+    url: https://ellkay.com
+    email: ''
+  version: '6.6'
+  x-logo:
+    url: ./logo.png
+    altText: Ellkay Logo
+servers:
+- url: https://services.lkcloud.com
+  description: prod url
+tags:
+- name: LKPatientBalance
+  description: Load patient's balances. Allows patients to apply payments.
+paths:
+  /LKPatientBalance/ApplyPayment:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: ApplyPayment
+      description: 'Record a payment that has been made for the given patient. Supports copay''s, specific encounter payments, and payments to the overall patient account.
+
+        ## Payment Batches
+
+        It''s recommended that you provide a batch name and date with each payment message, which tells our adapter which payment batch to attach the payment to.
+
+
+        If no payment batch data is provided with the message, the adapter will attach the payment to today''s open batch. If more than one open batch is found, the payment will fail.
+
+
+        The adapter automatically creates a new batch when zero batches exist, but it won''t create a new batch when there are 1 or more batches. More than one matching batch causes a failure.
+
+        ## Post "Kind"
+
+        Each payment message must include a "PostKind" enum. The options are Copay, Deposit, or Balance.
+
+        ### Copay
+
+        Copay payments required a visit ID be sent with the message, so we can record the copay for the correct visit.
+
+        ### Deposit
+
+        Deposit payments are simply recorded on the patient record. They are not posted to a particular visit or service.
+
+        ### Balance
+
+        Balance payments are recorded on the patient record, but also applied to services rendered for the patient. When a visit id is included with the message, the payment is only applied to a specific visit. If a visit id is not included with the message, the payment will be applied using the target systems first-in, first-out (FIFO) payment logic. Typically, this means the payment total amount is applied to the oldest visit with outstanding charges first, then to the second oldest visit, etc. Once the FIFO operation is completed, any remaining amount is deposited to the patient account.'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.ApplyPaymentSwaggerRequest'
+            example:
+              request:
+                patientId: '856492'
+                paymentMethod:
+                  method: CreditCard
+                  creditCardKind: Visa
+                  detail: Paid via online portal
+                payment:
+                  referenceId: '436723'
+                  postKind: Balance
+                  visitId: '349'
+                  amount: 150
+                  note: Copay for office visit
+                  batch:
+                    name: '2025'
+                    date: '2023-08-01T00:00:00+00:00'
+                  date: '2023-08-01T00:00:00+00:00'
+                  facilityId: '001'
+                  providerId: '103'
+                custom:
+                  sourceSystem: EHR-X
+                  notes: Office Visit
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ApplyPaymentResult'
+              example:
+                referenceId: '436723'
+                paymentId: '423975'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceApplyPayment
+      x-operation-id-source: derived
+  /LKPatientBalance/BeginSearchClaims:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: BeginSearchClaims
+      description: The BeginSearchClaims endpoint initiates the process to search for claims, providing a next token for pagination purposes.
+      requestBody:
+        description: Request message
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.BeginSearchClaimsSwaggerRequest'
+            example:
+              request:
+                patientId: PAT1001
+                claimId: CLM202512345
+                serviceDateRange:
+                  start: '2025-01-01T00:00:00.112+00:00'
+                  end: '2025-12-31T00:00:00.112+00:00'
+                claimDateRange:
+                  start: '2025-01-01T00:00:00.112+00:00'
+                  end: '2025-12-31T00:00:00.112+00:00'
+                custom:
+                  batchNumber: BATCH-2025-045
+                rawRequest: null
+                limit: 500
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PagedResult'
+              example:
+                nextToken: eyJSZXF1ZXN0SWQiOiJyV0lDdWp2d01CaEpvOXRaM2pON2U0QT09IiwiVG9rZW4iOiJwMHZwMEQ2OVZHRitEWHdvRExfSFUwTlE9PSJ9
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceBeginSearchClaims
+      x-operation-id-source: derived
+  /LKPatientBalance/GetAccount:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: GetAccount
+      description: The GetAccount endpoint returns details about an account, including the guarantor's ID, account balance, and associated patients with their balances.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetAccountSwaggerRequest'
+            example:
+              request:
+                accountId: '838620'
+                patientId: '144267'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetAccountResponse'
+              example:
+                account:
+                  guarantorId: '439726'
+                  accountId: '838620'
+                  balance: 10
+                  totalBalance: 150
+                  patients:
+                  - id: '144267'
+                    balance: 10
+                  custom:
+                    reviewedBy: Dr. Alice Grey
+                    technician: John Smith
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceGetAccount
+      x-operation-id-source: derived
+  /LKPatientBalance/GetBalance:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: GetBalance
+      description: 'The GetBalance endpoint provides detailed balance information for patients, including their personal details, guarantor details, account ID, and a list of encounters with their respective balances and services.
+
+
+        This is a resource-intensive operation and should be used judiciously.Whenever feasible, opt for using GetBalanceSummary instead.'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetBalanceSwaggerRequest'
+            example:
+              request:
+                patientId: '1442678'
+                dateRange:
+                  start: '2019-01-01T00:00:00+00:00'
+                  end: '2020-01-07T00:00:00+00:00'
+                lastUpdated: '2023-01-01T00:00:00+00:00'
+                includeInsuranceDetail: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetBalanceResult'
+              example:
+                patients:
+                - patient:
+                    firstName: Jane
+                    lastName: Smith
+                    id: '1442678'
+                    guarantor:
+                      id: '202'
+                      firstName: John
+                      lastName: Doe
+                    accountId: '98765'
+                  totalPatientBalance: 75
+                  unposted: 20
+                  encounters:
+                  - id: '107481'
+                    appointmentBalance: 250
+                    patientBalance: 75
+                    copay: 25
+                    adjustment: 15
+                    insuranceStatus: FollowUp
+                    patientBillingStatus: FollowUp
+                    date: '2019-11-01T10:30:00+00:00'
+                    firstBilledDate: '2019-11-05T08:00:00+00:00'
+                    patientResponsibleDate: '2019-11-15T00:00:00+00:00'
+                    diagnoses:
+                    - text: Acute sinusitis
+                      coding:
+                      - system: ICD-10
+                        code: J01.90
+                        display: Acute sinusitis, unspecified
+                    services:
+                    - claimId: '12345'
+                      id: '001'
+                      name: Office Visit - Established Patient
+                      code: '99213'
+                      description: Office or other outpatient visit for the evaluation and management of an established patient, typically 15 minutes.
+                      units: 1
+                      adjustment: 15
+                      refund: 0
+                      billedAmount: 120
+                      patientBalance: 20
+                      patientPaid: 40
+                      insuranceBalance: 55
+                      insurancePaid: 65
+                      modifiers:
+                      - '25'
+                      diagnoses:
+                      - text: Acute sinusitis
+                        coding:
+                        - system: icd-10
+                          code: J01.90
+                          display: Acute sinusitis, unspecified
+                      - text: Cough
+                        coding:
+                        - system: icd-10
+                          code: R05
+                          display: Cough
+                      billedInsurances:
+                      - payerId: '564153'
+                        insuranceName: Health Insurance Co.
+                        insuranceCode: INS001
+                        priority: Primary
+                        insuranceBalance: 35
+                        insurancePaid: 45
+                      - payerId: '789654'
+                        insuranceName: Secondary Health Insurance Co.
+                        insuranceCode: INS002
+                        priority: Secondary
+                        insuranceBalance: 20
+                        insurancePaid: 20
+                      custom:
+                        revenueCode: '0510'
+                    guarantor:
+                      id: '202'
+                      firstName: John
+                      lastName: Doe
+                    printStatement: true
+                    isVoided: false
+                    facilityId: '001'
+                    physicianId: '450'
+                    custom:
+                      financialClass: Commercial
+                  patientAccountBalance: 95
+                  custom:
+                    sourceSystem: EHR-X
+                    notes: Balance from Q4 2024
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceGetBalance
+      x-operation-id-source: derived
+  /LKPatientBalance/GetBalanceSummary:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: GetBalanceSummary
+      description: The GetBalanceSummary endpoint provides a summary of the patient's balance, including patient ID, patient balance, unposted payments, total charges, total payments, and total adjustments.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetBalanceSummarySwaggerRequest'
+            example:
+              request:
+                patientId: '381620'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.PatientBalanceSummaryResult'
+              example:
+                patientId: '381620'
+                patientBalance: 460
+                unpostedPayments: 343
+                totalCharges: 252
+                totalPayments: 113
+                totalAdjustments: 440
+                totalWithheld: 416
+                insuranceBalance: 297
+                custom:
+                  hacking: Generic Steel Chicken
+                  ib: Viaduct
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceGetBalanceSummary
+      x-operation-id-source: derived
+  /LKPatientBalance/GetBillingAlert:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: GetBillingAlert
+      description: 'The GetBillingAlert endpoint returns a billing alert text that provides important billing information or notifications.
+
+
+        This endpoint is only supported in select EHRs.'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetBillingAlertSwaggerRequest'
+            example:
+              request:
+                patientId: '170124'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetBillingAlertResult'
+              example:
+                billingAlertText: Patient has an outstanding balance exceeding $500
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceGetBillingAlert
+      x-operation-id-source: derived
+  /LKPatientBalance/GetPatientCollectionBuckets:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: GetPatientCollectionBuckets
+      description: The GetPatientCollectionBuckets endpoint returns a list of collection buckets for a patient, including patient ID, bucket ID, and the amount.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetPatientCollectionBucketsSwaggerRequest'
+            example:
+              request:
+                patientId: '144267'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetPatientCollectionBucketsResult'
+              example:
+                patientId: '144267'
+                buckets:
+                - bucketId: '122'
+                  amount: 50
+                - bucketId: '123'
+                  amount: 25
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceGetPatientCollectionBuckets
+      x-operation-id-source: derived
+  /LKPatientBalance/NextSearchClaims:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: NextSearchClaims
+      description: 'The NextSearchClaims endpoint allows to retrieve the next set of claims in a paginated sequence. It is typically used after the initial request to BeginSearchClaims, which provides the first batch of claims along with a pagination token.
+
+
+        By passing this token to NextSearchClaims, user can continue fetching subsequent pages of claims until all records are retrieved.'
+      requestBody:
+        description: Request message
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.NextSearchClaimsSwaggerRequest'
+            example:
+              token:
+                nextToken: eyJSZXF1ZXN0SWQiOiJyV0lDdWp2d01CaEpvOXRaM2pON2U0QT09IiwiVG9rZW4iOiJwMHZwMEQ2OVZHRitEWHdvRExfSFUwTlE9PSJ9
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.NextSearchClaimsPagedResponse'
+              example:
+                claims:
+                - claimId: '202512345'
+                  patient:
+                    id: '104201'
+                  encounterId: '20251201'
+                  ticketNumber: '202512'
+                  claimReferenceNumber: '202512345'
+                  guarantor:
+                    id: '221001'
+                  billType: '131'
+                  totalAmount: 500
+                  claimBilledDate: '2025-11-15T00:00:00.112+00:00'
+                  claimTransmittedDate: '2025-11-20T00:00:00.112+00:00'
+                  claimDenialDate: '2025-10-15T00:00:00.112+00:00'
+                  claimDenialLevel: Level2
+                  dateTimeRecorded: '2025-01-18T00:00:00.112+00:00'
+                  serviceDate: '2025-11-15T00:00:00.112+00:00'
+                  claimStatus: Denied
+                  claimType: Professional
+                  facilityId: '976187'
+                  filingMethod: Electronic
+                  locationId: '431321'
+                  placeOfServiceCode: '11'
+                  revenueCode: '045023'
+                  billingProvider:
+                    id: '565267'
+                    taxIdentificationNumber: '3456789'
+                  renderingProvider:
+                    id: '200890'
+                  insurances:
+                  - code: '874001'
+                    payerId: '549123'
+                    priority: '1'
+                    name: Acme Health Insurance
+                    policyNumber: '202512345'
+                  - code: '123002'
+                    payerId: '782656'
+                    priority: '2'
+                    name: Backup Insurance Co.
+                    policyNumber: '202512678'
+                  custom:
+                    sourceSystem: EHR-X
+                    notes: Balance from Q4 2024
+                  diagnoses:
+                  - text: Diabetes
+                    coding:
+                    - system: ICD-9
+                      code: '250.00'
+                      display: Diabetes mellitus without mention of complication, type II or unspecified type, not stated as uncontrolled
+                    - system: ICD-10
+                      code: E11.9
+                      display: Type 2 diabetes mellitus without complications
+                  procedures:
+                  - code: '99213'
+                    units: 1
+                    modifiers:
+                    - '25'
+                    icD10:
+                    - E11.9
+                    typeOfService: Office Visit
+                nextToken: eyJSZXF1ZXN0SWQiOiJyV0lDdWp2d01CaEpvOXRaM2pON2U0QT09IiwiVG9rZW4iOiJwMHZwMEQ2OVZHRitEWHdvRExfSFUwTlE9PSJ9
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceNextSearchClaims
+      x-operation-id-source: derived
+  /LKPatientBalance/UpdateBillingAlert:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: UpdateBillingAlert
+      description: Update a billing alert. Only supported in select EHRs.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.UpdateBillingAlertSwaggerRequest'
+            example:
+              request:
+                patientId: '528461'
+                billingAlertText: Patient is on a payment plan. Review before further billing
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.UpdateBillingAlertResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceUpdateBillingAlert
+      x-operation-id-source: derived
+  /LKPatientBalance/UpdatePatientCollectionBucket:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: UpdatePatientCollectionBucket
+      description: Move a patient from one collection bucket to another
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.UpdatePatientCollectionBucketSwaggerRequest'
+            example:
+              request:
+                patientId: '144267'
+                targetBucketId: '470206'
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.UpdatePatientCollectionBucketResult'
+              example: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceUpdatePatientCollectionBucket
+      x-operation-id-source: derived
+  /LKPatientBalance/VoidPayment:
+    post:
+      tags:
+      - LKPatientBalance
+      summary: VoidPayment
+      description: Void a payment based on patient id and payment id
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.VoidPaymentSwaggerRequest'
+            example:
+              request:
+                patientId: '838620'
+                referenceId: '736189'
+                note: Duplicate payment, void requested
+                paymentId: '151892'
+                paymentDate: '2019-01-01T00:00:00+00:00'
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.VoidPaymentResult'
+              example:
+                transactionId: '718246'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKPatientBalanceVoidPayment
+      x-operation-id-source: derived
+components:
+  schemas:
+    LKCloudConnect.Contracts.PatientBalance.ClaimProcedures:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Human-readable description of the procedures.
+        units:
+          type: number
+          description: Quantity of services performed for the procedure.
+          format: double
+        modifiers:
+          type: array
+          items:
+            type: string
+          description: Procedure modifiers that provide additional context.
+        icD10:
+          type: array
+          items:
+            type: string
+          description: Linked diagnosis codes (ICD‑10) that establish medical necessity for the procedure.
+        typeOfService:
+          type: string
+          description: Service category for the procedure.
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.UpdateBillingAlertResponse:
+      type: object
+      additionalProperties: false
+      description: result data for UpdateBillingAlert
+    LKCloudConnect.Contracts.PatientBalance.UpdatePatientCollectionBucketRequest:
+      required:
+      - patientId
+      - targetBucketId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient unique ID
+        targetBucketId:
+          minLength: 1
+          type: string
+          description: The target collection bucket unique ID.
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Request object to get a patients collection buckets
+    LKCloudConnect.Contracts.PatientBalance.GetBillingAlertResult:
+      type: object
+      properties:
+        billingAlertText:
+          type: string
+          description: Billing alert text
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Response data for GetBillingAlert API operation
+    LKCloudConnect.Contracts.PatientBalance.Account:
+      type: object
+      properties:
+        guarantorId:
+          type: string
+          description: Id of the guarantor.
+        accountId:
+          type: string
+          description: Id of the account
+        balance:
+          type: number
+          description: Balance of the guarantor or patient.
+          format: double
+        totalBalance:
+          type: number
+          description: Total balance for the account, including pre-adjudication balance, patient balance, and insurance balance.
+          format: double
+        patients:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.AccountPatient'
+          description: List of patients for this guarantor.
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Account Balance class
+    LKCloudConnect.Contracts.PatientBalance.ClaimPatient:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the patient
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetBillingAlertSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetBillingAlertRequest'
+          description: Request object
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.GetAccountResponse:
+      type: object
+      properties:
+        account:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.Account'
+          description: Account meeting search criteria.
+      additionalProperties: false
+      description: Response object for get account request.
+    LKCloudConnect.Contracts.PatientBalance.BilledInsurance:
+      type: object
+      properties:
+        payerId:
+          type: string
+          description: Unique identifier of the billed insurance payer.
+        insuranceName:
+          type: string
+          description: Name of the insurance company billed for the claim.
+        insuranceCode:
+          type: string
+          description: Internal or external code representing the insurance plan.
+        priority:
+          enum:
+          - Unspecified
+          - Primary
+          - Secondary
+          - Tertiary
+          - None
+          type: string
+          description: Billing priority of the insurance.
+        insuranceBalance:
+          type: number
+          description: The remaining balance owed by that specific insurance payer for the service.
+          format: double
+        insurancePaid:
+          type: number
+          description: The amount paid by a specific insurance payer for the service.
+          format: double
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.ApplyPaymentSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ApplyPaymentRequest'
+          description: Request object
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.GetPatientCollectionBucketsResult:
+      type: object
+      properties:
+        patientId:
+          type: string
+          description: Patient unique ID
+        buckets:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.PatientCollectionBucket'
+          description: Collection buckets the patient is assigned to
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Get patient collection buckets response data
+    LKCloudConnect.Contracts.PatientBalance.UpdatePatientCollectionBucketResult:
+      type: object
+      additionalProperties: false
+      description: Update patient collection bucket result data
+    LKCloudConnect.Contracts.PatientBalance.UpdateBillingAlertRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient id
+        billingAlertText:
+          type: string
+          description: Text content of the billing alert
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Request parameters for UpdateBillingAlert
+    LKCloudConnect.Contracts.PatientBalance.ClaimGuarantor:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the guarantor
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.Batch:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of batch
+        date:
+          type: string
+          description: Date of batch (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.GetPatientCollectionBucketsRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Id of patient to get collection buckets for.
+      additionalProperties: false
+      description: Request object to get a patients collection buckets
+    LKCloudConnect.Contracts.Coding:
+      type: object
+      properties:
+        system:
+          type: string
+          description: Code system id
+        code:
+          type: string
+          description: Code
+        display:
+          type: string
+          description: Display text
+      additionalProperties: false
+      description: Detail about a code, including the code, the display, and the code system id
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.VoidPaymentSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.VoidPaymentRequest'
+          description: Request object
+      additionalProperties: false
+    LKCloudConnect.Contracts.DateRange:
+      required:
+      - end
+      - start
+      type: object
+      properties:
+        start:
+          type: string
+          description: Date range start. (DateTimeOffset) e.g. 2019-01-01T00:00:00.112+00:00
+          format: date-time
+          example: '2001-01-01T13:00:00.112+00:00'
+        end:
+          type: string
+          description: Date range end. (DateTimeOffset) e.g. 2019-01-01T00:00:00.112+00:00
+          format: date-time
+          example: '2001-12-31T13:00:00.112+00:00'
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.Service:
+      type: object
+      properties:
+        claimId:
+          type: string
+          description: Service claim id
+        id:
+          type: string
+          description: Service id
+        name:
+          type: string
+          description: Service name
+        code:
+          type: string
+          description: Service code
+        description:
+          type: string
+          description: Service description
+        units:
+          type: integer
+          description: Service units
+          format: int32
+          example: 1
+        adjustment:
+          type: number
+          description: Service adjustment amount
+          format: double
+        refund:
+          type: number
+          description: Service refund amount
+          format: double
+        billedAmount:
+          type: number
+          description: Service billed amount
+          format: double
+        patientBalance:
+          type: number
+          description: Service patient outstanding balance
+          format: double
+        patientPaid:
+          type: number
+          description: How much the patient has paid
+          format: double
+        insuranceBalance:
+          type: number
+          description: The aggregate remaining balance across all billed insurances for that service.
+          format: double
+        insurancePaid:
+          type: number
+          description: The total insurance payments received across all billed insurances for that service.
+          format: double
+        modifiers:
+          type: array
+          items:
+            type: string
+          description: Service CPT modifier codes
+        diagnoses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.CodeableConcept'
+          description: Applicable diagnoses for the product or service
+        billedInsurances:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.BilledInsurance'
+          description: The billed insurance details are included only when the IncludeInsuranceDetail field in the request is set to true; otherwise, this will return as a null object.
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.GetBalanceResult:
+      type: object
+      properties:
+        patients:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetPatientBalanceResult'
+          description: List of patient balances, which will only ever contain a single patient
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.Payment:
+      required:
+      - amount
+      - date
+      - postKind
+      type: object
+      properties:
+        referenceId:
+          type: string
+          description: Reference id of the payment
+        postKind:
+          enum:
+          - Copay
+          - Deposit
+          - Balance
+          type: string
+          description: Payment post kind
+        visitId:
+          type: string
+          description: Optional visit id associated with payment
+        amount:
+          type: number
+          description: Amount of payment
+          format: double
+        note:
+          type: string
+          description: Payment note
+        batch:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.Batch'
+          description: Payment batch, optionally specify which batch to attach the payment to. If not provided, defaults to today's payment batch.
+        date:
+          type: string
+          description: Date of payment. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        facilityId:
+          type: string
+          description: The facility id associated with this payment
+        providerId:
+          type: string
+          description: The provider associated with this payment
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.ClaimInsurance:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Insurance code.
+        payerId:
+          type: string
+          description: Payer identifier for the insurance.
+        priority:
+          type: string
+          description: Priority of the insurance (e.g., 1 for primary).
+        name:
+          type: string
+          description: Name of the insurance provider.
+        policyNumber:
+          type: string
+          description: Policy number of the insurance.
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.GetBalanceRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient id for the GetBalance request
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.DateRange'
+          description: Search for items with a claim date-of-service in this range
+        lastUpdated:
+          type: string
+          description: Balance last updated date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2001-01-01T13:00:00+00:00'
+        includeInsuranceDetail:
+          type: boolean
+          description: Specifies whether insurance details are included in the response. By default, this value is false. To include insurance details, set the flag to true.
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetAccountSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetAccountRequest'
+          description: Request object
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.NextSearchClaimsSwaggerRequest:
+      type: object
+      properties:
+        token:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PagedResult'
+          description: Next page token
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.BeginSearchClaimsPagedRequest:
+      type: object
+      properties:
+        patientId:
+          type: string
+          description: Patient identifier used to filter claims.
+        claimId:
+          type: string
+          description: Claim identifier used to filter claims.
+        serviceDateRange:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.DateRange'
+          description: Date range for filtering claims based on service dates.
+        claimDateRange:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.DateRange'
+          description: Date range for filtering claims based on claim dates.
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+        limit:
+          type: integer
+          description: Maximum number of results per page
+          format: int32
+      additionalProperties: false
+      description: 'Represents a paged request to search for claims with filters such as patient ID, claim ID, date ranges, and custom parameters.
+
+        At least one parameter is required to perform a search.'
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.BeginSearchClaimsSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.BeginSearchClaimsPagedRequest'
+          description: 'Represents a paged request to search for claims with filters such as patient ID, claim ID, date ranges, and custom parameters.
+
+            At least one parameter is required to perform a search.'
+      additionalProperties: false
+    LKCloudConnect.Contracts.PagedResult:
+      type: object
+      properties:
+        nextToken:
+          type: string
+          description: The token needed for the next API call
+      additionalProperties: false
+      description: PagesResult object containing the next token string
+    LKCloudConnect.Contracts.PatientBalance.PaymentMethod:
+      required:
+      - creditCardKind
+      - method
+      type: object
+      properties:
+        method:
+          enum:
+          - CreditCard
+          - Check
+          - ElectronicCheck
+          - Cash
+          - Other
+          type: string
+          description: Method of payment
+        creditCardKind:
+          enum:
+          - AmericanExpress
+          - Visa
+          - MasterCard
+          - Discover
+          - Other
+          type: string
+          description: The kind of credit card
+        detail:
+          type: string
+          description: Optional detail transaction free text
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.Patient:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Patient first name
+        lastName:
+          type: string
+          description: Patient last name
+        id:
+          type: string
+          description: Id of the patient
+        guarantor:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.Guarantor'
+          description: Guarantor for the patient
+        accountId:
+          type: string
+          description: Patient account id
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetBalanceSummarySwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetBalanceSummaryRequest'
+          description: Request object
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.ClaimData:
+      type: object
+      properties:
+        claimId:
+          type: string
+          description: Unique identifier of the claim.
+        patient:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ClaimPatient'
+          description: Patient details associated with the claim.
+        encounterId:
+          type: string
+          description: Identifier of the encounter related to the claim.
+        ticketNumber:
+          type: string
+          description: Ticket number assigned to the claim.
+        claimReferenceNumber:
+          type: string
+          description: Reference number used to track the claim.
+        guarantor:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ClaimGuarantor'
+          description: Guarantor details responsible for the claim.
+        billType:
+          type: string
+          description: Type of bill associated with the claim.
+        totalAmount:
+          type: number
+          description: Total amount of the claim.
+          format: double
+        claimBilledDate:
+          type: string
+          description: Date when the claim was billed. (DateTimeOffset) e.g. 2019-01-01T00:00:00.112+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00.112+00:00'
+        claimTransmittedDate:
+          type: string
+          description: Date when the claim was transmitted. (DateTimeOffset) e.g. 2019-01-01T00:00:00.112+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00.112+00:00'
+        claimDenialDate:
+          type: string
+          description: Date when the claim was denied. (DateTimeOffset) e.g. 2019-01-01T00:00:00.112+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00.112+00:00'
+        claimDenialLevel:
+          type: string
+          description: Level of denial for the claim.
+        dateTimeRecorded:
+          type: string
+          description: Date and time when the claim was recorded. (DateTimeOffset) e.g. 2019-01-01T00:00:00.112+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00.112+00:00'
+        serviceDate:
+          type: string
+          description: Service date for the claim. (DateTimeOffset) e.g. 2019-01-01T00:00:00.112+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00.112+00:00'
+        claimStatus:
+          type: string
+          description: Current status of the claim.
+        claimType:
+          type: string
+          description: Type of claim (Professional, Institutional, Dental).
+        facilityId:
+          type: string
+          description: Identifier for the facility associated with the claim.
+        filingMethod:
+          type: string
+          description: Filing method used (Electronic or Paper).
+        locationId:
+          type: string
+          description: Identifier for the location associated with the claim.
+        placeOfServiceCode:
+          type: string
+          description: Place of service code for the claim.
+        revenueCode:
+          type: string
+          description: Revenue code associated with the claim.
+        billingProvider:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ClaimBillingProvider'
+          description: Billing provider details.
+        renderingProvider:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ClaimRenderingProvider'
+          description: Rendering provider details.
+        insurances:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ClaimInsurance'
+          description: List of insurance details associated with the claim.
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Custom system-specific data for special cases.
+        diagnoses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ClaimDiagnoses'
+          description: List of diagnosis codes relevant to the claim.
+        procedures:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ClaimProcedures'
+          description: List of procedure codes relevant to the claim.
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetBalanceSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetBalanceRequest'
+          description: Request object
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.ApplyPaymentResult:
+      type: object
+      properties:
+        referenceId:
+          type: string
+          description: Payment reference id
+        paymentId:
+          type: string
+          description: Payment id created in target system
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.GetPatientBalanceResult:
+      type: object
+      properties:
+        patient:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.Patient'
+          description: Patient these balances belong to
+        totalPatientBalance:
+          type: number
+          description: Total patient balance amount, excluding insurance balance amount.
+          format: double
+        unposted:
+          type: number
+          description: Total amount the patient has paid which has not been designated as a copay or balance payment
+          format: double
+        encounters:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.Encounter'
+          description: List of encounter and claim balance data
+        patientAccountBalance:
+          type: number
+          description: Total outstanding balance on the patient account
+          format: double
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.ClaimRenderingProvider:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the provider.
+      additionalProperties: false
+    LKCloudConnect.Contracts.LKCloudConnectFault:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Target system credentials are invalid
+        detail:
+          type: string
+          description: Additional error detail
+        recoverySteps:
+          type: string
+          description: Error recovery steps
+          example: Contact support to update credentials
+        handle:
+          type: string
+          description: Our unique message id, you should provide this when you open a support ticket
+          example: 3e4d0b7f-e3fa-4462-9cc3-860be812d696
+        errorCode:
+          type: string
+          description: Error code, please see error code section of the guide for details
+          example: Unauthorized
+        type:
+          type: string
+          description: Error type
+      additionalProperties: false
+      description: LKCloud Connect Fault
+    LKCloudConnect.Contracts.PatientBalance.GetBalanceSummaryRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient ID to query
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.GetAccountRequest:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: Id of account to get balance for. Mutually exclusive with PatientId.
+        patientId:
+          type: string
+          description: Id of patient to get the encompassing account for. Mutually exclusive with AccountId.
+      additionalProperties: false
+      description: Request object to get a guarantor balance.
+    LKCloudConnect.Contracts.PatientBalance.VoidPaymentRequest:
+      required:
+      - patientId
+      - paymentId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient id of the payment to void
+        referenceId:
+          type: string
+          description: Reference id of the payment to void
+        note:
+          type: string
+          description: Note with voided payment comments
+        paymentId:
+          minLength: 1
+          type: string
+          description: Payment id of the payment to void
+        paymentDate:
+          type: string
+          description: Date of payment to void, can help improve performance. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.PatientCollectionBucket:
+      type: object
+      properties:
+        bucketId:
+          type: string
+          description: The collection bucket ID. Cross-reference with LKMasterList/GetCollectionBuckets
+        amount:
+          type: number
+          description: The patient owed amount in this bucket
+          format: double
+      additionalProperties: false
+      description: Patient bucket data
+    LKCloudConnect.Contracts.PatientBalance.NextSearchClaimsPagedResponse:
+      type: object
+      properties:
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.ClaimData'
+          description: Claims returned for query
+        nextToken:
+          type: string
+          description: The token needed for the next API call
+      additionalProperties: false
+      description: Response for paged claims search
+    LKCloudConnect.Contracts.PatientBalance.Encounter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Encounter id
+        appointmentBalance:
+          type: number
+          description: Total charge billed to insurance for the appointment associated with this encounter
+          format: double
+        patientBalance:
+          type: number
+          description: Total outstanding patient balance for the encounter
+          format: double
+        copay:
+          type: number
+          description: Copay for encounter
+          format: double
+        adjustment:
+          type: number
+          description: Total adjustments for encounter
+          format: double
+        insuranceStatus:
+          enum:
+          - Created
+          - Billed
+          - FollowUp
+          - Hold
+          - Closed
+          - Writeoff
+          type: string
+          description: Insurance billing status
+        patientBillingStatus:
+          enum:
+          - Created
+          - Billed
+          - FollowUp
+          - Hold
+          - Closed
+          - Writeoff
+          type: string
+          description: Patient billing status
+        date:
+          type: string
+          description: Datetime of encounter. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        firstBilledDate:
+          type: string
+          description: First billed date. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        patientResponsibleDate:
+          type: string
+          description: Date patient is responsible for payment. (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        diagnoses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.CodeableConcept'
+          description: Pertinent Diagnoses codes
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.Service'
+          description: Services that were provided as part of this encounter
+        guarantor:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.Guarantor'
+          description: Encounter guarantor
+        printStatement:
+          type: boolean
+          description: Encounter print statement
+        isVoided:
+          type: boolean
+          description: Was the encounter payment voided or not
+        facilityId:
+          type: string
+          description: Encounter facility id
+        physicianId:
+          type: string
+          description: Encounter physician id
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: System specific details for a patients encounter.
+    LKCloudConnect.Contracts.PatientBalance.Guarantor:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the guarantor
+        firstName:
+          type: string
+          description: Guarantor first name
+        lastName:
+          type: string
+          description: Guarantor last name
+      additionalProperties: false
+    LKCloudConnect.Contracts.CodeableConcept:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Coding'
+          description: Code system detail
+      additionalProperties: false
+      description: CodeableConcept
+    LKCloudConnect.Contracts.PatientBalance.ClaimBillingProvider:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the provider.
+        taxIdentificationNumber:
+          type: string
+          description: Tax identification number of the provider.
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.UpdateBillingAlertSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.UpdateBillingAlertRequest'
+          description: Request object
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.GetPatientCollectionBucketsSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.GetPatientCollectionBucketsRequest'
+          description: Request object
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.PatientBalance.UpdatePatientCollectionBucketSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.UpdatePatientCollectionBucketRequest'
+          description: Request object
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.ApplyPaymentRequest:
+      required:
+      - patientId
+      - payment
+      - paymentMethod
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient id this payment is sent for
+        paymentMethod:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.PaymentMethod'
+          description: Payment method ie how the payment was made
+        payment:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.Payment'
+          description: Payment data object - Required
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.AccountPatient:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the patient.
+        balance:
+          type: number
+          description: Patient's individual balance for the guarantor.
+          format: double
+      additionalProperties: false
+      description: Patient Balance for Account.
+    LKCloudConnect.Contracts.PatientBalance.VoidPaymentResult:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: EHR transaction ID for the void payment record. Not all EHRs support this.
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.DiagnosesCoding:
+      type: object
+      properties:
+        system:
+          type: string
+          description: Identifier of the code system.
+        code:
+          type: string
+          description: Identifier of the code.
+        display:
+          type: string
+          description: Display-friendly text for the code.
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.PatientBalanceSummaryResult:
+      type: object
+      properties:
+        patientId:
+          type: string
+          description: Patient id
+        patientBalance:
+          type: number
+          description: Total patient balance amount
+          format: double
+        unpostedPayments:
+          type: number
+          description: Total amount the patient has paid which has not been designated as a copay or balance payment
+          format: double
+        totalCharges:
+          type: number
+          description: Total patient charges
+          format: double
+        totalPayments:
+          type: number
+          description: Total patient payments
+          format: double
+        totalAdjustments:
+          type: number
+          description: Total adjustments
+          format: double
+        totalWithheld:
+          type: number
+          description: Total withheld
+          format: double
+        insuranceBalance:
+          type: number
+          description: Total insurance balance
+          format: double
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.PatientBalance.GetBillingAlertRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient id
+      additionalProperties: false
+      description: Request parameters for GetBillingAlert API operation
+    LKCloudConnect.Contracts.PatientBalance.ClaimDiagnoses:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Human-readable description of the diagnosis.
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.PatientBalance.DiagnosesCoding'
+          description: Code system details for the diagnosis.
+      additionalProperties: false
+x-provenance:
+  method: searched
+  source: https://lkcloud-api.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-beginsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-editappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentslot.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getfacilities.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getopenappointmentslots.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getphysicians.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getscheduleappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-nextsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-scheduleappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getadvancedirectives.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getbridgeinfo.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getguarantor.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatient.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientalerts.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientsummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getreferrals.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-smartsearch.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-getchargestatus.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-sendcharge.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-createdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocumenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getpatientdocuments.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-createemployer.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcodeset.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemployers.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemploymentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getencounterreasons.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getethnicities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getgenderidentities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getinsurances.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getlanguages.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getmaritalstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getraces.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getrelationships.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getsexualorientations.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpractitioners.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchresources.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-applypayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-beginsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getaccount.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalance.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalancesummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getpatientcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-nextsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatebillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatepatientcollectionbucket.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-voidpayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-begingetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-closeencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-createencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getallergies.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getdiagnoses.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotebody.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotes.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounters.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getfamilyhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getimmunizations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getlabresults.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedications.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getophthalmologyobservations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getproblems.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getprocedures.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsocialhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsurgicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitals.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitalsdefinition.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-nextgetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-postvitals.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createpatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createreferral.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updateadvancedirective.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatereferral.md
+  merge:
+    pages: 85
+    deduped: 158
+    conflicts_kept_first: 0

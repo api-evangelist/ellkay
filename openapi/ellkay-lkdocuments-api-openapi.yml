@@ -1,0 +1,693 @@
+openapi: 3.2.0
+info:
+  title: LKCloud LK Documents API
+  description: Ellkay Api documentation 6.6 Ellkay api
+  contact:
+    name: Ellkay
+    url: https://ellkay.com
+    email: ''
+  version: '6.6'
+  x-logo:
+    url: ./logo.png
+    altText: Ellkay Logo
+servers:
+- url: https://services.lkcloud.com
+  description: prod url
+tags:
+- name: LKDocuments
+  description: LKDocuments endpoints
+paths:
+  /LKDocuments/CreateDocument:
+    post:
+      tags:
+      - LKDocuments
+      summary: CreateDocument
+      description: Creates a document in the target system. The LKDocument API supports a maximum document body size of 10,485,760 bytes (10 MB).
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKDocuments.CreateDocumentSwaggerRequest'
+            example:
+              request:
+                name: PatientDocument
+                date: '2023-08-01T00:00:00+00:00'
+                documentTypeId: '42'
+                patientId: '678956'
+                providerId: '122'
+                body: AA==
+                fileFormat: pdf
+                encounterId: '892'
+                facilityId: '3'
+                assignedTo:
+                  id: '122'
+                needsReview: true
+                metadata:
+                - name: Source
+                  value: Patient
+                - name: Priority
+                  value: High
+                custom:
+                  documentType: DischargeSummary
+                  reviewedBy: Dr. Patel
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.CreateDocumentResult'
+              example:
+                id: '25'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKDocumentsCreateDocument
+      x-operation-id-source: derived
+  /LKDocuments/GetDocument:
+    post:
+      tags:
+      - LKDocuments
+      summary: GetDocument
+      description: The GetDocument endpoint retrieves a document for a patient, including the document content, patient ID, file format, pages, and facility ID.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKDocuments.GetDocumentSwaggerRequest'
+            example:
+              request:
+                patientId: '678956'
+                patientDocumentId: '2'
+                pageId: '1'
+                metadata: null
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.GetDocumentResult'
+              example:
+                document: AA==
+                patientId: '678956'
+                fileFormat: pdf
+                pages:
+                - pageId: '1'
+                facilityId: '3'
+                needsReview: true
+                encounterId: '892'
+                custom:
+                  documentType: DischargeSummary
+                  reviewedBy: Dr. Patel
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKDocumentsGetDocument
+      x-operation-id-source: derived
+  /LKDocuments/GetDocumentTypes:
+    post:
+      tags:
+      - LKDocuments
+      summary: GetDocumentTypes
+      description: The GetDocumentTypes endpoint returns a list of document types, each containing an ID and name to categorize different types of documents.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.DocumentType'
+              example:
+              - id: '1'
+                name: Lab Documents
+              - id: '2'
+                name: Patient Documents
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKDocumentsGetDocumentTypes
+      x-operation-id-source: derived
+  /LKDocuments/GetPatientDocuments:
+    post:
+      tags:
+      - LKDocuments
+      summary: GetPatientDocuments
+      description: 'The GetPatientDocuments endpoint provides a list of documents associated with a patient, including details such as document ID, name, date, type, and provider.
+
+
+        You can retrieve document content using `GetDocument`.'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKDocuments.GetPatientDocumentsSwaggerRequest'
+            example:
+              request:
+                patientId: '678956'
+                dateRange:
+                  startDate: '2022-08-25T00:00:00+00:00'
+                  endDate: '2022-09-25T00:00:00+00:00'
+                documentTypes:
+                - Lab Documents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.GetPatientDocumentResult'
+              example:
+                patientDocuments:
+                - patientId: '678956'
+                  id: '126745'
+                  name: Payment Agreement
+                  date: '2022-08-25T00:00:00+00:00'
+                  documentType:
+                    id: '2'
+                    name: Patient Documents
+                  fileFormat: pdf
+                  provider:
+                    id: '122'
+                    name: James, Teri
+                  assignedTo:
+                    id: '122'
+                  encounterId: '892'
+                  custom:
+                    documentType: DischargeSummary
+                    reviewedBy: Dr. Patel
+                  status:
+                    code: Amended
+                    source: Updated
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKDocumentsGetPatientDocuments
+      x-operation-id-source: derived
+components:
+  schemas:
+    LKCloudConnect.Contracts.Documents.Provider:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Physician id
+        name:
+          type: string
+          description: Physician name
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.CreateDocumentRequest:
+      required:
+      - documentTypeId
+      - name
+      - patientId
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: The name of Document
+        date:
+          type: string
+          description: The created date of Document (DateTimeOffset) eg 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        documentTypeId:
+          minLength: 1
+          type: string
+          description: Document type id (ref GetDocumentTypes)
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient id
+        providerId:
+          type: string
+          description: Provider id
+        body:
+          type: string
+          description: Document body - base64 encoded string
+          format: byte
+        fileFormat:
+          type: string
+          description: Document file format e.g. Png, Pdf, Json
+        encounterId:
+          type: string
+          description: Encounter Id
+        facilityId:
+          type: string
+          description: Facilty Id
+        assignedTo:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.DocumentAssigned'
+          description: The practicioner the document should be assigned to for review
+        needsReview:
+          type: boolean
+          description: The review status of the document - true if needs review, false otherwise
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.DocumentMetadata'
+          description: Meta data for create document request
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.DocumentAssigned:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the user to assign the document to. Use SearchPracticioner
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.DateRange:
+      required:
+      - endDate
+      - startDate
+      type: object
+      properties:
+        startDate:
+          type: string
+          description: 'Start date (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Equivalent to Start in the DateRange of other LKCloud APIs'
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        endDate:
+          type: string
+          description: 'End date (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+
+            Equivalent to End in the DateRange of other LKCloud APIs'
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.CreateDocumentResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Created document id from target system
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.GetDocumentResult:
+      type: object
+      properties:
+        document:
+          type: string
+          description: Document binary content - base64 encoded string
+          format: byte
+        patientId:
+          type: string
+          description: Document patient id
+        fileFormat:
+          type: string
+          description: 'Document file format e.g. Png, Pdf, Json
+
+            `Unknown` `Pdf` `Docx` `Doc` `Jpg` `Tif` `Png` `Html` `Xml` `Json` `Text` `Rtf`'
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.DocumentPage'
+          description: Document pages, null if document is not divided into pages in the target system
+        facilityId:
+          type: string
+          description: Id of Facility where document was created.
+          example: Facility_Id
+        needsReview:
+          type: boolean
+          description: The review status of the document - true if needs review, false otherwise
+        encounterId:
+          type: string
+          description: Document linked to a patient's clinical visit or encounter
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.DocumentStatus:
+      type: object
+      properties:
+        code:
+          enum:
+          - Unknown
+          - Registered
+          - Partial
+          - Preliminary
+          - Final
+          - Amended
+          - Corrected
+          - Appended
+          - Cancelled
+          - EnteredInError
+          - Deprecated
+          type: string
+          description: ELLKAY defined standardized code representing the availability and validity status of the patient document.
+        source:
+          type: string
+          description: Original document status value as received from the source system.
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKDocuments.GetPatientDocumentsSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.GetPatientDocumentRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.DocumentType:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Document type id
+        name:
+          type: string
+          description: Document type name
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.GetPatientDocumentResult:
+      type: object
+      properties:
+        patientDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.PatientDocument'
+          description: Patient documents
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKDocuments.CreateDocumentSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.CreateDocumentRequest'
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKDocuments.GetDocumentSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.GetDocumentRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.LKCloudConnectFault:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Target system credentials are invalid
+        detail:
+          type: string
+          description: Additional error detail
+        recoverySteps:
+          type: string
+          description: Error recovery steps
+          example: Contact support to update credentials
+        handle:
+          type: string
+          description: Our unique message id, you should provide this when you open a support ticket
+          example: 3e4d0b7f-e3fa-4462-9cc3-860be812d696
+        errorCode:
+          type: string
+          description: Error code, please see error code section of the guide for details
+          example: Unauthorized
+        type:
+          type: string
+          description: Error type
+      additionalProperties: false
+      description: LKCloud Connect Fault
+    LKCloudConnect.Contracts.Documents.DocumentMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name
+        value:
+          type: string
+          description: Value
+      additionalProperties: false
+      description: Meta data for create document request
+    LKCloudConnect.Contracts.Documents.GetDocumentRequest:
+      required:
+      - patientDocumentId
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient id
+        patientDocumentId:
+          minLength: 1
+          type: string
+          description: Document id
+        pageId:
+          type: string
+          description: 'Document page id
+
+            Required for documents with multiple pages'
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.DocumentMetadata'
+          description: Meta data for GetDocument request
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.GetPatientDocumentRequest:
+      required:
+      - patientId
+      type: object
+      properties:
+        patientId:
+          minLength: 1
+          type: string
+          description: Patient id
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.DateRange'
+          description: Date range
+        documentTypes:
+          type: array
+          items:
+            type: string
+          description: Document types filter (ref GetDocumentTypes id if available)
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.DocumentPage:
+      type: object
+      properties:
+        pageId:
+          type: string
+          description: Document page id
+      additionalProperties: false
+    LKCloudConnect.Contracts.Documents.PatientDocument:
+      type: object
+      properties:
+        patientId:
+          type: string
+          description: Document patient id
+        id:
+          type: string
+          description: Document id
+        name:
+          type: string
+          description: Document name
+        date:
+          type: string
+          description: Document date (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        documentType:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.DocumentType'
+          description: Document type
+        fileFormat:
+          type: string
+          description: Document file format e.g. Png, Pdf, Json
+        provider:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.Provider'
+          description: Document physician
+        assignedTo:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.DocumentAssigned'
+          description: The practicioner the document should be assigned to for review
+        encounterId:
+          type: string
+          description: Document linked to a patient's clinical visit or encounter
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+        status:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Documents.DocumentStatus'
+          description: Patient document status object representing the standardized document state along with the original status value received from the source.
+      additionalProperties: false
+x-provenance:
+  method: searched
+  source: https://lkcloud-api.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-beginsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-editappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentslot.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getfacilities.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getopenappointmentslots.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getphysicians.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getscheduleappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-nextsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-scheduleappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getadvancedirectives.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getbridgeinfo.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getguarantor.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatient.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientalerts.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientsummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getreferrals.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-smartsearch.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-getchargestatus.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-sendcharge.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-createdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocumenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getpatientdocuments.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-createemployer.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcodeset.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemployers.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemploymentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getencounterreasons.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getethnicities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getgenderidentities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getinsurances.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getlanguages.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getmaritalstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getraces.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getrelationships.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getsexualorientations.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpractitioners.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchresources.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-applypayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-beginsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getaccount.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalance.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalancesummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getpatientcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-nextsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatebillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatepatientcollectionbucket.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-voidpayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-begingetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-closeencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-createencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getallergies.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getdiagnoses.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotebody.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotes.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounters.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getfamilyhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getimmunizations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getlabresults.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedications.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getophthalmologyobservations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getproblems.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getprocedures.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsocialhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsurgicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitals.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitalsdefinition.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-nextgetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-postvitals.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createpatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createreferral.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updateadvancedirective.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatereferral.md
+  merge:
+    pages: 85
+    deduped: 158
+    conflicts_kept_first: 0

@@ -150,9 +150,11 @@ common:
 
 apis:
 - name: LKCloud Interop API
-  description: Single-endpoint healthcare interoperability API exposing proprietary LK* operations (appointments, patient bridge/search, documents,
-    charges, patient balance, master lists) that bi-directionally connect applications to hundreds of EHR/PM data sources. JSON over HTTPS, invoked
-    as POST operations; OAuth 2.0 Bearer + SiteServiceKey.
+  description: >-
+    Single-endpoint healthcare interoperability API exposing proprietary LK* operations (appointments,
+    patient bridge/search, documents, charges, patient balance, master lists) that bi-directionally connect
+    applications to hundreds of EHR/PM data sources. JSON over HTTPS, invoked as POST operations; OAuth
+    2.0 Bearer + SiteServiceKey.
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
   tags:
@@ -166,8 +168,10 @@ apis:
     url: https://lkcloud-api.readme.io/reference
   aid: ellkay:lkcloud-interop-api
 - name: LKCloud FHIR R4 API
-  description: HL7 FHIR R4 RESTful API (read/search/create/update/delete across R4 resources) over the ELLKAY interoperability platform, with
-    a published CapabilityStatement. OAuth 2.0 Bearer + SiteServiceKey; errors returned as FHIR OperationOutcome resources.
+  description: >-
+    HL7 FHIR R4 RESTful API (read/search/create/update/delete across R4 resources) over the ELLKAY interoperability
+    platform, with a published CapabilityStatement. OAuth 2.0 Bearer + SiteServiceKey; errors returned
+    as FHIR OperationOutcome resources.
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://fhir.lkcloud.com/R4
   tags:
@@ -180,38 +184,32 @@ apis:
   - type: CapabilityStatement
     url: https://fhir.lkcloud.com/R4/metadata
   aid: ellkay:lkcloud-fhir-r4-api
-- aid: ellkay:ellkay-lkcloud-api
-  name: ELLKAY LK Appointments API
-  description: Ellkay Appointment endpoints
-  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
-  baseURL: https://services.lkcloud.com
-  tags:
-  - LKAppointments
-  properties:
-  - type: OpenAPI
-    url: openapi/ellkay-lkcloud-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
-  - type: JSONSchema
-    url: json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
-  - type: JSONSchema
-    url: json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
-  - type: JSONSchema
-    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
-  - type: JSONSchema
-    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
-  - type: JSONSchema
-    url: json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
-- aid: ellkay:ellkay-r4-fhir-api
+- aid: ellkay:ellkay-account-api
   name: ELLKAY Account API
-  description: The Account API from ELLKAY — 61 operation(s) for account.
+  description: The Account API from ELLKAY — 2 operation(s) for account.
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
   tags:
   - Account
   properties:
   - type: OpenAPI
-    url: openapi/ellkay-r4-fhir-api-openapi.yml
+    url: openapi/ellkay-account-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
   - type: JSONSchema
     url: json-schema/ellkay-account-schema.json
   - type: JSONSchema
@@ -224,7 +222,1488 @@ apis:
     url: json-schema/ellkay-bundle-schema.json
   - type: JSONSchema
     url: json-schema/ellkay-capability-statement-schema.json
-
+- aid: ellkay:ellkay-appointment-api
+  name: ELLKAY Appointment API
+  description: The Appointment API from ELLKAY — 2 operation(s) for appointment.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Appointment
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-appointment-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-binary-api
+  name: ELLKAY Binary API
+  description: The Binary API from ELLKAY — 1 operation(s) for binary.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Binary
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-binary-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-clinicalimpression-api
+  name: ELLKAY Clinical Impression API
+  description: The ClinicalImpression API from ELLKAY — 2 operation(s) for clinicalimpression.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - ClinicalImpression
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-clinicalimpression-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-communication-api
+  name: ELLKAY Communication API
+  description: The Communication API from ELLKAY — 2 operation(s) for communication.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Communication
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-communication-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-communicationrequest-api
+  name: ELLKAY Communication Request API
+  description: The CommunicationRequest API from ELLKAY — 2 operation(s) for communicationrequest.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - CommunicationRequest
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-communicationrequest-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-condition-api
+  name: ELLKAY Condition API
+  description: The Condition API from ELLKAY — 2 operation(s) for condition.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Condition
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-condition-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-coverage-api
+  name: ELLKAY Coverage API
+  description: The Coverage API from ELLKAY — 2 operation(s) for coverage.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Coverage
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-coverage-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-diagnosticreport-api
+  name: ELLKAY Diagnostic Report API
+  description: The DiagnosticReport API from ELLKAY — 2 operation(s) for diagnosticreport.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - DiagnosticReport
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-diagnosticreport-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-encounter-api
+  name: ELLKAY Encounter API
+  description: The Encounter API from ELLKAY — 2 operation(s) for encounter.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Encounter
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-encounter-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-familymemberhistory-api
+  name: ELLKAY Family Member History API
+  description: The FamilyMemberHistory API from ELLKAY — 2 operation(s) for familymemberhistory.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - FamilyMemberHistory
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-familymemberhistory-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-immunization-api
+  name: ELLKAY Immunization API
+  description: The Immunization API from ELLKAY — 2 operation(s) for immunization.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Immunization
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-immunization-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-lkappointments-api
+  name: ELLKAY LK Appointments API
+  description: Ellkay Appointment endpoints
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - LKAppointments
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-lkappointments-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-lkbridge-api
+  name: ELLKAY LK Bridge API
+  description: Ellkay Bridge
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - LKBridge
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-lkbridge-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-lkcharges-api
+  name: ELLKAY LK Charges API
+  description: Charge details
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - LKCharges
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-lkcharges-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-lkdocuments-api
+  name: ELLKAY LK Documents API
+  description: LKDocuments endpoints
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - LKDocuments
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-lkdocuments-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-lkmasterlist-api
+  name: ELLKAY LK Master List API
+  description: Master List.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - LKMasterList
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-lkmasterlist-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-lkpatientbalance-api
+  name: ELLKAY LK Patient Balance API
+  description: Load patient's balances. Allows patients to apply payments.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - LKPatientBalance
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-lkpatientbalance-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-lkpatientdatalink-api
+  name: ELLKAY LK Patient Data Link API
+  description: PatientDataLink endpoint
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - LKPatientDataLink
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-lkpatientdatalink-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-location-api
+  name: ELLKAY Location API
+  description: The Location API from ELLKAY — 2 operation(s) for location.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Location
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-location-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-medication-api
+  name: ELLKAY Medication API
+  description: The Medication API from ELLKAY — 2 operation(s) for medication.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Medication
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-medication-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-medicationstatement-api
+  name: ELLKAY Medication Statement API
+  description: The MedicationStatement API from ELLKAY — 2 operation(s) for medicationstatement.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - MedicationStatement
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-medicationstatement-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-metadata-api
+  name: ELLKAY Metadata API
+  description: The Metadata API from ELLKAY — 1 operation(s) for metadata.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-metadata-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-observation-api
+  name: ELLKAY Observation API
+  description: The Observation API from ELLKAY — 2 operation(s) for observation.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Observation
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-observation-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-operations-api
+  name: ELLKAY Operations API
+  description: The Operations API from ELLKAY — 1 operation(s) for operations.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-operations-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-organization-api
+  name: ELLKAY Organization API
+  description: The Organization API from ELLKAY — 2 operation(s) for organization.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-organization-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-patient-api
+  name: ELLKAY Patient API
+  description: The Patient API from ELLKAY — 2 operation(s) for patient.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Patient
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-patient-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-person-api
+  name: ELLKAY Person API
+  description: The Person API from ELLKAY — 2 operation(s) for person.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Person
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-person-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-practitioner-api
+  name: ELLKAY Practitioner API
+  description: The Practitioner API from ELLKAY — 2 operation(s) for practitioner.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Practitioner
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-practitioner-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-procedure-api
+  name: ELLKAY Procedure API
+  description: The Procedure API from ELLKAY — 2 operation(s) for procedure.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Procedure
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-procedure-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-questionnaire-api
+  name: ELLKAY Questionnaire API
+  description: The Questionnaire API from ELLKAY — 2 operation(s) for questionnaire.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Questionnaire
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-questionnaire-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-questionnaireresponse-api
+  name: ELLKAY Questionnaire Response API
+  description: The QuestionnaireResponse API from ELLKAY — 2 operation(s) for questionnaireresponse.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - QuestionnaireResponse
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-questionnaireresponse-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-relatedperson-api
+  name: ELLKAY Related Person API
+  description: The RelatedPerson API from ELLKAY — 2 operation(s) for relatedperson.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - RelatedPerson
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-relatedperson-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-servicerequest-api
+  name: ELLKAY Service Request API
+  description: The ServiceRequest API from ELLKAY — 2 operation(s) for servicerequest.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - ServiceRequest
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-servicerequest-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-slot-api
+  name: ELLKAY Slot API
+  description: The Slot API from ELLKAY — 2 operation(s) for slot.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Slot
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-slot-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-updatepatient-api
+  name: ELLKAY Update Patient API
+  description: UpdatePatient endpoint
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - UpdatePatient
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-updatepatient-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-allergy-intolerance-api
+  name: ELLKAY Allergy Intolerance API
+  description: The Allergy Intolerance API from ELLKAY — 2 operation(s) for allergy intolerance.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Allergy Intolerance
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-allergy-intolerance-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-document-reference-api
+  name: ELLKAY Document Reference API
+  description: The Document Reference API from ELLKAY — 2 operation(s) for document reference.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Document Reference
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-document-reference-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-insurance-plan-api
+  name: ELLKAY Insurance Plan API
+  description: The Insurance Plan API from ELLKAY — 2 operation(s) for insurance plan.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Insurance Plan
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-insurance-plan-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
+- aid: ellkay:ellkay-medication-request-api
+  name: ELLKAY Medication Request API
+  description: The Medication Request API from ELLKAY — 2 operation(s) for medication request.
+  humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
+  baseURL: https://services.lkcloud.com
+  tags:
+  - Medication Request
+  properties:
+  - type: OpenAPI
+    url: openapi/ellkay-medication-request-api-openapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-medications-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-procedures-result-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-diagnoses-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-bridge-get-guarantor-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-lkcloud-connect-contracts-appointments-appointment-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/ellkay-lkcloud-connect-contracts-patient-data-link-get-immunizations-result-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-account-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-allergy-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-binary-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/ellkay-capability-statement-schema.json
 x-enrichment:
   date: '2026-07-19'
   status: backfilled

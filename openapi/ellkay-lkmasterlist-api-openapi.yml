@@ -1,0 +1,2084 @@
+openapi: 3.2.0
+info:
+  title: LKCloud LK Master List API
+  description: Ellkay Api documentation 6.6 Ellkay api
+  contact:
+    name: Ellkay
+    url: https://ellkay.com
+    email: ''
+  version: '6.6'
+  x-logo:
+    url: ./logo.png
+    altText: Ellkay Logo
+servers:
+- url: https://services.lkcloud.com
+  description: prod url
+tags:
+- name: LKMasterList
+  description: Master List.
+paths:
+  /LKMasterList/CreateEmployer:
+    post:
+      tags:
+      - LKMasterList
+      summary: CreateEmployer
+      description: Create an employer and post it to the target system
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.CreateEmployerSwaggerRequest'
+            example:
+              request:
+                company: Ogden City Corporation
+                address1: '1525 E 6000 S # B'
+                address2: ''
+                city: South Ogden
+                state: UT
+                zip: '56456'
+                phoneNumber: 801-111-5818
+                custom:
+                  producer: Nvestment
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.CreateEmployerResult'
+              example:
+                id: '1'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListCreateEmployer
+      x-operation-id-source: derived
+  /LKMasterList/GetCodeSet:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetCodeSet
+      description: List of code sets based on requested type
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetCodeSetSwaggerRequest'
+            example:
+              request:
+                type: PaymentType
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetCodeSetResult'
+              example:
+              - id: '419751'
+                createdDate: '2020-05-01T10:00:00+00:00'
+                modifiedDate: '2023-08-12T15:30:00+00:00'
+                code: PAY001
+                name: Credit Card Payment
+                mappingType: PaymentType
+                codeSystemId: CS123
+                legacyRowId: '789'
+                sourceId: '101'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetCodeSet
+      x-operation-id-source: derived
+  /LKMasterList/GetCollectionBuckets:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetCollectionBuckets
+      description: The GetCollectionBuckets endpoint returns a list of collection buckets, each containing an ID, code, and name to categorize collections.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetCollectionBucketsSwaggerRequest'
+              description: Swagger request for GetCollectionBuckets
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetCollectionBucketsResult'
+              example:
+                buckets:
+                - id: ABC
+                  code: C1
+                  name: Collections warning
+                - id: '123'
+                  code: PP
+                  name: Payment plan
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetCollectionBuckets
+      x-operation-id-source: derived
+  /LKMasterList/GetEmployers:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetEmployers
+      description: The GetEmployers endpoint provides a list of employers, including details such as company name, address, city, state, zip code, and phone number.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetEmployersSwaggerRequest'
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetEmployersResult'
+              example:
+                employers:
+                - id: '1'
+                  company: Ogden City Corporation
+                  address1: '1525 E 6000 S # B'
+                  address2: ''
+                  city: South Ogden
+                  state: UT
+                  zip: '56456'
+                  phoneNumber: 801-111-5818
+                  custom:
+                    source: Manual Entry
+                    note: Initial diagnosis from ER visit
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetEmployers
+      x-operation-id-source: derived
+  /LKMasterList/GetEmploymentStatuses:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetEmploymentStatuses
+      description: The GetEmploymentStatuses endpoint returns a list of employment statuses, each containing a value and a code to represent different employment conditions.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetEmploymentStatusesSwaggerRequest'
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetEmploymentStatusesResult'
+              example:
+                items:
+                - value: Employed full-time
+                  code: '1'
+                - value: Employed part-time
+                  code: '2'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetEmploymentStatuses
+      x-operation-id-source: derived
+  /LKMasterList/GetEncounterReasons:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetEncounterReasons
+      description: The GetEncounterReasons endpoint returns a list of encounter reasons, each containing an ID, code, and name to categorize the reasons for encounters.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetEncounterReasonsSwaggerRequest'
+              description: Swagger request for GetEncounterReasons
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetEncounterReasonsResult'
+              example:
+                encounterReason:
+                - id: ABC
+                  code: R1
+                  name: Reason Test
+                - id: '123'
+                  code: R2
+                  name: Reason Test data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetEncounterReasons
+      x-operation-id-source: derived
+  /LKMasterList/GetEthnicities:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetEthnicities
+      description: The GetEthnicities endpoint returns a list of ethnicities, each containing a value and a code to represent different ethnic backgrounds.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetEthnicitiesSwaggerRequest'
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetEthnicitiesResult'
+              example:
+                items:
+                - value: Hispanic or Latino
+                  code: 2135-2
+                - value: Spaniard
+                  code: 2137-8
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetEthnicities
+      x-operation-id-source: derived
+  /LKMasterList/GetGenderIdentities:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetGenderIdentities
+      description: List of gender identities
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetGenderIdentitiesSwaggerRequest'
+              description: Swagger request for GetGenderIdentities
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetGenderIdentitiesResult'
+              example:
+                genderIdentities:
+                - id: '1'
+                  code: M
+                  name: Male
+                - id: '2'
+                  code: F
+                  name: Female
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetGenderIdentities
+      x-operation-id-source: derived
+  /LKMasterList/GetInsurances:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetInsurances
+      description: The GetInsurances endpoint provides a list of insurances, including details such as name, code, address, city, state, zip code, and phone number.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetInsurancesSwaggerRequest'
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetInsurancesResult'
+              example:
+                items:
+                - name: 21st Century Insurance
+                  code: '2'
+                  address1: P O Box 52165
+                  address2: ''
+                  city: Phoenix
+                  state: AZ
+                  zip: 85072-2165
+                  phone: 888-244-6163
+                  payerId: '12453'
+                  custom:
+                    reviewStatus: Peer Reviewed
+                    clinicianNote: Continue monitoring blood sugar levels
+                - name: A Plus Benefits
+                  code: '3'
+                  address1: P O Box 457
+                  address2: ''
+                  city: Pleasant Grove
+                  state: UT
+                  zip: 09876-2165
+                  phone: 555-244-6163
+                  payerId: PPNPI
+                  custom:
+                    source: Manual Entry
+                    note: Initial diagnosis from ER visit
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetInsurances
+      x-operation-id-source: derived
+  /LKMasterList/GetLanguages:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetLanguages
+      description: The GetLanguages endpoint returns a list of languages, each containing a value and a code to represent different languages.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetLanguagesSwaggerRequest'
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetLanguagesResult'
+              example:
+                items:
+                - value: Swedish
+                  code: sv
+                - value: Turkish
+                  code: tr
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetLanguages
+      x-operation-id-source: derived
+  /LKMasterList/GetMaritalStatuses:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetMaritalStatuses
+      description: The GetMaritalStatuses endpoint returns a list of marital statuses, each containing a value and a code to represent different marital conditions.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetMaritalStatusesSwaggerRequest'
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetMaritalStatusesResult'
+              example:
+                statuses:
+                - value: Married
+                  code: M
+                - value: Single
+                  code: S
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetMaritalStatuses
+      x-operation-id-source: derived
+  /LKMasterList/GetPharmacies:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetPharmacies
+      description: The GetPharmacies endpoint provides a list of pharmacies, each containing details such as pharmacy ID, name, address, city, state, zip code, phone, and fax.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetPharmaciesSwaggerRequest'
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetPharmaciesResult'
+              example:
+                pharmacies:
+                - id: '1286'
+                  name: WALLACE DRUG
+                  address: 44 S MAIN STREET
+                  address2: ''
+                  city: ABERDEEN
+                  state: ID
+                  zip: '83210'
+                  phone: 208-397-4540
+                  fax: 208-397-5215
+                  ncpdpProviderId: '1300449'
+                  ePrescribeEnabled: true
+                  mailOrderPharmacy: false
+                  custom:
+                    source: Manual Entry
+                    note: Initial diagnosis from ER visit
+                - id: '1286'
+                  name: 'WALGREENS DRUG STORE #11169'
+                  address: 950 BEARDS HILL RD
+                  address2: ''
+                  city: ABERDEEN
+                  state: MD
+                  zip: '21001'
+                  phone: 410-272-1021
+                  fax: 410-272-2923
+                  ncpdpProviderId: '2134132'
+                  ePrescribeEnabled: true
+                  mailOrderPharmacy: false
+                  custom:
+                    reviewStatus: Peer Reviewed
+                    clinicianNote: Continue monitoring blood sugar levels
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetPharmacies
+      x-operation-id-source: derived
+  /LKMasterList/GetRaces:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetRaces
+      description: The GetRaces endpoint returns a list of races, each containing a value and a code to represent different racial backgrounds.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetRacesSwaggerRequest'
+              description: Race Request
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetRacesResult'
+              example:
+                items:
+                - value: African
+                  code: 2060-2
+                - value: Asian Indian
+                  code: 2029-7
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetRaces
+      x-operation-id-source: derived
+  /LKMasterList/GetRelationships:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetRelationships
+      description: The GetRelationships endpoint returns a list of relationships, each containing a value and a code to represent different relationship types.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetRelationshipsSwaggerRequest'
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetRelationshipsResult'
+              example:
+                items:
+                - value: Brother
+                  code: Bro
+                - value: Child
+                  code: CHD
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetRelationships
+      x-operation-id-source: derived
+  /LKMasterList/GetSexualOrientations:
+    post:
+      tags:
+      - LKMasterList
+      summary: GetSexualOrientations
+      description: List of sexual orientations
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetSexualOrientationsSwaggerRequest'
+              description: Swagger request for GetSexualOrientations
+            example:
+              request: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetSexualOrientationsResult'
+              example:
+                sexualOrientations:
+                - id: '1'
+                  code: asku
+                  name: Choose not to disclose
+                - id: '2'
+                  code: unk
+                  name: Do not know
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListGetSexualOrientations
+      x-operation-id-source: derived
+  /LKMasterList/SearchPharmacies:
+    post:
+      tags:
+      - LKMasterList
+      summary: SearchPharmacies
+      description: List of pharmacies based on requested object
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.SearchPharmaciesSwaggerRequest'
+            example:
+              request:
+                id: '1286'
+                custom:
+                  ncpdpProviderId: '1300449'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.SearchPharmaciesResult'
+              example:
+                pharmacies:
+                - id: '1286'
+                  name: WALLACE DRUG
+                  address: 44 S MAIN STREET
+                  address2: ''
+                  city: ABERDEEN
+                  state: ID
+                  zip: '83210'
+                  phone: 208-397-4540
+                  fax: 208-397-5215
+                  ncpdpProviderId: '1300449'
+                  ePrescribeEnabled: true
+                  mailOrderPharmacy: false
+                  custom:
+                    source: Manual Entry
+                    note: Initial diagnosis from ER visit
+                - id: '1286'
+                  name: 'WALGREENS DRUG STORE #11169'
+                  address: 950 BEARDS HILL RD
+                  address2: ''
+                  city: ABERDEEN
+                  state: MD
+                  zip: '21001'
+                  phone: 410-272-1021
+                  fax: 410-272-2923
+                  ncpdpProviderId: '2134132'
+                  ePrescribeEnabled: true
+                  mailOrderPharmacy: false
+                  custom:
+                    reviewStatus: Peer Reviewed
+                    clinicianNote: Continue monitoring blood sugar levels
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListSearchPharmacies
+      x-operation-id-source: derived
+  /LKMasterList/SearchPractitioners:
+    post:
+      tags:
+      - LKMasterList
+      summary: SearchPractitioners
+      description: The SearchPractitioners endpoint returns a list of practitioners, each containing details such as name, address, city, state, zip code, phone, fax, email, and specialty.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.SearchPractitionersSwaggerRequest'
+            example:
+              request:
+                firstName: Ben
+                lastName: Casey
+                identifiers:
+                - value: '141731'
+                  type:
+                    code: NPI
+                    source: NPI
+                - value: A12345
+                  type:
+                    code: UPIN
+                    source: UPIN
+                id: '460'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.SearchPractitionersResult'
+              example:
+              - id: '460'
+                firstName: Ben
+                lastName: Casey
+                middleName: null
+                address1: 460 Harrison Blvd
+                address2: ''
+                city: Ogden
+                state: UT
+                zip: '844034303'
+                phone: 801-500-3800
+                fax: 801-475-3211
+                email: edward.1234@clinic.com
+                specialty:
+                  value: Orthopedic Hand
+                inactive: true
+                identifiers:
+                - value: '141731'
+                  type:
+                    code: NPI
+                    source: NPI
+                facility:
+                  id: '7'
+                practitionerType:
+                  source: Physician
+                custom:
+                  source: Manual Entry
+                  note: Initial diagnosis from ER visit
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListSearchPractitioners
+      x-operation-id-source: derived
+  /LKMasterList/SearchResources:
+    post:
+      tags:
+      - LKMasterList
+      summary: SearchResources
+      description: The SearchResources endpoint returns a list of resources, each containing details such as name, address, city, state, zip code, phone, fax, email, specialty, and resource type.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.SearchResourcesSwaggerRequest'
+            example:
+              request:
+                firstName: Henry
+                lastName: Topper
+                identifiers:
+                - value: '170047'
+                  type:
+                    code: NPI
+                    source: NPI
+                - value: H95164
+                  type:
+                    code: UPIN
+                    source: UPIN
+                id: '421'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.SearchResourcesResult'
+              example:
+              - id: '421'
+                firstName: Henry
+                lastName: Topper
+                middleName: null
+                address1: 8015 SHOAL CREEK BLVD, SUITE 103
+                address2: ''
+                city: AUSTIN
+                state: TX
+                zip: 78757-2222
+                phone: 801-500-3800
+                fax: 512-467-6767
+                email: edward.1234@clinic.com
+                specialty:
+                  value: Pain Medicine
+                inactive: true
+                identifiers:
+                - value: '170047'
+                  type:
+                    code: NPI
+                    source: NPI
+                resourceType:
+                  source: Personnel
+                  code: Personnel
+                facility:
+                  id: '7'
+                custom:
+                  source: Manual Entry
+                  note: Initial diagnosis from ER visit
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKMasterListSearchResources
+      x-operation-id-source: derived
+components:
+  schemas:
+    LKCloudConnect.Contracts.MasterLists.Employer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Employer system-specific id
+        company:
+          type: string
+          description: Employer company name
+        address1:
+          type: string
+          description: Employer address 1
+        address2:
+          type: string
+          description: Employer address 2
+        city:
+          type: string
+          description: Employer address city
+        state:
+          type: string
+          description: Employer address state
+        zip:
+          type: string
+          description: Employer address zip
+        phoneNumber:
+          type: string
+          description: Employer phone number
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetInsurancesRequest:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetEthnicitiesRequest:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetEmploymentStatusesRequest:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetInsurancesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetInsurancesRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.SearchResourcesResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Resource Id
+        firstName:
+          type: string
+          description: Resource FirstName
+        lastName:
+          type: string
+          description: Resource LastName
+        middleName:
+          type: string
+          description: Practitioner MiddleName
+        address1:
+          type: string
+          description: Resource Address1
+        address2:
+          type: string
+          description: Resource Address2
+        city:
+          type: string
+          description: Resource City
+        state:
+          type: string
+          description: Resource State
+        zip:
+          type: string
+          description: Resource Zip
+        phone:
+          type: string
+          description: Resource Phone
+        fax:
+          type: string
+          description: Resource Fax
+        email:
+          type: string
+          description: Resource Email
+        specialty:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerResourceSpecialty'
+          description: Resource Specialty
+        inactive:
+          type: boolean
+          description: Resource Status - Active or InActive
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerResourceIdentifier'
+          description: Resource Identifiers
+        resourceType:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.ResourceType'
+          description: Resource Type
+        facility:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerResourceFacility'
+          description: Resource Facility
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Search Resource Result
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetCollectionBucketsSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetCollectionBucketsRequest'
+          description: Get collection buckets request parameters
+      additionalProperties: false
+      description: Swagger request for GetCollectionBuckets
+    LKCloudConnect.Contracts.MasterLists.PractitionerResourceIdentifier:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Practitioner identifier value to filter by, performs exact match
+        type:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerResourceIdentifierType'
+          description: Practitioner Resource identifier type
+      additionalProperties: false
+      description: Practitioner Resource Identifier
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetCodeSetSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetCodeSetRequest'
+          description: Represents a request to retrieve a specific category of code set from the system.
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetEmployersSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetEmployersRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetMaritalStatusesRequest:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.SearchResourcesRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: FirstName filter
+        lastName:
+          type: string
+          description: LastName filter
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerResourceIdentifier'
+          description: List of identifiers to filter by, results must match all identifiers in this filter
+        id:
+          type: string
+          description: 'Search using Unique Internal Identifier
+
+            Requires an exact match and returns only one result when searching by ID'
+      additionalProperties: false
+      description: Search Resource Request
+    LKCloudConnect.Contracts.MasterLists.CreateEmployerResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the created employer
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetEncounterReasonsResult:
+      type: object
+      properties:
+        encounterReason:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.EncounterReasonData'
+          description: List of encounter reason
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetPharmaciesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetPharmaciesRequest'
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetGenderIdentitiesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetGenderIdentitiesRequest'
+          description: Gender Identities Request
+      additionalProperties: false
+      description: Swagger request for GetGenderIdentities
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetLanguagesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetLanguagesRequest'
+          description: No related Language Request object.
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetGenderIdentitiesResult:
+      type: object
+      properties:
+        genderIdentities:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GenderIdentity'
+          description: List of gender identities
+      additionalProperties: false
+      description: Gender Identities Result
+    LKCloudConnect.Contracts.MasterLists.SearchPharmaciesResult:
+      type: object
+      properties:
+        pharmacies:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.Pharmacy'
+          description: List of pharmacies
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetSexualOrientationsResult:
+      type: object
+      properties:
+        sexualOrientations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.SexualOrientation'
+          description: List of sexual orientations
+      additionalProperties: false
+      description: Sexual orientations result
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetEncounterReasonsSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetEncounterReasonsRequest'
+      additionalProperties: false
+      description: Swagger request for GetEncounterReasons
+    LKCloudConnect.Contracts.MasterLists.GetCollectionBucketsRequest:
+      type: object
+      additionalProperties: false
+      description: Get collection buckets request parameters
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetEmploymentStatusesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetEmploymentStatusesRequest'
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetMaritalStatusesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetMaritalStatusesRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.PractitionerType:
+      type: object
+      properties:
+        source:
+          type: string
+          description: Practitioner type source value
+          example: Physician, Staff, Referring Physician, Other
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetCodeSetRequest:
+      type: object
+      properties:
+        type:
+          enum:
+          - PaymentType
+          type: string
+          description: Specifies the category of code set to retrieve.
+      additionalProperties: false
+      description: Represents a request to retrieve a specific category of code set from the system.
+    LKCloudConnect.Contracts.MasterLists.Ethnicity:
+      type: object
+      properties:
+        value:
+          type: string
+          description: System-specific ethnicity value
+        code:
+          type: string
+          description: System-specific ethnicity code
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.SearchPharmaciesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.SearchPharmaciesRequest'
+          description: Search Pharmacies Request
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetRelationshipsRequest:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.SearchResourcesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.SearchResourcesRequest'
+          description: Search Resource Request
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetRacesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetRacesRequest'
+          description: Race Request
+      additionalProperties: false
+      description: Race Request
+    LKCloudConnect.Contracts.MasterLists.SearchPharmaciesRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Pharmacy Id.
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Optional field where users can pass any filter supported by the source system to refine pharmacy search results.
+      additionalProperties: false
+      description: Search Pharmacies Request
+    LKCloudConnect.Contracts.MasterLists.GetEmploymentStatusesResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.EmploymentStatus'
+          description: List of employment statuses
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.EmploymentStatus:
+      type: object
+      properties:
+        value:
+          type: string
+          description: System-specific employment status display
+        code:
+          type: string
+          description: System-specific employment status code
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.SearchPractitionersRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: FirstName filter
+        lastName:
+          type: string
+          description: LastName filter
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerResourceIdentifier'
+          description: List of identifiers to filter by, results must match all identifiers in this filter
+        id:
+          type: string
+          description: 'Search using Unique Identifier
+
+            Requires an exact match and returns only one result when searching by ID'
+      additionalProperties: false
+      description: Search Practitioners Request
+    LKCloudConnect.Contracts.MasterLists.GetMaritalStatusesResult:
+      type: object
+      properties:
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.MaritalStatusResult'
+          description: List of marital statuses
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetCodeSetResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: System-specific id
+        createdDate:
+          type: string
+          description: Created Date (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        modifiedDate:
+          type: string
+          description: Modified Date (DateTimeOffset) e.g. 2019-01-01T00:00:00+00:00
+          format: date-time
+          example: '2019-01-01T00:00:00+00:00'
+        code:
+          type: string
+          description: Code
+        name:
+          type: string
+          description: Name
+        mappingType:
+          type: string
+          description: Mapping Type
+        codeSystemId:
+          type: string
+          description: CodeSystemId
+        legacyRowId:
+          type: string
+          description: LegacyRowId
+        sourceId:
+          type: string
+          description: SourceId
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.SearchPractitionersResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Practitioner Id
+        firstName:
+          type: string
+          description: Practitioner FirstName
+        lastName:
+          type: string
+          description: Practitioner LastName
+        middleName:
+          type: string
+          description: Practitioner MiddleName
+        address1:
+          type: string
+          description: Practitioner Address1
+        address2:
+          type: string
+          description: Practitioner Address2
+        city:
+          type: string
+          description: Practitioner City
+        state:
+          type: string
+          description: Practitioner State
+        zip:
+          type: string
+          description: Practitioner Zip
+        phone:
+          type: string
+          description: Practitioner Phone
+        fax:
+          type: string
+          description: Practitioner Fax
+        email:
+          type: string
+          description: Practitioner Email
+        specialty:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerResourceSpecialty'
+          description: Practitioner Specialty
+        inactive:
+          type: boolean
+          description: Practitioner Status - Active or InActive
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerResourceIdentifier'
+          description: Practitioner Identifiers
+        facility:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerResourceFacility'
+          description: Practitioner Facility
+        practitionerType:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.PractitionerType'
+          description: Practitioner Type
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+      description: Search Practitioners Result
+    LKCloudConnect.Contracts.MasterLists.Insurance:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Insurance name
+        code:
+          type: string
+          description: Insurance system-specific unique identifier
+        address1:
+          type: string
+          description: Insurance address 1
+        address2:
+          type: string
+          description: Insurance address 2
+        city:
+          type: string
+          description: Insurance address city
+        state:
+          type: string
+          description: Insurance address state
+        zip:
+          type: string
+          description: Insurance address zip
+        phone:
+          type: string
+          description: Insurance company phone number
+        payerId:
+          type: string
+          description: Insurance Payer Id
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.PractitionerResourceFacility:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Facility Id
+      additionalProperties: false
+      description: Practitioner Resource Facility
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.SearchPractitionersSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.SearchPractitionersRequest'
+          description: Search Practitioners Request
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GenderIdentity:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the gender identity
+        code:
+          type: string
+          description: Represent the code of the gender identity in the medical system
+        name:
+          type: string
+          description: Name from the medical system
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetSexualOrientationsSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetSexualOrientationsRequest'
+          description: Sexual Orientations Request
+      additionalProperties: false
+      description: Swagger request for GetSexualOrientations
+    LKCloudConnect.Contracts.MasterLists.GetLanguagesRequest:
+      type: object
+      additionalProperties: false
+      description: No related Language Request object.
+    LKCloudConnect.Contracts.MasterLists.Language:
+      type: object
+      properties:
+        value:
+          type: string
+          description: System-specific language display
+        code:
+          type: string
+          description: System-specific language code
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetPharmaciesRequest:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetEthnicitiesResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.Ethnicity'
+          description: List of ethnicity codes
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.CollectionBucket:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Collection bucket unique ID in target system. May be the same as code, depending on the system.
+        code:
+          type: string
+          description: Collection bucket code in target system. May be the same as id, depending on the system.
+        name:
+          type: string
+          description: Collection bucket name
+      additionalProperties: false
+      description: Metadata about an EHR collection bucket
+    LKCloudConnect.Contracts.MasterLists.Pharmacy:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Pharmacy system-specific id
+        name:
+          type: string
+          description: Pharmacy name
+        address:
+          type: string
+          description: Pharmacy address 1
+        address2:
+          type: string
+          description: Pharmacy address 2
+        city:
+          type: string
+          description: Pharmacy address city
+        state:
+          type: string
+          description: Pharmacy address state
+        zip:
+          type: string
+          description: Pharmacy address zip
+        phone:
+          type: string
+          description: Pharmacy phone number
+        fax:
+          type: string
+          description: Pharmacy fax number
+        ncpdpProviderId:
+          type: string
+          description: NCPDP assigned number that provides pharmacies with a unique, 7-digit national identifying number
+        ePrescribeEnabled:
+          type: boolean
+          description: Indicating whether ePrescribing is enabled for the pharmacy.
+        mailOrderPharmacy:
+          type: boolean
+          description: Indicating whether the pharmacy offers mail order services.
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.CreateEmployerRequest:
+      required:
+      - company
+      type: object
+      properties:
+        company:
+          minLength: 1
+          type: string
+          description: Employer company name
+        address1:
+          type: string
+          description: Employer address 1
+        address2:
+          type: string
+          description: Employer address 2
+        city:
+          type: string
+          description: Employer city
+        state:
+          type: string
+          description: Employer state
+        zip:
+          type: string
+          description: Employer zip
+        phoneNumber:
+          type: string
+          description: Employer phone number
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.LKCloudConnectFault:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Target system credentials are invalid
+        detail:
+          type: string
+          description: Additional error detail
+        recoverySteps:
+          type: string
+          description: Error recovery steps
+          example: Contact support to update credentials
+        handle:
+          type: string
+          description: Our unique message id, you should provide this when you open a support ticket
+          example: 3e4d0b7f-e3fa-4462-9cc3-860be812d696
+        errorCode:
+          type: string
+          description: Error code, please see error code section of the guide for details
+          example: Unauthorized
+        type:
+          type: string
+          description: Error type
+      additionalProperties: false
+      description: LKCloud Connect Fault
+    LKCloudConnect.Contracts.MasterLists.GetRacesRequest:
+      type: object
+      additionalProperties: false
+      description: Race Request
+    LKCloudConnect.Contracts.MasterLists.EncounterReasonData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Encounter reason Id
+        code:
+          type: string
+          description: Encounter reason code
+        name:
+          type: string
+          description: 'Encounter reason display/name
+
+            Some EHR only supports free text we can map with the name in this case'
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetEmployersRequest:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetEmployersResult:
+      type: object
+      properties:
+        employers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.Employer'
+          description: List of employers
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetEncounterReasonsRequest:
+      type: object
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetRelationshipsResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.Relationship'
+          description: List of relationship codes
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetRacesResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.Race'
+          description: List of race codes
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetRelationshipsSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetRelationshipsRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.Relationship:
+      type: object
+      properties:
+        value:
+          type: string
+          description: System-specific relationship display
+        code:
+          type: string
+          description: System-specific relationship code
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.ResourceType:
+      type: object
+      properties:
+        source:
+          type: string
+          description: Resource type source
+        code:
+          enum:
+          - General
+          - Location
+          - Personnel
+          type: string
+          description: Resource type code
+      additionalProperties: false
+      description: Resource type
+    LKCloudConnect.Contracts.MasterLists.Race:
+      type: object
+      properties:
+        value:
+          type: string
+          description: System-specific race value
+        code:
+          type: string
+          description: System-specific race code
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.SexualOrientation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the sexual orientation
+        code:
+          type: string
+          description: Represent the code of the sexual orientation in the medical system
+        name:
+          type: string
+          description: Name from the medical system
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.PractitionerResourceIdentifierType:
+      type: object
+      properties:
+        code:
+          enum:
+          - Other
+          - NPI
+          - UPIN
+          type: string
+          description: Ellkay code for this identifier
+        source:
+          type: string
+          description: The EHR-specific type of code
+      additionalProperties: false
+      description: Practitioner Resource identifier type object
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.GetEthnicitiesSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.GetEthnicitiesRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetSexualOrientationsRequest:
+      type: object
+      additionalProperties: false
+      description: Sexual Orientations Request
+    LKCloudConnect.Contracts.MasterLists.MaritalStatusResult:
+      type: object
+      properties:
+        value:
+          type: string
+          description: 'System-specific marital status display mapped to one of these values:
+
+            `Unknown` `Married` `Divorced` `Partner` `Single` `Widowed` `LegallySeparated`'
+        code:
+          type: string
+          description: System-specific marital status code
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetLanguagesResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.Language'
+          description: List of language codes
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetInsurancesResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.Insurance'
+          description: List of insurances
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetGenderIdentitiesRequest:
+      type: object
+      additionalProperties: false
+      description: Gender Identities Request
+    LKCloudConnect.Contracts.MasterLists.PractitionerResourceSpecialty:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Specialty Value
+      additionalProperties: false
+      description: Practitioner Resource Specialty
+    LKCloudConnect.Swagger.SwaggerRequests.LKMasterList.CreateEmployerSwaggerRequest:
+      type: object
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.CreateEmployerRequest'
+      additionalProperties: false
+    LKCloudConnect.Contracts.MasterLists.GetCollectionBucketsResult:
+      type: object
+      properties:
+        buckets:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.CollectionBucket'
+          description: List of collection bucket metadata
+      additionalProperties: false
+      description: Collection bucket data
+    LKCloudConnect.Contracts.MasterLists.GetPharmaciesResult:
+      type: object
+      properties:
+        pharmacies:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.MasterLists.Pharmacy'
+          description: List of pharmacies
+      additionalProperties: false
+x-provenance:
+  method: searched
+  source: https://lkcloud-api.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-beginsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-editappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentslot.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getfacilities.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getopenappointmentslots.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getphysicians.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getscheduleappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-nextsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-scheduleappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getadvancedirectives.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getbridgeinfo.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getguarantor.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatient.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientalerts.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientsummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getreferrals.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-smartsearch.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-getchargestatus.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-sendcharge.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-createdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocumenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getpatientdocuments.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-createemployer.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcodeset.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemployers.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemploymentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getencounterreasons.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getethnicities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getgenderidentities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getinsurances.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getlanguages.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getmaritalstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getraces.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getrelationships.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getsexualorientations.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpractitioners.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchresources.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-applypayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-beginsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getaccount.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalance.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalancesummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getpatientcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-nextsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatebillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatepatientcollectionbucket.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-voidpayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-begingetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-closeencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-createencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getallergies.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getdiagnoses.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotebody.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotes.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounters.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getfamilyhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getimmunizations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getlabresults.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedications.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getophthalmologyobservations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getproblems.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getprocedures.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsocialhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsurgicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitals.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitalsdefinition.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-nextgetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-postvitals.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createpatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createreferral.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updateadvancedirective.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatereferral.md
+  merge:
+    pages: 85
+    deduped: 158
+    conflicts_kept_first: 0

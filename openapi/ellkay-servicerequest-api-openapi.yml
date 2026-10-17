@@ -1,0 +1,480 @@
+openapi: 3.2.0
+info:
+  title: ELLKAY R4 FHIR Service Request API
+  version: 1.5.0
+servers:
+- url: https://fhir.lkclouddev.com/R4
+tags:
+- name: ServiceRequest
+paths:
+  /ServiceRequest:
+    post:
+      tags:
+      - ServiceRequest
+      summary: Create
+      description: 'https://hl7.org/fhir/R4/ServiceRequest.html
+
+        https://hl7.org/fhir/R4/http.html#create'
+      operationId: Create.ServiceRequest
+      parameters:
+      - $ref: '#/components/parameters/SiteServiceKey'
+      requestBody:
+        description: A FHIR ServiceRequest
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/ServiceRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+        '400':
+          description: Bad Request
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '401':
+          description: Unauthorized
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '403':
+          description: Forbidden
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '404':
+          description: Not Found
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '409':
+          description: Conflict
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '412':
+          description: Precondition Failed
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+    get:
+      tags:
+      - ServiceRequest
+      summary: Search
+      description: 'https://hl7.org/fhir/R4/ServiceRequest.html
+
+        https://hl7.org/fhir/R4/http.html#search'
+      operationId: Search.ServiceRequest.Get
+      parameters:
+      - $ref: '#/components/parameters/SiteServiceKey'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Bundle'
+        '401':
+          description: Unauthorized
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '403':
+          description: Forbidden
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '404':
+          description: Not Found
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '410':
+          description: Gone
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+  /ServiceRequest/{logical_id}:
+    put:
+      tags:
+      - ServiceRequest
+      summary: Update
+      description: 'https://hl7.org/fhir/R4/ServiceRequest.html
+
+        https://hl7.org/fhir/R4/http.html#update'
+      operationId: Update.ServiceRequest
+      parameters:
+      - $ref: '#/components/parameters/logical_id'
+      - $ref: '#/components/parameters/SiteServiceKey'
+      requestBody:
+        description: An updated FHIR ServiceRequest
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/ServiceRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+        '400':
+          description: Bad Request
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '401':
+          description: Unauthorized
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '403':
+          description: Forbidden
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '404':
+          description: Not Found
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '409':
+          description: Conflict
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '412':
+          description: Precondition Failed
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+    delete:
+      tags:
+      - ServiceRequest
+      summary: Delete
+      description: 'https://hl7.org/fhir/R4/ServiceRequest.html
+
+        https://hl7.org/fhir/R4/http.html#delete'
+      operationId: Delete.ServiceRequest
+      parameters:
+      - $ref: '#/components/parameters/logical_id'
+      - $ref: '#/components/parameters/SiteServiceKey'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+        '202':
+          description: Accepted
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '401':
+          description: Unauthorized
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '403':
+          description: Forbidden
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '404':
+          description: Not Found
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '409':
+          description: Conflict
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+    get:
+      tags:
+      - ServiceRequest
+      summary: Read
+      description: 'https://hl7.org/fhir/R4/ServiceRequest.html
+
+        https://hl7.org/fhir/R4/http.html#read'
+      operationId: Read.ServiceRequest
+      parameters:
+      - $ref: '#/components/parameters/logical_id'
+      - $ref: '#/components/parameters/SiteServiceKey'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+        '401':
+          description: Unauthorized
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '403':
+          description: Forbidden
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '404':
+          description: Not Found
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+        '410':
+          description: Gone
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationOutcome'
+components:
+  schemas:
+    ServiceRequest:
+      type: object
+    OperationOutcome:
+      type: object
+    Bundle:
+      type: object
+  parameters:
+    logical_id:
+      name: logical_id
+      in: path
+      description: Resource Logical ID
+      required: true
+      schema:
+        type: string
+    SiteServiceKey:
+      name: SiteServiceKey
+      in: header
+      description: LKCloud routing key to the site service
+      required: true
+      schema:
+        type: string
+x-explorer-enabled: false
+x-provenance:
+  method: searched
+  source: https://lkcloud-api.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://lkcloud-api.readme.io/reference/createaccount.md
+  - https://lkcloud-api.readme.io/reference/createallergyintolerance.md
+  - https://lkcloud-api.readme.io/reference/createappointment.md
+  - https://lkcloud-api.readme.io/reference/createclinicalimpression.md
+  - https://lkcloud-api.readme.io/reference/createcommunication.md
+  - https://lkcloud-api.readme.io/reference/createcommunicationrequest.md
+  - https://lkcloud-api.readme.io/reference/createcondition.md
+  - https://lkcloud-api.readme.io/reference/createcoverage.md
+  - https://lkcloud-api.readme.io/reference/creatediagnosticreport.md
+  - https://lkcloud-api.readme.io/reference/createdocumentreference.md
+  - https://lkcloud-api.readme.io/reference/createencounter.md
+  - https://lkcloud-api.readme.io/reference/createfamilymemberhistory.md
+  - https://lkcloud-api.readme.io/reference/createimmunization.md
+  - https://lkcloud-api.readme.io/reference/createinsuranceplan.md
+  - https://lkcloud-api.readme.io/reference/createlocation.md
+  - https://lkcloud-api.readme.io/reference/createmedication.md
+  - https://lkcloud-api.readme.io/reference/createmedicationrequest.md
+  - https://lkcloud-api.readme.io/reference/createmedicationstatement.md
+  - https://lkcloud-api.readme.io/reference/createobservation.md
+  - https://lkcloud-api.readme.io/reference/createorganization.md
+  - https://lkcloud-api.readme.io/reference/createpatient.md
+  - https://lkcloud-api.readme.io/reference/createperson.md
+  - https://lkcloud-api.readme.io/reference/createpractitioner.md
+  - https://lkcloud-api.readme.io/reference/createprocedure.md
+  - https://lkcloud-api.readme.io/reference/createquestionnaire.md
+  - https://lkcloud-api.readme.io/reference/createquestionnaireresponse.md
+  - https://lkcloud-api.readme.io/reference/createrelatedperson.md
+  - https://lkcloud-api.readme.io/reference/createservicerequest.md
+  - https://lkcloud-api.readme.io/reference/createslot.md
+  - https://lkcloud-api.readme.io/reference/deleteaccount.md
+  - https://lkcloud-api.readme.io/reference/deleteallergyintolerance.md
+  - https://lkcloud-api.readme.io/reference/deleteappointment.md
+  - https://lkcloud-api.readme.io/reference/deleteclinicalimpression.md
+  - https://lkcloud-api.readme.io/reference/deletecommunication.md
+  - https://lkcloud-api.readme.io/reference/deletecommunicationrequest.md
+  - https://lkcloud-api.readme.io/reference/deletecondition.md
+  - https://lkcloud-api.readme.io/reference/deletecoverage.md
+  - https://lkcloud-api.readme.io/reference/deletediagnosticreport.md
+  - https://lkcloud-api.readme.io/reference/deletedocumentreference.md
+  - https://lkcloud-api.readme.io/reference/deleteencounter.md
+  - https://lkcloud-api.readme.io/reference/deletefamilymemberhistory.md
+  - https://lkcloud-api.readme.io/reference/deleteimmunization.md
+  - https://lkcloud-api.readme.io/reference/deleteinsuranceplan.md
+  - https://lkcloud-api.readme.io/reference/deletelocation.md
+  - https://lkcloud-api.readme.io/reference/deletemedication.md
+  - https://lkcloud-api.readme.io/reference/deletemedicationrequest.md
+  - https://lkcloud-api.readme.io/reference/deletemedicationstatement.md
+  - https://lkcloud-api.readme.io/reference/deleteobservation.md
+  - https://lkcloud-api.readme.io/reference/deleteorganization.md
+  - https://lkcloud-api.readme.io/reference/deletepatient.md
+  - https://lkcloud-api.readme.io/reference/deleteperson.md
+  - https://lkcloud-api.readme.io/reference/deletepractitioner.md
+  - https://lkcloud-api.readme.io/reference/deleteprocedure.md
+  - https://lkcloud-api.readme.io/reference/deletequestionnaire.md
+  - https://lkcloud-api.readme.io/reference/deletequestionnaireresponse.md
+  - https://lkcloud-api.readme.io/reference/deleterelatedperson.md
+  - https://lkcloud-api.readme.io/reference/deleteservicerequest.md
+  - https://lkcloud-api.readme.io/reference/deleteslot.md
+  - https://lkcloud-api.readme.io/reference/getmetadata.md
+  - https://lkcloud-api.readme.io/reference/operationpatienteverything.md
+  - https://lkcloud-api.readme.io/reference/readaccount.md
+  - https://lkcloud-api.readme.io/reference/readallergyintolerance.md
+  - https://lkcloud-api.readme.io/reference/readappointment.md
+  - https://lkcloud-api.readme.io/reference/readbinary.md
+  - https://lkcloud-api.readme.io/reference/readclinicalimpression.md
+  - https://lkcloud-api.readme.io/reference/readcommunication.md
+  - https://lkcloud-api.readme.io/reference/readcommunicationrequest.md
+  - https://lkcloud-api.readme.io/reference/readcondition.md
+  - https://lkcloud-api.readme.io/reference/readcoverage.md
+  - https://lkcloud-api.readme.io/reference/readdiagnosticreport.md
+  - https://lkcloud-api.readme.io/reference/readdocumentreference.md
+  - https://lkcloud-api.readme.io/reference/readencounter.md
+  - https://lkcloud-api.readme.io/reference/readfamilymemberhistory.md
+  - https://lkcloud-api.readme.io/reference/readimmunization.md
+  - https://lkcloud-api.readme.io/reference/readinsuranceplan.md
+  - https://lkcloud-api.readme.io/reference/readlocation.md
+  - https://lkcloud-api.readme.io/reference/readmedication.md
+  - https://lkcloud-api.readme.io/reference/readmedicationrequest.md
+  - https://lkcloud-api.readme.io/reference/readmedicationstatement.md
+  - https://lkcloud-api.readme.io/reference/readobservation.md
+  - https://lkcloud-api.readme.io/reference/readorganization.md
+  - https://lkcloud-api.readme.io/reference/readpatient.md
+  - https://lkcloud-api.readme.io/reference/readperson.md
+  - https://lkcloud-api.readme.io/reference/readpractitioner.md
+  - https://lkcloud-api.readme.io/reference/readprocedure.md
+  - https://lkcloud-api.readme.io/reference/readquestionnaire.md
+  - https://lkcloud-api.readme.io/reference/readquestionnaireresponse.md
+  - https://lkcloud-api.readme.io/reference/readrelatedperson.md
+  - https://lkcloud-api.readme.io/reference/readservicerequest.md
+  - https://lkcloud-api.readme.io/reference/readslot.md
+  - https://lkcloud-api.readme.io/reference/searchaccountget.md
+  - https://lkcloud-api.readme.io/reference/searchallergyintoleranceget.md
+  - https://lkcloud-api.readme.io/reference/searchappointmentget.md
+  - https://lkcloud-api.readme.io/reference/searchclinicalimpressionget.md
+  - https://lkcloud-api.readme.io/reference/searchcommunicationget.md
+  - https://lkcloud-api.readme.io/reference/searchcommunicationrequestget.md
+  - https://lkcloud-api.readme.io/reference/searchconditionget.md
+  - https://lkcloud-api.readme.io/reference/searchcoverageget.md
+  - https://lkcloud-api.readme.io/reference/searchdiagnosticreportget.md
+  - https://lkcloud-api.readme.io/reference/searchdocumentreferenceget.md
+  - https://lkcloud-api.readme.io/reference/searchencounterget.md
+  - https://lkcloud-api.readme.io/reference/searchfamilymemberhistoryget.md
+  - https://lkcloud-api.readme.io/reference/searchimmunizationget.md
+  - https://lkcloud-api.readme.io/reference/searchinsuranceplanget.md
+  - https://lkcloud-api.readme.io/reference/searchlocationget.md
+  - https://lkcloud-api.readme.io/reference/searchmedicationget.md
+  - https://lkcloud-api.readme.io/reference/searchmedicationrequestget.md
+  - https://lkcloud-api.readme.io/reference/searchmedicationstatementget.md
+  - https://lkcloud-api.readme.io/reference/searchobservationget.md
+  - https://lkcloud-api.readme.io/reference/searchorganizationget.md
+  - https://lkcloud-api.readme.io/reference/searchpatientget.md
+  - https://lkcloud-api.readme.io/reference/searchpersonget.md
+  - https://lkcloud-api.readme.io/reference/searchpractitionerget.md
+  - https://lkcloud-api.readme.io/reference/searchprocedureget.md
+  - https://lkcloud-api.readme.io/reference/searchquestionnaireget.md
+  - https://lkcloud-api.readme.io/reference/searchquestionnaireresponseget.md
+  - https://lkcloud-api.readme.io/reference/searchrelatedpersonget.md
+  - https://lkcloud-api.readme.io/reference/searchservicerequestget.md
+  - https://lkcloud-api.readme.io/reference/searchslotget.md
+  - https://lkcloud-api.readme.io/reference/updateaccount.md
+  - https://lkcloud-api.readme.io/reference/updateallergyintolerance.md
+  - https://lkcloud-api.readme.io/reference/updateappointment.md
+  - https://lkcloud-api.readme.io/reference/updateclinicalimpression.md
+  - https://lkcloud-api.readme.io/reference/updatecommunication.md
+  - https://lkcloud-api.readme.io/reference/updatecommunicationrequest.md
+  - https://lkcloud-api.readme.io/reference/updatecondition.md
+  - https://lkcloud-api.readme.io/reference/updatecoverage.md
+  - https://lkcloud-api.readme.io/reference/updatediagnosticreport.md
+  - https://lkcloud-api.readme.io/reference/updatedocumentreference.md
+  - https://lkcloud-api.readme.io/reference/updateencounter.md
+  - https://lkcloud-api.readme.io/reference/updatefamilymemberhistory.md
+  - https://lkcloud-api.readme.io/reference/updateimmunization.md
+  - https://lkcloud-api.readme.io/reference/updateinsuranceplan.md
+  - https://lkcloud-api.readme.io/reference/updatelocation.md
+  - https://lkcloud-api.readme.io/reference/updatemedication.md
+  - https://lkcloud-api.readme.io/reference/updatemedicationrequest.md
+  - https://lkcloud-api.readme.io/reference/updatemedicationstatement.md
+  - https://lkcloud-api.readme.io/reference/updateobservation.md
+  - https://lkcloud-api.readme.io/reference/updateorganization.md
+  - https://lkcloud-api.readme.io/reference/updatepatient-1.md
+  - https://lkcloud-api.readme.io/reference/updateperson.md
+  - https://lkcloud-api.readme.io/reference/updatepractitioner.md
+  - https://lkcloud-api.readme.io/reference/updateprocedure.md
+  - https://lkcloud-api.readme.io/reference/updatequestionnaire.md
+  - https://lkcloud-api.readme.io/reference/updatequestionnaireresponse.md
+  - https://lkcloud-api.readme.io/reference/updaterelatedperson.md
+  - https://lkcloud-api.readme.io/reference/updateservicerequest.md
+  - https://lkcloud-api.readme.io/reference/updateslot.md
+  merge:
+    pages: 148
+    deduped: 496
+    conflicts_kept_first: 0

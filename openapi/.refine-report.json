@@ -1,0 +1,65 @@
+{
+  "provider": "ellkay",
+  "sources": [
+    "ellkay-lkcloud-api-openapi.yml",
+    "ellkay-r4-fhir-api-openapi.yml"
+  ],
+  "outputs": [
+    "ellkay-lkappointments-api-openapi.yml",
+    "ellkay-lkbridge-api-openapi.yml",
+    "ellkay-lkcharges-api-openapi.yml",
+    "ellkay-lkdocuments-api-openapi.yml",
+    "ellkay-lkmasterlist-api-openapi.yml",
+    "ellkay-lkpatientbalance-api-openapi.yml",
+    "ellkay-lkpatientdatalink-api-openapi.yml",
+    "ellkay-updatepatient-api-openapi.yml",
+    "ellkay-account-api-openapi.yml",
+    "ellkay-allergyintolerance-api-openapi.yml",
+    "ellkay-appointment-api-openapi.yml",
+    "ellkay-binary-api-openapi.yml",
+    "ellkay-clinicalimpression-api-openapi.yml",
+    "ellkay-communication-api-openapi.yml",
+    "ellkay-communicationrequest-api-openapi.yml",
+    "ellkay-condition-api-openapi.yml",
+    "ellkay-coverage-api-openapi.yml",
+    "ellkay-diagnosticreport-api-openapi.yml",
+    "ellkay-documentreference-api-openapi.yml",
+    "ellkay-encounter-api-openapi.yml",
+    "ellkay-familymemberhistory-api-openapi.yml",
+    "ellkay-immunization-api-openapi.yml",
+    "ellkay-insuranceplan-api-openapi.yml",
+    "ellkay-location-api-openapi.yml",
+    "ellkay-medication-api-openapi.yml",
+    "ellkay-medicationrequest-api-openapi.yml",
+    "ellkay-medicationstatement-api-openapi.yml",
+    "ellkay-metadata-api-openapi.yml",
+    "ellkay-observation-api-openapi.yml",
+    "ellkay-operations-api-openapi.yml",
+    "ellkay-organization-api-openapi.yml",
+    "ellkay-patient-api-openapi.yml",
+    "ellkay-person-api-openapi.yml",
+    "ellkay-practitioner-api-openapi.yml",
+    "ellkay-procedure-api-openapi.yml",
+    "ellkay-questionnaire-api-openapi.yml",
+    "ellkay-questionnaireresponse-api-openapi.yml",
+    "ellkay-relatedperson-api-openapi.yml",
+    "ellkay-servicerequest-api-openapi.yml",
+    "ellkay-slot-api-openapi.yml"
+  ],
+  "archived": [
+    "deleted 2 superseded output(s) from the previous generation"
+  ],
+  "errors": [],
+  "warnings": [
+    "ellkay-lkcloud-api-openapi.yml: previously refined output kept for 85 operation(s) no archived document covers (e.g. /LKAppointments/BeginSearchAppointments post, /LKAppointments/EditAppointment post, /LKAppointments/GetAppointment post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "ellkay-r4-fhir-api-openapi.yml: previously refined output kept for 148 operation(s) no archived document covers (e.g. /Account get, /Account post, /Account/{logical_id} delete); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ellkay-lkcloud-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "ellkay-r4-fhir-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "superseded outputs removed: ellkay-lkcloud-api-openapi.yml, ellkay-r4-fhir-api-openapi.yml",
+    "apis.yml register: written (+40 apis, 42 total)"
+  ],
+  "skipped": []
+}

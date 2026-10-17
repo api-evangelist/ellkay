@@ -1,0 +1,602 @@
+openapi: 3.2.0
+info:
+  title: LKCloud LK Charges API
+  description: Ellkay Api documentation 6.6 Ellkay api
+  contact:
+    name: Ellkay
+    url: https://ellkay.com
+    email: ''
+  version: '6.6'
+  x-logo:
+    url: ./logo.png
+    altText: Ellkay Logo
+servers:
+- url: https://services.lkcloud.com
+  description: prod url
+tags:
+- name: LKCharges
+  description: Charge details
+paths:
+  /LKCharges/GetChargeStatus:
+    post:
+      tags:
+      - LKCharges
+      summary: GetChargeStatus
+      description: The GetChargeStatus endpoint returns the status of a charge, including its ID, status, and any related exception details and posted transaction details.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKCharges.GetChargeStatusSwaggerRequest'
+            example:
+              chargeIds:
+              - e2fa562e-82de-4441-94ca-a36329981f29
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.GetChargeStatusResult'
+              example:
+              - id: e2fa562e-82de-4441-94ca-a36329981f29
+                status: Success
+                exceptionDetail: null
+                postedTransactionDetails:
+                - id: '001'
+                  destinationId: '789'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKChargesGetChargeStatus
+      x-operation-id-source: derived
+  /LKCharges/SendCharge:
+    post:
+      tags:
+      - LKCharges
+      summary: SendCharge
+      description: 'Send charge to target system. Charges are processed asynchronously,
+
+        the charge id can be used later to get charge status.'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LKCloudConnect.Swagger.SwaggerRequests.LKCharges.SendChargeSwaggerRequest'
+            example:
+              charges:
+              - transactionId: '1'
+                sendingFacility: River Oaks East
+                receivingFacility: River Oaks East
+                patient:
+                  internalId: '1442678381000620'
+                  externalId: '1442678381000620'
+                  lastName: Barton
+                  firstName: Dana
+                  sex: Female
+                  dob: '1973-10-29T00:00:00'
+                  ssn: 587458520
+                  alternatePatientId: '35'
+                bill:
+                  encounter:
+                    id: '1481732394050560'
+                    locationName: River Oaks East
+                    locationId: '3'
+                    date: '2023-08-01T00:00:00'
+                  supervisingProvider:
+                    id: '442'
+                    firstName: Lane
+                    lastName: Andersen
+                    middleName: M
+                    prefix: ''
+                    suffix: MD
+                    npi: '1184861544'
+                    upin: E45678
+                  referringProvider:
+                    id: '442'
+                    firstName: Lane
+                    lastName: Andersen
+                    middleName: M
+                    prefix: ''
+                    suffix: MD
+                    npi: '1184861544'
+                    upin: E45678
+                  transactions:
+                  - id: '1'
+                    renderingProvider:
+                      id: '442'
+                      firstName: Lane
+                      lastName: Andersen
+                      middleName: M
+                      prefix: ''
+                      suffix: MD
+                      npi: '1184861544'
+                      upin: E45678
+                    dateOfService: '2023-08-01T00:00:00'
+                    postingDate: '2023-08-01T00:00:00'
+                    procedure:
+                      code: G0511
+                    diagnoses:
+                    - code: E11.65
+                      problemId: '2'
+                      icdVersion: I10
+                      alternateCode: ''
+                      alternateICDVersion: I9
+                    modifiers:
+                    - code: '99213'
+                    units: 1
+                    insuranceId: '3467'
+                    placeOfServiceCode: '21'
+                    typeOfServiceCode: '751615'
+                custom:
+                  reviewedBy: Dr. Alice Grey
+                  technician: John Smith
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.SendChargeResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LKCloudConnect.Contracts.LKCloudConnectFault'
+      operationId: postLKChargesSendCharge
+      x-operation-id-source: derived
+components:
+  schemas:
+    LKCloudConnect.Swagger.SwaggerRequests.LKCharges.GetChargeStatusSwaggerRequest:
+      required:
+      - chargeIds
+      type: object
+      properties:
+        chargeIds:
+          type: array
+          items:
+            type: string
+          description: Array of ChargeIDs to get the status for - Required
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.ChargeDetail:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Top-level charge transaction id
+        sendingFacility:
+          type: string
+          description: Sending facility
+        receivingFacility:
+          type: string
+          description: Receiving facility
+        patient:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.PatientDetail'
+          description: Patient
+        bill:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.BillDetail'
+          description: Charge transaction data
+        custom:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: System-specific data for special cases
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.PostedTransactionDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Transaction unique id
+        destinationId:
+          type: string
+          description: Transaction id in the target system
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.ModifierCode:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Procedure (CPT) modifier code
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.GetChargeStatusResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Charge id
+        status:
+          enum:
+          - NotFound
+          - Pending
+          - Success
+          - Error
+          type: string
+          description: Charge status
+        exceptionDetail:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.ChargeExceptionDetail'
+          description: Charge error detail
+        postedTransactionDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.PostedTransactionDetail'
+          description: Charge transaction details
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.SendChargeResult:
+      type: object
+      properties:
+        chargeId:
+          type: string
+          description: Id inside of our charge queue. Charge messages are processed asynchronously, use GetChargeStatuses to poll for charge processing status
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.ProviderDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Provider id
+        firstName:
+          type: string
+          description: Provider first name
+        lastName:
+          type: string
+          description: Provider last name
+        middleName:
+          type: string
+          description: Provider middle name
+        prefix:
+          type: string
+          description: Provider name prefix
+        suffix:
+          type: string
+          description: Provider name suffix
+        npi:
+          type: string
+          description: Provider NPI
+        upin:
+          type: string
+          description: Provider UPIN
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.Diagnosis:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Diagnosis code
+        problemId:
+          type: string
+          description: Diagnosis problem id
+        icdVersion:
+          enum:
+          - Unknown
+          - I9
+          - I10
+          - I11
+          type: string
+          description: "Diagnosis ICD version\n            I11 and Unknown coding systems are not currently supported"
+        alternateCode:
+          type: string
+          description: Diagnosis alternate code
+        alternateICDVersion:
+          enum:
+          - Unknown
+          - I9
+          - I10
+          - I11
+          type: string
+          description: "Diagnosis alternate ICD version\n            I11 and Unknown coding systems are not currently supported"
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.TransactionDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Transaction id
+        renderingProvider:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.ProviderDetail'
+          description: Transaction rendering provider
+        dateOfService:
+          type: string
+          description: Transaction date of service e.g. 2019-01-01T00:00:00.112
+          format: date-time
+          example: '2019-01-01T00:00:00'
+        postingDate:
+          type: string
+          description: Transaction posting date e.g. 2019-01-01T00:00:00.112
+          format: date-time
+          example: '2019-01-01T00:00:00'
+        procedure:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.Procedure'
+          description: Transaction procedure code
+        diagnoses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.Diagnosis'
+          description: Transaction diagnosis codes
+        modifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.ModifierCode'
+          description: Transaction procedure (CPT) code modifiers
+        units:
+          type: integer
+          description: Transaction numeric units eg 1
+          format: int32
+        insuranceId:
+          type: string
+          description: Transaction insurance id
+        placeOfServiceCode:
+          type: string
+          description: Transaction Place of Service code
+        typeOfServiceCode:
+          type: string
+          description: Represents the Type of Service provided during the transaction
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.BillDetail:
+      type: object
+      properties:
+        encounter:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.EncounterDetail'
+          description: Charge encounter data
+        supervisingProvider:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.ProviderDetail'
+          description: Charge top-level supersiving provider
+        referringProvider:
+          allOf:
+          - $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.ProviderDetail'
+          description: Charge top-level referring provider
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.TransactionDetail'
+          description: Charge transactions
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.ChargeExceptionDetail:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Exception message
+        errorCode:
+          type: string
+          description: Exception error code
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.Procedure:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Procedure code
+      additionalProperties: false
+    LKCloudConnect.Contracts.Charges.PatientDetail:
+      type: object
+      properties:
+        internalId:
+          type: string
+          description: Patient id in the target system
+        externalId:
+          type: string
+          description: Patient id from an external system
+        lastName:
+          type: string
+          description: Patient last name
+        firstName:
+          type: string
+          description: Patient first name
+        sex:
+          enum:
+          - Unknown
+          - Male
+          - Female
+          type: string
+          description: Patient sex
+        dob:
+          type: string
+          description: Patient date of birth e.g. 2019-01-01T00:00:00
+          format: date-time
+          example: '2019-01-01T00:00:00'
+        ssn:
+          type: integer
+          description: Patient social security number
+          format: int64
+        alternatePatientId:
+          type: string
+          description: Patient alternate id
+      additionalProperties: false
+    LKCloudConnect.Contracts.LKCloudConnectFault:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Target system credentials are invalid
+        detail:
+          type: string
+          description: Additional error detail
+        recoverySteps:
+          type: string
+          description: Error recovery steps
+          example: Contact support to update credentials
+        handle:
+          type: string
+          description: Our unique message id, you should provide this when you open a support ticket
+          example: 3e4d0b7f-e3fa-4462-9cc3-860be812d696
+        errorCode:
+          type: string
+          description: Error code, please see error code section of the guide for details
+          example: Unauthorized
+        type:
+          type: string
+          description: Error type
+      additionalProperties: false
+      description: LKCloud Connect Fault
+    LKCloudConnect.Contracts.Charges.EncounterDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Encounter id
+        locationName:
+          type: string
+          description: Encounter location name
+        locationId:
+          type: string
+          description: Encounter location id
+        date:
+          type: string
+          description: Encounter date e.g. 2019-01-01T00:00:00.112
+          format: date-time
+          example: '2019-01-01T00:00:00.112'
+      additionalProperties: false
+    LKCloudConnect.Swagger.SwaggerRequests.LKCharges.SendChargeSwaggerRequest:
+      required:
+      - charges
+      type: object
+      properties:
+        charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/LKCloudConnect.Contracts.Charges.ChargeDetail'
+          description: array of ChargeDetail objects - Required
+      additionalProperties: false
+x-provenance:
+  method: searched
+  source: https://lkcloud-api.readme.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-beginsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-editappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentslot.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getfacilities.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getopenappointmentslots.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getphysicians.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-getscheduleappointmenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-nextsearchappointments.md
+  - https://lkcloud-api.readme.io/reference/post_lkappointments-scheduleappointment.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getadvancedirectives.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getbridgeinfo.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getguarantor.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatient.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientalerts.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getpatientsummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-getreferrals.md
+  - https://lkcloud-api.readme.io/reference/post_lkbridge-smartsearch.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-getchargestatus.md
+  - https://lkcloud-api.readme.io/reference/post_lkcharges-sendcharge.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-createdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocument.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getdocumenttypes.md
+  - https://lkcloud-api.readme.io/reference/post_lkdocuments-getpatientdocuments.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-createemployer.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcodeset.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemployers.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getemploymentstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getencounterreasons.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getethnicities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getgenderidentities.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getinsurances.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getlanguages.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getmaritalstatuses.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getraces.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getrelationships.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-getsexualorientations.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpharmacies.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchpractitioners.md
+  - https://lkcloud-api.readme.io/reference/post_lkmasterlist-searchresources.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-applypayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-beginsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getaccount.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalance.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbalancesummary.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getbillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-getpatientcollectionbuckets.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-nextsearchclaims.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatebillingalert.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-updatepatientcollectionbucket.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientbalance-voidpayment.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-begingetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-closeencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-createencounter.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getallergies.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getdiagnoses.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotebody.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounternotes.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getencounters.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getfamilyhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getimmunizations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getlabresults.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getmedications.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getophthalmologyobservations.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getproblems.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getprocedures.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsocialhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getsurgicalhistory.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitals.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-getvitalsdefinition.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-nextgetupdatedpatients.md
+  - https://lkcloud-api.readme.io/reference/post_lkpatientdatalink-postvitals.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createpatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-createreferral.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updateadvancedirective.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatient.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatepatientreportingdata.md
+  - https://lkcloud-api.readme.io/reference/post_updatepatient-updatepatientservice-svc-updatereferral.md
+  merge:
+    pages: 85
+    deduped: 158
+    conflicts_kept_first: 0
