@@ -342,6 +342,8 @@ apis:
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
   tags:
+  - Communications
+  tags_raw:
   - Communication
   properties:
   - type: OpenAPI
@@ -1101,7 +1103,8 @@ apis:
   description: The Operations API from ELLKAY — 1 operation(s) for operations.
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
-  tags:
+  tags: []
+  tags_raw:
   - Operations
   properties:
   - type: OpenAPI
@@ -1178,6 +1181,8 @@ apis:
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
   tags:
+  - Patients
+  tags_raw:
   - Patient
   properties:
   - type: OpenAPI
@@ -1216,6 +1221,8 @@ apis:
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
   tags:
+  - Persons
+  tags_raw:
   - Person
   properties:
   - type: OpenAPI
@@ -1558,6 +1565,8 @@ apis:
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
   tags:
+  - AllergyIntolerance
+  tags_raw:
   - Allergy Intolerance
   properties:
   - type: OpenAPI
@@ -1596,6 +1605,8 @@ apis:
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
   tags:
+  - DocumentReference
+  tags_raw:
   - Document Reference
   properties:
   - type: OpenAPI
@@ -1634,6 +1645,8 @@ apis:
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
   tags:
+  - InsurancePlan
+  tags_raw:
   - Insurance Plan
   properties:
   - type: OpenAPI
@@ -1672,6 +1685,8 @@ apis:
   humanURL: https://lkcloud-api.readme.io/docs/lk-cloud-overview
   baseURL: https://services.lkcloud.com
   tags:
+  - MedicationRequest
+  tags_raw:
   - Medication Request
   properties:
   - type: OpenAPI
